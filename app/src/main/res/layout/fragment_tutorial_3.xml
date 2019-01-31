@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TutorialFragment_3">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/GetSupport"
+        android:text="Share your burden by being a part of the community"
+        android:layout_marginStart="100dp"
+        android:layout_width="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/blueAccent"
+        android:layout_centerInParent="true"
 
-</FrameLayout>
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        />
+
+
+
+</RelativeLayout>
