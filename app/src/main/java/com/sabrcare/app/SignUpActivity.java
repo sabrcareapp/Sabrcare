@@ -11,12 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 public class SignUpActivity extends AppCompatActivity {
-    private static final String TAG = "SIGN UP";
-    TextInputEditText username;
-    TextInputEditText password;
-    TextInputEditText name;
-    Button signUp_btn;
-    ViewPager viewPager;
+
+    private TextInputEditText username;
+    private TextInputEditText password;
+    private TextInputEditText name;
+    private Button signUp_btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,6 @@ public class SignUpActivity extends AppCompatActivity {
         password=findViewById(R.id.password);
         name=findViewById(R.id.name);
 
-        viewPager=findViewById(R.id.container);
         signUp_btn =findViewById(R.id.register_btn);
 
         signUp_btn.setOnClickListener(new View.OnClickListener() {

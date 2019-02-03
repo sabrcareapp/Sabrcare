@@ -10,15 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SignInActivity extends AppCompatActivity {
 
-    private static final String TAG = "SIGN IN";
-    TextInputEditText username;
-    TextInputEditText password;
-    Button signIn_btn;
+
+    private TextInputEditText username;
+    private TextInputEditText password;
+    private Button signIn_btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
 
 
         username=findViewById(R.id.username);

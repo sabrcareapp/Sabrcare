@@ -11,8 +11,8 @@ import androidx.viewpager.widget.ViewPager;
 
 public class TutorialActivity extends AppCompatActivity {
 
-    Button Sign_Up;
-    Button Log_In;
+    private Button Sign_Up;
+    private Button Log_In;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
