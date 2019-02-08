@@ -15,22 +15,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".TutorialActivity"
-            android:theme="@style/AppThemeNoActionBar">
-        </activity>
-
+            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".SignUpActivity"></activity>
         <activity
-            android:name=".SignInActivity">
-        </activity>
-
-        <activity
-            android:name=".SignUpActivity">
-        </activity>
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"></activity>
     </application>
 
 </manifest>
