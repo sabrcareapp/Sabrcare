@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="75dp"
 
     tools:context=".TutorialActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/TutorialViewPager"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="200dp">
     </androidx.viewpager.widget.ViewPager>
 
     <com.google.android.material.tabs.TabLayout
@@ -45,11 +45,11 @@
         />
 
     <LinearLayout
-        android:layout_below="@id/ButtonIntro"
         android:layout_width="wrap_content"
         android:id="@+id/LL1"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
+        android:layout_below="@id/SignUpBtn"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/txt1"
