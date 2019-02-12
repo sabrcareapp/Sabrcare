@@ -21,19 +21,16 @@
         </activity>
         <activity
             android:name=".TutorialActivity"
-            android:theme="@style/AppThemeNoActionBar"></activity>
-        <activity
-            android:name=".HomeActivity">
-        </activity>
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".HomeActivity"></activity>
         <activity
             android:name=".SignInActivity"
-            android:theme="@style/AppThemeNoActionBar">
-        </activity>
-
+            android:theme="@style/AppThemeNoActionBar"></activity>
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/AppThemeNoActionBar">
-        </activity>
+            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity android:name=".ReportFolderActivity"
+            android:label="@string/title_records"></activity>
     </application>
 
 </manifest>

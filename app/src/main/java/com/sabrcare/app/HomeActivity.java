@@ -31,13 +31,14 @@ public class HomeActivity extends AppCompatActivity  {
                     fragment = new TimelineFragment();
                     break;
 
-                case R.id.navigation_notifications:
-                    fragment = new NotificationFragment();
-                    break;
-
                 case R.id.navigation_profile:
                     fragment = new ProfileFragment();
                     break;
+
+                case R.id.navigation_records:
+                    fragment= new RecordsFragment();
+                    break;
+
                 case R.id.navigation_symptom_tracker:
                     fragment = new SymptomTrackerFragment();
             }
