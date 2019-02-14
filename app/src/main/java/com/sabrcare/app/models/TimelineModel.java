@@ -1,4 +1,4 @@
-package com.sabrcare.app;
+package com.sabrcare.app.models;
 
 import android.net.Uri;
 

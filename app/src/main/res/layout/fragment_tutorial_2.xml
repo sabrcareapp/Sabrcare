@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TutorialFragment_2">
+    tools:context=".fragments.TutorialFragment_2">
     <TextView
         android:id="@+id/GetSupport"
         android:text="Check your reports and tests from the ease of your phone"

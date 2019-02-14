@@ -1,14 +1,16 @@
-package com.sabrcare.app;
+package com.sabrcare.app.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
-import java.io.File;
+import com.sabrcare.app.adapters.FileRecordsAdapter;
+import com.sabrcare.app.adapters.ImageRecordsAdapter;
+import com.sabrcare.app.R;
+
 import java.util.ArrayList;
 
 public class ReportFolderActivity extends AppCompatActivity {
