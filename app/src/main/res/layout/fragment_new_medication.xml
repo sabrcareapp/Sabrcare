@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Medication Details Please :"
+        android:textSize="20sp"
+        android:textAppearance="@style/ShapeAppearanceOverlay.BottomLeftDifferentCornerSize"/>
+
+
+    <EditText
+        android:id="@+id/med_name"
+        android:layout_below="@id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="New Medicine"
+        android:inputType="text" />
+
+
+    <EditText
+        android:id="@+id/day_phase"
+        android:layout_below="@id/med_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Morning/Evening/Night"
+        android:inputType="text" />
+
+
+    <EditText
+        android:id="@+id/time"
+        android:layout_below="@id/reminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Time"
+        android:inputType="text" />
+
+
+    <EditText
+        android:id="@+id/reminder"
+        android:layout_below="@id/day_phase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Reminder"
+        android:inputType="text" />
+
+
+
+
+
+</RelativeLayout>
