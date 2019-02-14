@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class TimelineFragment extends Fragment {
 
-    private ArrayList<TimelineModel> timeline;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class TimelineFragment extends Fragment {
 
 
 
-        timeline = new ArrayList<>();
+        ArrayList<TimelineModel> timeline = new ArrayList<>();
 
         //generate 10 items just for now.WIll be changed later
         for(int i=0;i<10;i++) {

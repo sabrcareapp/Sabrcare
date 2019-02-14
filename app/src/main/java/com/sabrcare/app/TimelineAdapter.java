@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.facebook.drawee.view.SimpleDraweeView;
-
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -17,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.TimelineVH> {
 
     private ArrayList<TimelineModel> timeline;
-    private Context ctx;
+    Context ctx;
     public TimelineAdapter(ArrayList<TimelineModel> timeline,Context ctx) {
 
         this.ctx=ctx;
