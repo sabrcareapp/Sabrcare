@@ -4,13 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity  {
 
@@ -31,8 +31,8 @@ public class HomeActivity extends AppCompatActivity  {
                     fragment = new TimelineFragment();
                     break;
 
-                case R.id.navigation_profile:
-                    fragment = new ProfileFragment();
+                case R.id.navigation_medicine:
+                    fragment = new MedicineFragment();
                     break;
 
                 case R.id.navigation_records:
@@ -51,6 +51,7 @@ public class HomeActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fresco.initialize(this);
         setContentView(R.layout.activity_home);
 
         loadFragment(new HomeFragment());
