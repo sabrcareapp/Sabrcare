@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.TimelineVH> {
 
     private ArrayList<TimelineModel> timeline;
-    Context ctx;
+    public Context ctx;
     public TimelineAdapter(ArrayList<TimelineModel> timeline,Context ctx) {
+
 
         this.ctx=ctx;
         this.timeline=timeline;
