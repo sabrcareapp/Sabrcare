@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.github.clans.fab.FloatingActionMenu;
 import com.sabrcare.app.R;
+import com.sabrcare.app.activities.NewMedActivity;
 import com.sabrcare.app.adapters.MedicineAdapter;
 import com.sabrcare.app.models.MedicineModel;
 
@@ -48,7 +50,6 @@ public class MedicineFragment extends Fragment {
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         MedicineAdapter medicineAdapter = new MedicineAdapter(medicine,getContext());
         recyclerView.setAdapter(medicineAdapter);
 
@@ -56,23 +57,11 @@ public class MedicineFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-
-                AlertDialog.Builder newFolderDialogBuilder = new AlertDialog.Builder(getContext());
-                newFolderDialogBuilder.setView(R.layout.fragment_new_medication);
-                newFolderDialogBuilder.setCancelable(false);
-                newFolderDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                }).setNegativeButton("Cancel",null);
-
-                AlertDialog newFolderDialog = newFolderDialogBuilder.create();
-                newFolderDialog.show();
+                Intent intent = new Intent(getActivity(), NewMedActivity.class);
+                startActivity(intent);
             }
-        });
 
+                });
         return view;
-
     }
-    }
+}

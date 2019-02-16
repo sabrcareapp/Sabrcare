@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity  {
     }
 
 
-    private boolean loadFragment(Fragment fragment) {
+    public boolean loadFragment(Fragment fragment) {
         //switching fragment
         if (fragment != null) {
             getSupportFragmentManager()
