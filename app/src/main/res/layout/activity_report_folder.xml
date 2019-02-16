@@ -6,17 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReportFolderActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.appcompat.widget.Toolbar>
     
-    <TextView
-        android:id="@+id/FolderTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Folder Name"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:paddingStart="20dp"
-        android:paddingTop="20dp"/>
 
     <TextView
         android:id="@+id/filesHead"
@@ -26,7 +25,7 @@
         android:layout_marginStart="20dp"
         android:paddingTop="10dp"
         android:textColor="@color/colorPrimary"
-        android:layout_below="@id/FolderTitle"
+        android:layout_below="@id/toolbar"
         android:textSize="20sp"
         />
 
@@ -62,9 +61,8 @@
     </androidx.recyclerview.widget.RecyclerView>
 
 
-
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/material_design_android_floating_action_menu"
+        android:id="@+id/material_design_android_floating_action_menu2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
@@ -104,10 +102,10 @@
             android:id="@+id/TakePhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_photo_camera_black_24dp"
+            android:src="@drawable/ic_add_a_photo_white_24dp"
             fab:fab_colorNormal="@color/colorAccent"
             fab:fab_colorPressed="@color/colorAccent"
-            fab:fab_label="Take a photo"
+            fab:fab_label="Upload a photo"
             fab:fab_size="normal" />
 
         <com.github.clans.fab.FloatingActionButton

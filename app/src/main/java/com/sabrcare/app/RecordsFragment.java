@@ -55,7 +55,6 @@ public class RecordsFragment extends Fragment {
         records = new ArrayList<>();
         records.add("Blood Tests");
         records.add("Biopsy");
-        records.add("Chemotherapy");
         records.add("Insurance");
         records.add("CT Scans");
         records.add("Prescriptions");
