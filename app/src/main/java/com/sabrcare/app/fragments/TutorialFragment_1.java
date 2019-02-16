@@ -1,32 +1,23 @@
-package com.sabrcare.app;
-
+package com.sabrcare.app.fragments;
 
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.sabrcare.app.R;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class TutorialFragment_3 extends Fragment {
-
-
-    public TutorialFragment_3() {
-        // Required empty public constructor
-    }
+public class TutorialFragment_1 extends Fragment {
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tutorial_3, container, false);
+        return inflater.inflate(R.layout.fragment_tutorial_1, container, false);
     }
-
 }

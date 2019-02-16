@@ -1,4 +1,4 @@
-package com.sabrcare.app;
+package com.sabrcare.app.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.sabrcare.app.R;
+import com.sabrcare.app.activities.ReportFolderActivity;
 
 import java.util.ArrayList;
 

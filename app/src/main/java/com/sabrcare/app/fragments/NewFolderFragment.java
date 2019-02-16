@@ -1,4 +1,4 @@
-package com.sabrcare.app;
+package com.sabrcare.app.fragments;
 
 
 import android.app.Dialog;
@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import com.sabrcare.app.R;
 
 
 /**

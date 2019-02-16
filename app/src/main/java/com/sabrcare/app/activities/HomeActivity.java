@@ -1,4 +1,4 @@
-package com.sabrcare.app;
+package com.sabrcare.app.activities;
 
 import android.os.Bundle;
 
@@ -6,6 +6,12 @@ import androidx.annotation.NonNull;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sabrcare.app.fragments.HomeFragment;
+import com.sabrcare.app.fragments.MedicineFragment;
+import com.sabrcare.app.R;
+import com.sabrcare.app.fragments.RecordsFragment;
+import com.sabrcare.app.fragments.SymptomTrackerFragment;
+import com.sabrcare.app.fragments.TimelineFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -62,7 +68,7 @@ public class HomeActivity extends AppCompatActivity  {
     }
 
 
-    private boolean loadFragment(Fragment fragment) {
+    public boolean loadFragment(Fragment fragment) {
         //switching fragment
         if (fragment != null) {
             getSupportFragmentManager()
