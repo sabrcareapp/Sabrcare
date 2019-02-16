@@ -13,15 +13,10 @@ import pub.devrel.easypermissions.EasyPermissions;
 import pub.devrel.easypermissions.PermissionRequest;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.esafirm.imagepicker.features.ReturnMode;
@@ -35,13 +30,13 @@ public class ReportFolderActivity extends AppCompatActivity {
     RecyclerView imgList;
     RecyclerView pdfList;
 
-    boolean showUploadDialog;
-    int imgFlag;
+    private boolean showUploadDialog;
+    private int imgFlag;
 
-    FloatingActionButton photoFab,uploadFileFab;
-    FloatingActionMenu fabMenu;
+    public FloatingActionButton photoFab,uploadFileFab;
+    public FloatingActionMenu fabMenu;
 
-    String filePath;
+    private String filePath;
 
     private static final int RC_CAMERA_STORAGE = 123;
     private static final int RC_READ_STORAGE = 120;

@@ -21,14 +21,8 @@ import android.widget.TextView;
  */
 public class UploadDialogFragment extends DialogFragment {
 
-    String filepath;
+    public String filepath;
 
-    TextView fileName;
-    Button cancel,upload;
-
-    public UploadDialogFragment() {
-        // Required empty public constructor
-    }
 
     public static UploadDialogFragment newInstance(String filepath){
         UploadDialogFragment uploadDialogFragment = new UploadDialogFragment();
@@ -50,9 +44,9 @@ public class UploadDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_upload_dialog,null);
-        fileName = view.findViewById(R.id.fileName);
-        cancel = view.findViewById(R.id.cancelbtn);
-        upload = view.findViewById(R.id.uploadbtn);
+        TextView fileName = view.findViewById(R.id.fileName);
+        Button cancel = view.findViewById(R.id.cancelbtn);
+        Button upload = view.findViewById(R.id.uploadbtn);
         String str2 = filepath.substring(filepath.lastIndexOf('/')+1);
         fileName.setText(str2);
 
