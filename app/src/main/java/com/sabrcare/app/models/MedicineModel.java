@@ -2,32 +2,32 @@ package com.sabrcare.app.models;
 
 public class MedicineModel {
 
-    private String med_name;
-    private String day_phase;
+    private String medName;
+    private String dayPhase;
     private String reminder;
     private String time;
 
-    public MedicineModel(String med_name, String day_phase, String reminder, String time) {
-        this.med_name = med_name;
-        this.day_phase = day_phase;
+    public MedicineModel(String med_name, String dayPhase, String reminder, String time) {
+        this.medName = med_name;
+        this.dayPhase = dayPhase;
         this.reminder = reminder;
         this.time = time;
     }
 
-    public String getMed_name() {
-        return med_name;
+    public String getMedName() {
+        return medName;
     }
 
-    public void setMed_name(String med_name) {
-        this.med_name = med_name;
+    public void setMedName(String medName) {
+        this.medName = medName;
     }
 
-    public String getDay_phase() {
-        return day_phase;
+    public String getDayPhase() {
+        return dayPhase;
     }
 
-    public void setDay_phase(String day_phase) {
-        this.day_phase = day_phase;
+    public void setDayPhase(String dayPhase) {
+        this.dayPhase = dayPhase;
     }
 
     public String getReminder() {

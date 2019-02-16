@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -25,8 +23,8 @@ import java.util.ArrayList;
 
 public class MedicineFragment extends Fragment {
 
-    com.github.clans.fab.FloatingActionButton fabNewMed;
-    FloatingActionMenu materialDesignFAM;
+   public com.github.clans.fab.FloatingActionButton fabNewMed;
+   public FloatingActionMenu materialDesignFAM;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

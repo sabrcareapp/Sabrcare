@@ -1,8 +1,7 @@
 package com.sabrcare.app.activities;
 
-import com.sabrcare.app.activities.HomeActivity;
 import android.app.TimePickerDialog;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,14 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
-
 import com.sabrcare.app.R;
-import com.sabrcare.app.fragments.MedicineFragment;
+
 
 import java.util.Calendar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+
 
 
 public class NewMedActivity extends AppCompatActivity {

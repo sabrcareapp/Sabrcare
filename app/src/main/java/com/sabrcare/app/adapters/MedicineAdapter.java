@@ -32,8 +32,8 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
 
     @Override
     public void onBindViewHolder(@NonNull MedicineVH holder, int position) {
-        holder.med_name.setText(medicine.get(position).getMed_name());
-        holder.day_phase.setText(medicine.get(position).getDay_phase());
+        holder.med_name.setText(medicine.get(position).getMedName());
+        holder.day_phase.setText(medicine.get(position).getDayPhase());
         holder.reminder.setText(medicine.get(position).getReminder());
         holder.time.setText(medicine.get(position).getTime());
     }

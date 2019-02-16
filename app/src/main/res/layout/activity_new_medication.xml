@@ -35,7 +35,7 @@
             android:layout_marginBottom="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/med_name"
+                android:id="@+id/medName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/blueAccent"
