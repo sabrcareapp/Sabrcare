@@ -18,6 +18,8 @@ import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
 
+import static com.sabrcare.app.SymptomAddActivity.flag;
+
 public class HomeActivity extends AppCompatActivity  {
 
 
@@ -60,10 +62,16 @@ public class HomeActivity extends AppCompatActivity  {
         Fresco.initialize(this);
         setContentView(R.layout.activity_home);
 
-        loadFragment(new HomeFragment());
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        if(flag==1){
+            flag=0;
+            loadFragment(new SymptomTrackerFragment());
+            navigation.setSelectedItemId(R.id.navigation_symptom_tracker);
+        }
+        else
+            loadFragment(new HomeFragment());
 
 //        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 

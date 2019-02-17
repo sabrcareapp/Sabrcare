@@ -1,14 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools">
 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="120"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:weightSum="100"
+        android:orientation="horizontal">
 
     <TextView
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:layout_weight="50"
+        android:text="@string/date_time"
+        android:layout_gravity="start" />
+
+    <TextView
+        android:id="@+id/syt_date"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:layout_weight="50"
+        android:text="@string/date_time"
+        android:textAlignment="textEnd" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:textSize="20sp"
+        android:text="@string/how_severe_is_the_symptom"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:textSize="20sp"
+        android:text="@string/none_mild_moderate_severe_unbearable"
+        android:layout_gravity="center_horizontal" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="68">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/syt_rv">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/syt_fab"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|right"
         android:layout_height="wrap_content"
-        android:text="SYMPTOM TRACKER"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp"/>
-</LinearLayout>
+        android:src="@drawable/fab_add"
+        app:fab_colorNormal="@color/colorAccent"
+        app:fab_colorPressed="@color/colorAccent"
+        fab:fab_label="Add new folder"
+        android:layout_marginTop="380dp"
+        android:layout_marginLeft="290dp"
+        fab:fab_size="normal" />
+
+    <Button
+        android:id="@+id/syt_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="395dp"
+        android:text="SAVE"
+        android:fontFamily="sans-serif"
+        android:textSize="24sp"
+        android:textColor="#ffffff"
+        android:background="@color/blueAccent"
+        android:layout_marginLeft="20dp"/>
+
+</RelativeLayout>
