@@ -1,13 +1,12 @@
-package com.sabrcare.app;
+package com.sabrcare.app.adapters;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.sabrcare.app.R;
 
 import java.util.ArrayList;
 

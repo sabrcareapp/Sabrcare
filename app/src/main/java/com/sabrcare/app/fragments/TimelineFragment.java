@@ -1,4 +1,4 @@
-package com.sabrcare.app;
+package com.sabrcare.app.fragments;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.sabrcare.app.adapters.TimelineAdapter;
+import com.sabrcare.app.R;
+import com.sabrcare.app.models.TimelineModel;
 
 import java.util.ArrayList;
 

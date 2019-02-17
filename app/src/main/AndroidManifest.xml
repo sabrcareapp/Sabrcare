@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LaunchActivity"
+            android:name=".activities.LaunchActivity"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,18 +25,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TutorialActivity"
+            android:name=".activities.TutorialActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".activities.HomeActivity"></activity>
         <activity
-            android:name=".SignInActivity"
+            android:name=".activities.SignInActivity"
             android:theme="@style/AppThemeNoActionBar"></activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".activities.SignUpActivity"
             android:theme="@style/AppThemeNoActionBar"></activity>
-        <activity android:name=".ReportFolderActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:label="@string/title_records"></activity>
+        <activity android:name=".activities.ReportFolderActivity"
+            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity android:name=".activities.NewMedActivity"></activity>
     </application>
 
 </manifest>

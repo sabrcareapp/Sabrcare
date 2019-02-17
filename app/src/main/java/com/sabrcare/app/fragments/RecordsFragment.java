@@ -1,4 +1,4 @@
-package com.sabrcare.app;
+package com.sabrcare.app.fragments;
 
 
 import android.app.AlertDialog;
@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.github.clans.fab.FloatingActionMenu;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.sabrcare.app.adapters.RecordsAdapter;
+import com.sabrcare.app.R;
 
 import java.util.ArrayList;
 

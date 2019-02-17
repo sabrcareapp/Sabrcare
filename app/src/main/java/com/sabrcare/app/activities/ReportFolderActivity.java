@@ -1,4 +1,4 @@
-package com.sabrcare.app;
+package com.sabrcare.app.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +22,11 @@ import android.widget.Toast;
 import com.esafirm.imagepicker.features.ReturnMode;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-
+import com.sabrcare.app.PathUtil;
+import com.sabrcare.app.UploadDialogFragment;
+import com.sabrcare.app.adapters.FileRecordsAdapter;
+import com.sabrcare.app.adapters.ImageRecordsAdapter;
+import com.sabrcare.app.R;
 import java.util.ArrayList;
 
 public class ReportFolderActivity extends AppCompatActivity {

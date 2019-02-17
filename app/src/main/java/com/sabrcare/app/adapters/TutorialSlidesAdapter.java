@@ -1,6 +1,10 @@
-package com.sabrcare.app;
+package com.sabrcare.app.adapters;
 
 import android.content.Context;
+
+import com.sabrcare.app.fragments.TutorialFragment_1;
+import com.sabrcare.app.fragments.TutorialFragment_2;
+import com.sabrcare.app.fragments.TutorialFragment_3;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
