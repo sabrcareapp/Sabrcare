@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sabrcare.app">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,7 +35,7 @@
             android:name=".activities.SignUpActivity"
             android:theme="@style/AppThemeNoActionBar"></activity>
         <activity android:name=".activities.ReportFolderActivity"
-            android:label="@string/title_records"></activity>
+            android:theme="@style/AppThemeNoActionBar"></activity>
         <activity android:name=".activities.NewMedActivity"></activity>
     </application>
 
