@@ -53,8 +53,8 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         public TextView time;
         public MedicineVH(@NonNull View itemView) {
             super(itemView);
-            med_name=itemView.findViewById(R.id.med_name);
-            day_phase=itemView.findViewById(R.id.day_phase);
+            med_name=itemView.findViewById(R.id.medName);
+            day_phase=itemView.findViewById(R.id.dayPhase);
             reminder=itemView.findViewById(R.id.reminder);
             time=itemView.findViewById(R.id.time);
 
