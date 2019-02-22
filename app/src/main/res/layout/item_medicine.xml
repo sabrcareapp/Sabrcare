@@ -5,16 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="false"
-    card_view:cardCornerRadius="20dp"
+    card_view:cardCornerRadius="5dp"
     android:layout_margin="5dp"
     card_view:cardElevation="15dp"
     style="@style/Base.CardView"
     android:id="@+id/cv"
     android:requiresFadingEdge="vertical"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -24,8 +23,8 @@
             android:id="@+id/medName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/pic"
+            android:textStyle="bold"
+            android:padding="10dp"
             android:text="Name here"
             android:textSize="25sp">
 
@@ -36,33 +35,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/medName"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:text="Evening/Morning"
-            android:textSize="25sp"
-
+            android:textSize="20sp"
+            android:paddingStart="10dp"
+            android:layout_marginBottom="10dp"
             />
 
-        <TextView
-            android:id="@+id/reminder"
+
+        <Button
+            android:id="@+id/editMed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="25dp"
-            android:layout_toRightOf="@id/medName"
-            android:text="Reminder"
-            android:textSize="25sp" />
+            android:layout_marginStart="100dp"
+            android:layout_alignParentEnd="true"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/colorPrimary"
+            android:drawableTint="@color/colorPrimary"
+            android:paddingTop="10dp"
+            android:textSize="20sp"
+            android:paddingEnd="10dp"
+            android:text="Edit" />
+
 
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/isReminderSet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/reminder"
-            android:layout_marginLeft="68dp"
-            android:layout_marginTop="25dp"
-            android:layout_toRightOf="@+id/dayPhase"
-            android:text="Time"
-            android:textSize="25sp" />
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/reminderSwitch"
+            android:layout_marginTop="75dp"
+            android:paddingBottom="10dp"
+            android:paddingEnd="20dp"
+            android:text="Reminder On"
+            android:textSize="20sp" />
 
 
     </RelativeLayout>
+
+
 </androidx.cardview.widget.CardView>

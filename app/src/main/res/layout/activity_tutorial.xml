@@ -8,7 +8,7 @@
 
     android:layout_marginTop="75dp"
 
-    tools:context=".activities.TutorialActivity">
+    tools:context=".tutorial.TutorialActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/TutorialViewPager"

@@ -60,7 +60,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="17dp"
-        android:src="@drawable/ic_new_medicine_18dp"
+        android:src="@drawable/ic_add_black_24dp"
         app:fab_colorNormal="#98ff98"
         app:fab_colorPressed="#98ff98"
         fab:fab_label="Add new Medication"

@@ -4,5 +4,6 @@
         <item>Evening</item>
         <item>Night</item>
         <item>Morning</item>
+        <item>Afternoon</item>
     </string-array>
 </resources>
