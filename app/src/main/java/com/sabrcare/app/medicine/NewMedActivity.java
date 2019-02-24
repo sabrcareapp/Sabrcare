@@ -160,6 +160,7 @@ public class NewMedActivity extends AppCompatActivity {
 
                 Toast.makeText(NewMedActivity.this,"Saved",Toast.LENGTH_SHORT).show();
                 NewMedActivity.this.finish();
+
             }
         });
     }

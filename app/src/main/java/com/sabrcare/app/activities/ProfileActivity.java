@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sabrcare.app.R;
+import com.sabrcare.app.auth.SignInActivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
