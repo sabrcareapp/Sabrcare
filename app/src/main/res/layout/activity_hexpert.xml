@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="100">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/home_btn"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hex_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="PROFILE"
-        android:textSize="24sp"
-        android:textColor="#ffffff"
-        android:background="@color/blueAccent"
-        android:layout_margin="20dp"
-        android:layout_weight="12"/>
+        android:layout_weight="88"/>
 
     <Button
-        android:id="@+id/home_btn2"
+        android:id="@+id/hex_btn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="HEALTH EXPERT"
+        android:text="APPLY"
+        android:layout_alignBottom="@id/syta_rv"
         android:textSize="24sp"
         android:textColor="#ffffff"
         android:background="@color/blueAccent"
