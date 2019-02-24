@@ -17,5 +17,10 @@
     <string name="how_severe_is_the_symptom">How severe is the symptom</string>
     <string name="title_add_new_medication">Add New Medication</string>
     <string name="title_here">Title here</string>
-    >>>>>>> upstream/master
+    <string name="about_the_app">About The App</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="username_agrim_agarwal">Username: Agrim Agarwal</string>
+    <string name="albert_robinson">Albert Robinson</string>
+    <string name="logout">logout</string>
 </resources>

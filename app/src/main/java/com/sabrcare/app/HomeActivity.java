@@ -60,19 +60,21 @@ public class HomeActivity extends AppCompatActivity  {
         Fresco.initialize(this);
         setContentView(R.layout.activity_home);
 
+       // String username = Objects.requireNonNull(getIntent().getExtras()).get("username").toString();
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         if(flag==1){
             flag=0;
             loadFragment(new SymptomTrackerFragment());
             navigation.setSelectedItemId(R.id.navigation_symptom_tracker);
         }
-        else
+        else {
             loadFragment(new HomeFragment());
+        }
 
 //        mTextMessage = (TextView) findViewById(R.id.message);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
 
     public boolean loadFragment(Fragment fragment) {
         //switching fragment

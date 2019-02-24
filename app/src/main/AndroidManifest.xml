@@ -44,7 +44,9 @@
             android:label="@string/title_add_new_medication" />
         <activity android:name=".medicine.AlarmActivity"
             android:theme="@style/AppThemeNoActionBar"/>
-
+        <activity android:name=".symptomtracker.SymptomAddActivity"></activity>
+        <activity android:name=".activities.ProfileActivity"></activity>
+        <activity android:name=".activities.HExpertActivity"></activity>
 
         <receiver android:name=".AlarmReceiver" />
 

@@ -210,7 +210,7 @@ public class SymptomAddActivity extends AppCompatActivity {
                     "DELAYED ORGASM", 0, "null");
             symptoms.add(modelSymptom59);
             ModelSymptom modelSymptom60 = new ModelSymptom(
-                    "", 0, "null");
+                    "EJACULATION PROBLEMS", 0, "null");
             symptoms.add(modelSymptom60);
             ModelSymptom modelSymptom61 = new ModelSymptom(
                     "ERECTION DIFFICULTY", 0, "null");
