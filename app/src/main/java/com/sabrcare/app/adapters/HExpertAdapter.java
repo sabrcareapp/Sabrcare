@@ -11,7 +11,6 @@ import com.sabrcare.app.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.sabrcare.app.SymptomAddActivity.symptoms;
 import static com.sabrcare.app.activities.HExpertActivity.hExpert;
 
 public class HExpertAdapter extends RecyclerView.Adapter<HExpertAdapter.HExpertVH> {
