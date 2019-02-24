@@ -9,12 +9,13 @@
     <string name="title_records">Records</string>
     <string name="title_medicine">Medicine</string>
     <string name="title_symptom_tracker">Symptom Tracker</string>
-
     <string name="rationale_camera_storage">Please allow access to take images of records.</string>
     <string name="rationale_read_storage">Please allow access to upload PDFs of records.</string>
     <string name="symptom_tracker">SYMPTOM TRACKER</string>
     <string name="date_time">Date/Time</string>
     <string name="none_mild_moderate_severe_unbearable">None Mild Moderate Severe Unbearable</string>
     <string name="how_severe_is_the_symptom">How severe is the symptom</string>
+    <string name="title_add_new_medication">Add New Medication</string>
     <string name="title_here">Title here</string>
+    >>>>>>> upstream/master
 </resources>

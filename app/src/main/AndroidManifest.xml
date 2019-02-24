@@ -2,12 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sabrcare.app">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name="Sabrcare"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.LaunchActivity"
+            android:name=".LaunchActivity"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,21 +26,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.TutorialActivity"
+            android:name=".tutorial.TutorialActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".activities.HomeActivity"></activity>
+        <activity android:name=".HomeActivity" />
         <activity
-            android:name=".activities.SignInActivity"
-            android:theme="@style/AppThemeNoActionBar"></activity>
-
-        <activity android:name=".SymptomAddActivity"></activity>
-
+            android:name=".auth.SignInActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".symptomtracker.SymptomAddActivity" />
         <activity
-            android:name=".activities.SignUpActivity"
-            android:theme="@style/AppThemeNoActionBar"></activity>
-        <activity android:name=".activities.ReportFolderActivity"
-            android:theme="@style/AppThemeNoActionBar"></activity>
-        <activity android:name=".activities.NewMedActivity"></activity>
+            android:name=".auth.SignUpActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".records.ReportFolderActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".medicine.NewMedActivity"
+            android:label="@string/title_add_new_medication" />
+        <activity android:name=".medicine.AlarmActivity"
+            android:theme="@style/AppThemeNoActionBar"/>
+
+
+        <receiver android:name=".AlarmReceiver" />
+
     </application>
 
 </manifest>
