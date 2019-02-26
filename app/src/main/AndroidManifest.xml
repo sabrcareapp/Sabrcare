@@ -52,7 +52,6 @@
 
         <receiver android:name=".AlarmReceiver" />
 
->>>>>>> c9be95b77815425bafa98423793567776785ce81
     </application>
 
 </manifest>

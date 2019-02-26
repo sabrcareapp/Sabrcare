@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
 
+import java.util.Objects;
+
 import static com.sabrcare.app.symptomtracker.SymptomAddActivity.flag;
 
 public class HomeActivity extends AppCompatActivity  {
@@ -62,8 +64,14 @@ public class HomeActivity extends AppCompatActivity  {
 
        // String username = Objects.requireNonNull(getIntent().getExtras()).get("username").toString();
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        if(flag==1){
+
+
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        if(getIntent().getAction()!=null && getIntent().getAction().equalsIgnoreCase("updateMeds")){
+            loadFragment(new MedicineFragment());
+            navigation.setSelectedItemId(R.id.navigation_medicine);
+        }
+        else if(flag==1){
             flag=0;
             loadFragment(new SymptomTrackerFragment());
             navigation.setSelectedItemId(R.id.navigation_symptom_tracker);

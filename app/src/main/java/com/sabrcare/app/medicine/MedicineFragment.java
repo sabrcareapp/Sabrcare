@@ -2,6 +2,7 @@ package com.sabrcare.app.medicine;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
@@ -49,14 +50,9 @@ public class MedicineFragment extends Fragment {
                 Intent newMed = new Intent(getActivity(), NewMedActivity.class);
                 newMed.setAction("new");
                 startActivity(newMed);
+                getActivity().finish();
             }
         });
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        medicineAdapter.notifyDataSetChanged();
     }
 }
