@@ -2,6 +2,7 @@ package com.sabrcare.app.medicine;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.MedicineVH> {
 
@@ -46,7 +49,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         return medicine.size();
     }
 
-    public class MedicineVH extends RecyclerView.ViewHolder {
+    public class MedicineVH extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
         public TextView med_name;
         public TextView day_phase;
@@ -61,6 +64,12 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
             edit=itemView.findViewById(R.id.editMed);
         }
 
+//
+//        public void setItemClickListener (ItemCl)
+        public boolean onLongClick(View v) {
+            Log.d(TAG, "Item long-clicked at position " + getAdapterPosition());
+            return true;
+        }
         void populateMedicine(final MedicineModel medicine){
             med_name.setText(medicine.getMedName());
             day_phase.setText(medicine.getDayPhase());
