@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import com.sabrcare.app.R;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 public class AlarmActivity extends AppCompatActivity {
     Button dismiss;
     MediaPlayer mediaPlayer;
@@ -24,14 +27,21 @@ public class AlarmActivity extends AppCompatActivity {
 
         dismiss=findViewById(R.id.dismissAlarm);
         medTV=findViewById(R.id.med);
-
         mediaPlayer=MediaPlayer.create(getBaseContext(),getAlarmUri());
         mediaPlayer.start();
+        String med = getIntent().getStringExtra("medications");
 
-        String med = getIntent().getStringExtra("medication");
+        ArrayList<String> medList = new ArrayList<>();
+        StringTokenizer st = new StringTokenizer(med," ");
+        while(st.hasMoreTokens()){
+            medList.add(st.nextToken());
+        }
+        String displayMed="";
+        for(int j = 0;j<medList.size();j++){
+            displayMed+=medList.get(j)+"\n";
+        }
         System.out.println("MED IN ALARM ACTIVITY>>>>>>>>>>>>>>>>>>"+med);
-        medTV.setText(med);
-
+        medTV.setText(new StringBuilder("Take your medicine - \n"+displayMed));
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

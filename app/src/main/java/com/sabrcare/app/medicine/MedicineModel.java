@@ -1,5 +1,7 @@
 package com.sabrcare.app.medicine;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import io.realm.RealmObject;
 
 public class MedicineModel extends RealmObject {
@@ -8,6 +10,8 @@ public class MedicineModel extends RealmObject {
     private String dayPhase;
     private String time;
     private boolean reminderOn;
+
+    private static final AtomicInteger alarmCountID=new AtomicInteger();
 
     public MedicineModel() {
         this.medName = "";

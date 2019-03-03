@@ -27,8 +27,8 @@
         app:menu_backgroundColor="#CCFFFFFF"
         fab:menu_animationDelayPerItem="55"
         fab:menu_buttonSpacing="0dp"
-        fab:menu_colorNormal="@color/colorAccent"
-        fab:menu_colorPressed="#D81B60"
+        fab:menu_colorNormal="#98ff98"
+        fab:menu_colorPressed="#008577"
         fab:menu_colorRipple="#99d4d4d4"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
@@ -60,8 +60,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_create_new_folder_black_24dp"
-            app:fab_colorNormal="@color/colorAccent"
-            app:fab_colorPressed="@color/colorAccent"
+            app:fab_colorNormal="#98ff98"
+            app:fab_colorPressed="#008577"
             fab:fab_label="Add new folder"
             fab:fab_size="normal" />
 
