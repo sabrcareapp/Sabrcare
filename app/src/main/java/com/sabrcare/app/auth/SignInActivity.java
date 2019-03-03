@@ -33,7 +33,7 @@ public class SignInActivity extends AppCompatActivity {
                 Intent launchHome = new Intent(SignInActivity.this,HomeActivity.class);
                 launchHome.putExtra("username", username.toString());
                 startActivity(launchHome);
-                finish();
+                finishAffinity();
             }
         });
     }

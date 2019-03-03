@@ -1,5 +1,6 @@
 package com.sabrcare.app.medicine;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -64,8 +65,6 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
             edit=itemView.findViewById(R.id.editMed);
         }
 
-//
-//        public void setItemClickListener (ItemCl)
         public boolean onLongClick(View v) {
             Log.d(TAG, "Item long-clicked at position " + getAdapterPosition());
             return true;
@@ -85,7 +84,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
                 public void onClick(View view) {
                     Intent editMed = new Intent(ctx,NewMedActivity.class);
                     editMed.setAction("Edit");
-                    editMed.putExtra("MedAlarmID",medicine.getAlarmID());
+                    editMed.putExtra("MedName",medicine.getMedName());
                     ctx.startActivity(editMed);
                 }
             });

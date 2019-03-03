@@ -6,7 +6,6 @@ import io.realm.RealmObject;
 
 public class MedicineModel extends RealmObject {
 
-    private long alarmID;
     private String medName;
     private String dayPhase;
     private String time;
@@ -19,7 +18,6 @@ public class MedicineModel extends RealmObject {
         this.dayPhase = "";
         this.time = "";
         this.reminderOn = false;
-        this.alarmID=-1;
     }
 
     public MedicineModel(String medName, String dayPhase, String time, boolean reminderOn) {
@@ -27,14 +25,6 @@ public class MedicineModel extends RealmObject {
         this.dayPhase = dayPhase;
         this.time = time;
         this.reminderOn = reminderOn;
-    }
-
-    public long getAlarmID() {
-        return alarmID;
-    }
-
-    public void setAlarmID() {
-        alarmID=System.currentTimeMillis();
     }
 
     public boolean isReminderOn() {

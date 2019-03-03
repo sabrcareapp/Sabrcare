@@ -39,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 Intent launchHome = new Intent(SignUpActivity.this,HomeActivity.class);
                 startActivity(launchHome);
-                finish();
+                finishAffinity();
             }
         });
 

@@ -1,5 +1,7 @@
 package com.sabrcare.app;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,8 @@ import com.sabrcare.app.records.RecordsFragment;
 import com.sabrcare.app.symptomtracker.SymptomTrackerFragment;
 import com.sabrcare.app.timeline.TimelineFragment;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -21,6 +25,7 @@ import java.util.Objects;
 import static com.sabrcare.app.symptomtracker.SymptomAddActivity.flag;
 
 public class HomeActivity extends AppCompatActivity  {
+    private static final int REQUEST_EXIT = 2;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -94,5 +99,22 @@ public class HomeActivity extends AppCompatActivity  {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle(R.string.app_name);
+        builder.setMessage("Really Exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finishAffinity();
+                    }
+                })
+                .setNegativeButton("No", null);
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

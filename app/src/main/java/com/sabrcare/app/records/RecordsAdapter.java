@@ -51,7 +51,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordsV
             super(itemView);
             foldername1=itemView.findViewById(R.id.Foldername1);
             icon=itemView.findViewById(R.id.folderIc);
-            icon.setColorFilter(Color.parseColor("#00574B"));
+            icon.setColorFilter(Color.parseColor("#0060a3"));
         }
 
         void showFolder(final String folderName){

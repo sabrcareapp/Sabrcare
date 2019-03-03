@@ -6,6 +6,8 @@ import android.content.Intent;
 
 import com.sabrcare.app.medicine.AlarmActivity;
 
+import java.util.ArrayList;
+
 import androidx.core.app.NotificationCompat;
 
 public class AlarmReceiver extends BroadcastReceiver {
@@ -19,11 +21,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification();
         notificationHelper.getManager().notify(1, nb.build());
 
-        String med = intent.getStringExtra("medication");
+        String medList = intent.getStringExtra("medications");
 
         Intent openAlarm = new Intent(context,AlarmActivity.class);
-        openAlarm.putExtra("medication", med);
-        System.out.println("RECIEVED MED>>>>>>>>>>>>>"+med);
+        openAlarm.putExtra("medications", medList);
+        System.out.println("RECIEVED MEDS>>>>>>>>>>>>>"+medList);
         context.startActivity(openAlarm);
     }
 }

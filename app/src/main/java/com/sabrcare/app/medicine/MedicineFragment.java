@@ -20,13 +20,15 @@ import com.sabrcare.app.R;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class MedicineFragment extends Fragment {
 
     public com.github.clans.fab.FloatingActionButton fabNewMed;
     public FloatingActionMenu materialDesignFAM;
     private Realm realm;
-    MedicineAdapter medicineAdapter;
+    private MedicineAdapter medicineAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,11 +50,11 @@ public class MedicineFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent newMed = new Intent(getActivity(), NewMedActivity.class);
-                newMed.setAction("new");
+                newMed.setAction("New");
                 startActivity(newMed);
-                getActivity().finish();
             }
         });
         return view;
     }
+
 }

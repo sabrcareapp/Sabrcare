@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,7 +27,6 @@ import java.util.Calendar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 
 public class NewMedActivity extends AppCompatActivity {
@@ -43,7 +43,10 @@ public class NewMedActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
 
     MedicineModel medicineModel;
+    AlarmModel alarmModel;
     Realm realm;
+
+    boolean timeFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,23 +58,152 @@ public class NewMedActivity extends AppCompatActivity {
         adapter_day_phase.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         day_phase.setAdapter(adapter_day_phase);
 
-        realm=Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
 
-        if(getIntent().getAction().equalsIgnoreCase("Edit")){
-            RealmResults<MedicineModel> thisMedicine = realm.where(MedicineModel.class).
-                    equalTo("alarmID",getIntent().getLongExtra("MedAlarmID",-1)).findAll();
-            medicineModel=thisMedicine.first();
+        if (getIntent().getAction().equalsIgnoreCase("Edit")) {
+            //Querying with medName only, change later.
+            medicineModel = realm.where(MedicineModel.class).
+                    equalTo("medName", getIntent().getStringExtra("MedName")).findFirst();
             med_name.setText(medicineModel.getMedName());
             int selectedDayPhase = adapter_day_phase.getPosition(medicineModel.getDayPhase());
             day_phase.setSelection(selectedDayPhase);
             alarmSwitch.setChecked(medicineModel.isReminderOn());
             reminderTime.setText(medicineModel.getTime());
-        }
-        else {
-            medicineModel=new MedicineModel();
-            medicineModel.setAlarmID();
+
+            timeFlag=false;
+
+        } else {
+            medicineModel = new MedicineModel();
+            timeFlag=true;
         }
 
+
+        final Calendar calendar = Calendar.getInstance();
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmIntent = new Intent(this, AlarmReceiver.class);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar.set(Calendar.HOUR_OF_DAY, hr);
+                calendar.set(Calendar.MINUTE, min);
+
+                if (calendar.before(Calendar.getInstance())) {
+                    calendar.add(Calendar.DATE, 1);
+                }
+
+                if(med_name.getText().toString().matches("")){
+                    Toast.makeText(NewMedActivity.this,"Name empty!",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(timeFlag){
+                    Toast.makeText(NewMedActivity.this,"Time not set!",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                realm.beginTransaction();
+                medicineModel.setMedName(med_name.getText().toString());
+                medicineModel.setReminderOn(alarmSwitch.isChecked());
+                medicineModel.setTime(reminderTime.getText().toString());
+                medicineModel.setDayPhase(day_phase.getSelectedItem().toString());
+
+                alarmModel = realm.where(AlarmModel.class).equalTo("time", medicineModel.getTime()).findFirst();
+                System.out.println("TIME QUERY>>>>>>>>>>>>>" + medicineModel.getTime());
+                if (alarmModel == null) // No alarm already set for this particular time
+                {
+                    alarmModel = new AlarmModel();
+                    alarmModel.setTime(medicineModel.getTime());
+                    alarmModel.setAlarmID();
+                    System.out.println(">>>>ALARM ID" + alarmModel.getAlarmID());
+                    alarmModel.setOn(medicineModel.isReminderOn());
+                } else {
+                    System.out.println("ALARM FOUND>>>>>>" + alarmModel.getTime());
+
+                    Intent cancelAlarm = new Intent(NewMedActivity.this, AlarmReceiver.class);
+                    cancelAlarm.putExtra("medications", alarmModel.getMedicines());
+                    pendingIntent = PendingIntent.getBroadcast(NewMedActivity.this, (int) alarmModel.getAlarmID(), cancelAlarm, 0);
+                    pendingIntent.cancel();
+                    alarmManager.cancel(pendingIntent);
+                    System.out.println(">>>>>>>>>>CANCELLED FOR" + alarmModel.getMedicines());
+                }
+
+                alarmModel.setOn(medicineModel.isReminderOn());
+                if(alarmModel.isOn()){
+                    alarmModel.addMedicineToAlarm(medicineModel.getMedName());
+                }else{
+                    alarmModel.removeMedicineFromAlarm(medicineModel.getMedName());
+                }
+                System.out.println(">>>>>>>>Meds in ALARM after adding/removing " + alarmModel.getMedicines());
+                realm.insertOrUpdate(medicineModel);
+                realm.insertOrUpdate(alarmModel);
+                realm.commitTransaction();
+                //TODO Update data in server for medicine
+
+                if (alarmModel.isOn() || (!alarmModel.getMedicines().equalsIgnoreCase(""))) {
+                    Intent openAlarm = new Intent(NewMedActivity.this, AlarmReceiver.class);
+                    openAlarm.putExtra("medications", alarmModel.getMedicines());
+
+                    pendingIntent = PendingIntent.getBroadcast(NewMedActivity.this, (int) alarmModel.getAlarmID(), openAlarm, 0);
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                            AlarmManager.INTERVAL_DAY, pendingIntent);
+                    System.out.println(">>>>>>>>>>>SENT for " + alarmModel.getMedicines() + ">>>ID>>>" + alarmModel.getAlarmID());
+                } else {
+                    Intent cancelAlarm = new Intent(NewMedActivity.this, AlarmReceiver.class);
+                    cancelAlarm.putExtra("medications", alarmModel.getMedicines());
+                    pendingIntent = PendingIntent.getBroadcast(NewMedActivity.this, (int) alarmModel.getAlarmID(), cancelAlarm, 0);
+                    pendingIntent.cancel();
+                    alarmManager.cancel(pendingIntent);
+                    System.out.println(">>>>>>>>>>CANCELLED FOR" + alarmModel.getMedicines());
+
+                }
+
+                Toast.makeText(NewMedActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                NewMedActivity.this.finish();
+
+                //Finishing home activity from here, launch new intent with updateMeds action.
+                Intent openMedFrag = new Intent(NewMedActivity.this, HomeActivity.class);
+                openMedFrag.setAction("updateMeds");
+                startActivity(openMedFrag);
+                finish();
+                setResult(RESULT_CANCELED);
+                finishAffinity();
+            }
+        });
+    }
+
+    void bindViews() {
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NewMedActivity.this.finish();
+            }
+        });
+
+        if (getIntent().getAction().equalsIgnoreCase("Edit")) {
+            toolbar.setTitle("Edit Medication");
+        } else {
+            toolbar.setTitle("Add New Medication");
+        }
+
+        reminderTime = findViewById(R.id.time);
+        med_name = findViewById(R.id.medName);
+        day_phase = findViewById(R.id.spinner_day_phase);
+        alarmSwitch = findViewById(R.id.reminderSwitch);
+        save = findViewById(R.id.done);
+        alarmSwitch.setTextOff("Reminder Off");
+        alarmSwitch.setTextOn("Reminder On");
+        alarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (alarmSwitch.isChecked()) {
+                    alarmSwitch.setText("Reminder on");
+                } else {
+                    alarmSwitch.setText("Reminder off");
+                }
+            }
+        });
 
         reminderTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +231,7 @@ public class NewMedActivity extends AppCompatActivity {
                         }
                         reminderTime.setText(new StringBuilder(sHour + ":" + sMin));
 
+                        timeFlag=false;
                     }
                 }, hour, minute, true);
                 timePickerDialog.setTitle("Select Time");
@@ -106,80 +239,6 @@ public class NewMedActivity extends AppCompatActivity {
             }
         });
 
-        final Calendar calendar = Calendar.getInstance();
-        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmIntent = new Intent(this, AlarmReceiver.class);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar.set(Calendar.HOUR_OF_DAY, hr);
-                calendar.set(Calendar.MINUTE, min);
-
-                if (calendar.before(Calendar.getInstance())) {
-                    calendar.add(Calendar.DATE, 1);
-                }
-
-                realm.beginTransaction();
-                medicineModel.setMedName(med_name.getText().toString());
-                medicineModel.setReminderOn(alarmSwitch.isChecked());
-                medicineModel.setTime(reminderTime.getText().toString());
-                medicineModel.setDayPhase(day_phase.getSelectedItem().toString());
-                realm.insertOrUpdate(medicineModel);
-                realm.commitTransaction();
-                //TODO Update data in server
-
-                if(medicineModel.isReminderOn()){
-                    Intent openAlarm = new Intent(NewMedActivity.this, AlarmReceiver.class);
-                    openAlarm.putExtra("medication", medicineModel.getMedName());
-
-                    pendingIntent = PendingIntent.getBroadcast(NewMedActivity.this, (int) medicineModel.getAlarmID(),
-                            openAlarm,0);
-
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                            AlarmManager.INTERVAL_DAY, pendingIntent);
-                    System.out.println(">>>>>>>>>>>SENT for "+openAlarm.getStringExtra("medication")
-                            +">>>ID>>>"+medicineModel.getAlarmID());
-                }
-
-
-                Toast.makeText(NewMedActivity.this,"Saved",Toast.LENGTH_SHORT).show();
-                NewMedActivity.this.finish();
-
-                Intent openMedFrag = new Intent(NewMedActivity.this,HomeActivity.class);
-                openMedFrag.setAction("updateMeds");
-                startActivity(openMedFrag);
-
-            }
-        });
     }
 
-    void bindViews(){
-        reminderTime = findViewById(R.id.time);
-        med_name = findViewById(R.id.medName);
-        day_phase = findViewById(R.id.spinner_day_phase);
-        alarmSwitch=findViewById(R.id.reminderSwitch);
-        save = findViewById(R.id.done);
-        alarmSwitch.setTextOff("Reminder Off");
-        alarmSwitch.setTextOn("Reminder On");
-        alarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(alarmSwitch.isChecked()){
-                    alarmSwitch.setText("Reminder on");
-                }
-                else {
-                    alarmSwitch.setText("Reminder off");
-                }
-            }
-        });
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent openMedFrag = new Intent(NewMedActivity.this,HomeActivity.class);
-        openMedFrag.setAction("udateMeds");
-
-    }
 }
