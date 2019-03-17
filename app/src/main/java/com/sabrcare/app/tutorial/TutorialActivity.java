@@ -4,7 +4,11 @@ package com.sabrcare.app.tutorial;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
+
 import com.google.android.material.tabs.TabLayout;
 import com.sabrcare.app.R;
 import com.sabrcare.app.auth.SignInActivity;
@@ -15,8 +19,10 @@ import androidx.viewpager.widget.ViewPager;
 
 public class TutorialActivity extends AppCompatActivity {
 
-    private Button Sign_Up;
-    private Button Log_In;
+    private Button sign_up;
+    private Button log_in;
+    TextView already_user;
+    Animation from_side;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +38,15 @@ public class TutorialActivity extends AppCompatActivity {
         pager.setAdapter(fragAdapter);
         tabLayout.setupWithViewPager(pager, true);
 
+        from_side = AnimationUtils.loadAnimation(this,R.anim.from_side);
+        sign_up = findViewById(R.id.SignUpBtn);
+        log_in = findViewById(R.id.loginbtn);
+        already_user=findViewById(R.id.tutorial_already_user);
 
-        Sign_Up = findViewById(R.id.SignUpBtn);
-        Log_In = findViewById(R.id.loginbtn);
+        already_user.setAnimation(from_side);
+        log_in.setAnimation(from_side);
 
-        Sign_Up.setOnClickListener(new View.OnClickListener() {
+        sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent launchSignUp = new Intent(TutorialActivity.this,SignUpActivity.class);
@@ -44,7 +54,7 @@ public class TutorialActivity extends AppCompatActivity {
             }
         });
 
-        Log_In.setOnClickListener(new View.OnClickListener() {
+        log_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent launchSignIn = new Intent(TutorialActivity.this,SignInActivity.class);
