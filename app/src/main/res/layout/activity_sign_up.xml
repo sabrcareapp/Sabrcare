@@ -63,8 +63,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/blueAccent"
-                android:hint="Phone Number"
-                android:inputType="phone"
+                android:hint="Email Id"
+                android:inputType="textEmailAddress"
                 android:textColorHint="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
 
