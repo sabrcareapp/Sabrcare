@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Remedly</string>
+    <string name="app_name">Remedley</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -23,4 +23,9 @@
     <string name="username_agrim_agarwal">Username: Agrim Agarwal</string>
     <string name="albert_robinson">Albert Robinson</string>
     <string name="logout">logout</string>
+    <string name="base_url">http://api.remedley.com</string>
+    <string name="None">None</string>
+    <string name="Mild">Mild</string>
+    <string name="Moderate">Moderate</string>
+    <string name="Severe">Severe</string>
 </resources>

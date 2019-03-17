@@ -36,13 +36,13 @@ public class HomeActivity extends AppCompatActivity  {
             Fragment fragment = null;
 
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    fragment = new HomeFragment();
-                    break;
-
-                case R.id.navigation_timeline:
-                    fragment = new TimelineFragment();
-                    break;
+//                case R.id.navigation_home:
+//                    fragment = new HomeFragment();
+//                    break;
+//
+//                case R.id.navigation_timeline:
+//                    fragment = new TimelineFragment();
+//                    break;
 
                 case R.id.navigation_medicine:
                     fragment = new MedicineFragment();
@@ -82,7 +82,7 @@ public class HomeActivity extends AppCompatActivity  {
             navigation.setSelectedItemId(R.id.navigation_symptom_tracker);
         }
         else {
-            loadFragment(new HomeFragment());
+            loadFragment(new MedicineFragment());     //change this back to homefragment
         }
 
 //        mTextMessage = (TextView) findViewById(R.id.message);

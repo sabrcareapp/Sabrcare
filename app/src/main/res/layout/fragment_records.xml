@@ -8,6 +8,34 @@
     android:layout_height="match_parent"
     tools:context=".records.RecordsFragment">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/records_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0a2472"
+        app:title=""
+        app:titleTextColor="#FFFFFF">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="0dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/remedley_logo"
+            android:layout_marginStart="0dp"/>
+        <TextView
+            android:id="@+id/symptom_toolbar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Records"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecordsRV"
@@ -66,5 +94,5 @@
             fab:fab_size="normal" />
 
     </com.github.clans.fab.FloatingActionMenu>
-
+</LinearLayout>
 </RelativeLayout>
