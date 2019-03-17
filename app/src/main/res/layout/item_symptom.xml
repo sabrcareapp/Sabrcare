@@ -2,75 +2,100 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="false"
-    card_view:cardCornerRadius="20dp"
+    card_view:cardCornerRadius="10dp"
     android:layout_margin="5dp"
-    card_view:cardElevation="15dp"
+    card_view:cardElevation="5dp"
     style="@style/Base.CardView"
     android:id="@+id/cv"
     android:requiresFadingEdge="vertical"
     android:orientation="vertical">
 
+
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:divider="?android:dividerHorizontal"
+        android:orientation="vertical"
+        android:showDividers="middle"
         android:weightSum="100">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/title"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/lobster_italic"
+            android:layout_centerHorizontal="true"
             android:text="@string/title_here"
             android:textSize="25sp"
-            android:layout_margin="10dp"/>
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/title"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="-10dp"
+            android:background="#000000" />
+
 
         <RadioGroup
             android:id="@+id/radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
 
             <RadioButton
-                android:layout_margin="18dp"
                 android:id="@+id/none"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"/>
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:onClick="onRadioButtonClicked"
+                android:textAlignment="gravity"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:text="None"
+                />
 
-            <RadioButton
-                android:id="@+id/mild"
-                android:layout_margin="18dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"/>
 
             <RadioButton
                 android:id="@+id/moderate"
-                android:layout_margin="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"/>
+                android:layout_alignBottom="@+id/radio"
+                android:layout_marginTop="20dp"
+                android:onClick="onRadioButtonClicked"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="@string/Mild"/>
 
             <RadioButton
                 android:id="@+id/severe"
-                android:layout_margin="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"/>
+                android:layout_alignEnd="@+id/radio"
+                android:layout_marginTop="20dp"
+                android:onClick="onRadioButtonClicked"
+                android:layout_weight="1"
+                android:text="@string/Moderate"
+                android:textStyle="bold"/>
 
             <RadioButton
-                android:id="@+id/unbearable"
-                android:layout_margin="18dp"
+                android:id="@+id/mild"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"/>
+                android:layout_marginTop="20dp"
+                android:onClick="onRadioButtonClicked"
+                android:layout_weight="1"
+                android:text="@string/Severe"
+                android:textStyle="bold"/>
 
         </RadioGroup>
-
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

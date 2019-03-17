@@ -1,6 +1,8 @@
 package com.sabrcare.app.medicine;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 
 import com.github.clans.fab.FloatingActionMenu;
 import com.sabrcare.app.R;
@@ -37,6 +40,10 @@ public class MedicineFragment extends Fragment {
         realm=Realm.getDefaultInstance();
         materialDesignFAM = view.findViewById(R.id.material_design_android_floating_action_menu);
         fabNewMed = view.findViewById(R.id.NewMedicineFAB);
+
+
+        Toolbar medicine_toolbar = view.findViewById(R.id.medicine_toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(medicine_toolbar);
 
         //TODO This data to be loaded from server.
         RealmResults<MedicineModel> medicineModels = realm.where(MedicineModel.class).findAll();

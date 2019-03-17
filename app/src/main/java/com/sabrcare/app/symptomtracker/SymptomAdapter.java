@@ -50,8 +50,8 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
                              break;
                 case "severe": holder.severe.setChecked(true);
                              break;
-                case "unbearable": holder.unbearable.setChecked(true);
-                             break;
+//                case "unbearable": holder.unbearable.setChecked(true);
+//                             break;
             }
         }
 
@@ -84,13 +84,13 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
                 symptoms.get(a.get(position)).severity=s;
             }
         });
-        holder.unbearable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.onRadioButtonClicked(view);
-                symptoms.get(a.get(position)).severity=s;
-            }
-        });
+//        holder.unbearable.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                holder.onRadioButtonClicked(view);
+//                symptoms.get(a.get(position)).severity=s;
+//            }
+//        });
         c++;
     }
 
@@ -120,7 +120,6 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
             mild = itemView.findViewById(R.id.mild);
             moderate = itemView.findViewById(R.id.moderate);
             severe = itemView.findViewById(R.id.severe);
-            unbearable = itemView.findViewById(R.id.unbearable);
         }
 
         private void adSymptom(final String symptom){
@@ -150,11 +149,11 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
                                         s = "severe";
                                     }
                                     break;
-                case R.id.unbearable: if(checked){
-                                        c=1;
-                                        s = "unbearable";
-                                    }
-                                    break;
+//                case R.id.unbearable: if(checked){
+//                                        c=1;
+//                                        s = "unbearable";
+//                                    }
+//                                    break;
             }
         }
 

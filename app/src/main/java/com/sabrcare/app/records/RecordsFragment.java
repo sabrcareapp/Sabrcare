@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,8 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import com.github.clans.fab.FloatingActionMenu;
-import com.sabrcare.app.records.RecordsAdapter;
 import com.sabrcare.app.R;
 
 import java.util.ArrayList;
@@ -49,6 +51,8 @@ public class RecordsFragment extends Fragment {
         materialDesignFAM = view.findViewById(R.id.material_design_android_floating_action_menu);
         fabNewFolder = view.findViewById(R.id.NewFolderFAB);
 
+
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
@@ -64,6 +68,8 @@ public class RecordsFragment extends Fragment {
         recordsAdapter = new RecordsAdapter(records,getContext());
         recyclerView.setAdapter(recordsAdapter);
 
+        Toolbar records_toolbar = view.findViewById(R.id.symptom_toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(records_toolbar);
         fabNewFolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
