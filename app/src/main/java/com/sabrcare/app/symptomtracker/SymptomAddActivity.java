@@ -25,7 +25,13 @@ public class SymptomAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_symptom_add);
 
-        RecyclerView sytaRv = findViewById(R.id.syta_rv);
+        RecyclerView sytaRv = findViewById(R.id.syta_rv),
+                sytaRv1=findViewById(R.id.syta_rv1),
+                sytaRv2=findViewById(R.id.syta_rv2),
+                sytaRv3=findViewById(R.id.syta_rv3),
+                sytaRv4=findViewById(R.id.syta_rv4),
+                sytaRv5=findViewById(R.id.syta_rv5),
+                sytaRv6=findViewById(R.id.syta_rv6);
         Button sytaBtn = findViewById(R.id.syta_btn);
 
         if(symptoms.size()==0) {
@@ -60,10 +66,10 @@ public class SymptomAddActivity extends AppCompatActivity {
                     "RACING HEART", 0, "null");
             symptoms.add(modelSymptom9);
             ModelSymptom modelSymptom10 = new ModelSymptom(
-                    "BLOATING", 0, "null");
+                    "SWELLING", 0, "null");
             symptoms.add(modelSymptom10);
             ModelSymptom modelSymptom11 = new ModelSymptom(
-                    "SWELLING", 0, "null");
+                    "BLOATING", 0, "null");
             symptoms.add(modelSymptom11);
             ModelSymptom modelSymptom12 = new ModelSymptom(
                     "GAS", 0, "null");
@@ -254,8 +260,28 @@ public class SymptomAddActivity extends AppCompatActivity {
         }
 
         sytaRv.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
-        AddSymptomAdapter symptomsAdapter = new AddSymptomAdapter();
+        sytaRv1.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        sytaRv2.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        sytaRv3.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        sytaRv4.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        sytaRv5.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        sytaRv6.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        AddSymptomAdapter symptomsAdapter = new AddSymptomAdapter("sytaRv");
+        AddSymptomAdapter symptomsAdapter1 = new AddSymptomAdapter("sytaRv1");
+        AddSymptomAdapter symptomsAdapter2 = new AddSymptomAdapter("sytaRv2");
+        AddSymptomAdapter symptomsAdapter3 = new AddSymptomAdapter("sytaRv3");
+        AddSymptomAdapter symptomsAdapter4 = new AddSymptomAdapter("sytaRv4");
+        AddSymptomAdapter symptomsAdapter5 = new AddSymptomAdapter("sytaRv5");
+        AddSymptomAdapter symptomsAdapter6 = new AddSymptomAdapter("sytaRv6");
+
         sytaRv.setAdapter(symptomsAdapter);
+        sytaRv1.setAdapter(symptomsAdapter1);
+        sytaRv2.setAdapter(symptomsAdapter2);
+        sytaRv3.setAdapter(symptomsAdapter3);
+        sytaRv4.setAdapter(symptomsAdapter4);
+        sytaRv5.setAdapter(symptomsAdapter5);
+        sytaRv6.setAdapter(symptomsAdapter6);
+
 
         sytaBtn.setOnClickListener(new View.OnClickListener() {
             @Override

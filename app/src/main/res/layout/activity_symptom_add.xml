@@ -4,11 +4,145 @@
     android:layout_height="match_parent"
     android:weightSum="100">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/syta_rv"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="88"/>
+        android:layout_weight="88">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MOST COMMON"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:textSize="30sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CARDIO/CIRCULATORY"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GASTROINTESTINAL"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MOOD/ATTENTION/MEMORY"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ORAL/MOUTH"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PAIN"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RESPIRATORY"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/syta_btn"
@@ -18,7 +152,7 @@
         android:layout_alignBottom="@id/syta_rv"
         android:textSize="24sp"
         android:textColor="#ffffff"
-        android:background="@color/blueAccent"
+        android:background="#3bd411"
         android:layout_margin="20dp"
         android:layout_weight="12"/>
 
