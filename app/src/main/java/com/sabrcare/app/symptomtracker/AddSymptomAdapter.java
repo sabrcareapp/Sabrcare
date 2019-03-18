@@ -18,25 +18,25 @@ public class AddSymptomAdapter extends RecyclerView.Adapter<AddSymptomAdapter.Ad
     private int i;
 
     public AddSymptomAdapter(String x){
-        if(x.equals("sytaRv")){
+        if(("sytaRv").equals(x)){
             i=0;
         }
-        else if(x.equals("sytaRv1")){
+        else if(("sytaRv1").equals(x)){
             i=9;
         }
-        else if(x.equals("sytaRv2")){
+        else if(("sytaRv2").equals(x)){
             i=11;
         }
-        else if(x.equals("sytaRv3")){
+        else if(("sytaRv3").equals(x)){
             i=18;
         }
-        else if(x.equals("sytaRv4")){
+        else if(("sytaRv4").equals(x)){
             i=22;
         }
-        else if(x.equals("sytaRv5")){
+        else if(("sytaRv5").equals(x)){
             i=28;
         }
-        else if(x.equals("sytaRv6")){
+        else if(("sytaRv6").equals(x)){
             i=32;
         }
     }

@@ -25,9 +25,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_symptom_add);
 
-        RecyclerView sytaRv = findViewById(R.id.syta_rv), sytaRv1=findViewById(R.id.syta_rv1),
-                sytaRv2=findViewById(R.id.syta_rv2), sytaRv3=findViewById(R.id.syta_rv3),
-                sytaRv4=findViewById(R.id.syta_rv4), sytaRv5=findViewById(R.id.syta_rv5),
+        RecyclerView sytaRv = findViewById(R.id.syta_rv),
+                sytaRv1=findViewById(R.id.syta_rv1),
+                sytaRv2=findViewById(R.id.syta_rv2),
+                sytaRv3=findViewById(R.id.syta_rv3),
+                sytaRv4=findViewById(R.id.syta_rv4),
+                sytaRv5=findViewById(R.id.syta_rv5),
                 sytaRv6=findViewById(R.id.syta_rv6);
         Button sytaBtn = findViewById(R.id.syta_btn);
 
