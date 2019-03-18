@@ -30,11 +30,11 @@ import io.realm.Realm;
 
 
 public class NewMedActivity extends AppCompatActivity {
-    public Spinner day_phase;
+    public Spinner day_phase,remCount;
     public EditText med_name;
     public TextView reminderTime;
     public TimePickerDialog timePickerDialog;
-    public Button save;
+    public Button save, delete;
     Switch alarmSwitch;
 
     int hr, min;
@@ -55,8 +55,11 @@ public class NewMedActivity extends AppCompatActivity {
         bindViews();
 
         final ArrayAdapter<CharSequence> adapter_day_phase = ArrayAdapter.createFromResource(NewMedActivity.this, R.array.Day_Phase, R.layout.support_simple_spinner_dropdown_item);
+        final ArrayAdapter<CharSequence> adapter_med_times = ArrayAdapter.createFromResource(NewMedActivity.this, R.array.Med_Times, R.layout.support_simple_spinner_dropdown_item);
         adapter_day_phase.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        adapter_med_times.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         day_phase.setAdapter(adapter_day_phase);
+        remCount.setAdapter(adapter_med_times);
 
         realm = Realm.getDefaultInstance();
 
@@ -75,12 +78,21 @@ public class NewMedActivity extends AppCompatActivity {
         } else {
             medicineModel = new MedicineModel();
             timeFlag=true;
+            delete.setVisibility(View.INVISIBLE);
         }
 
 
         final Calendar calendar = Calendar.getInstance();
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmIntent = new Intent(this, AlarmReceiver.class);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO Delete medicine.
+            }
+        });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,8 +202,10 @@ public class NewMedActivity extends AppCompatActivity {
         reminderTime = findViewById(R.id.time);
         med_name = findViewById(R.id.medName);
         day_phase = findViewById(R.id.spinner_day_phase);
+        remCount=findViewById(R.id.spinner_med_count);
         alarmSwitch = findViewById(R.id.reminderSwitch);
         save = findViewById(R.id.done);
+        delete=findViewById(R.id.delete);
         alarmSwitch.setTextOff("Reminder Off");
         alarmSwitch.setTextOn("Reminder On");
         alarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
