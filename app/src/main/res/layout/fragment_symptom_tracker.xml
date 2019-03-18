@@ -16,17 +16,19 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/symptom_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="15"
             android:background="#0a2472"
             app:title=" "
             app:titleTextColor="#FFFFFF">
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/remedley_logo" />
+
             <TextView
                 android:id="@+id/symptom_toolbar_text"
                 android:layout_width="wrap_content"
@@ -34,6 +36,7 @@
                 android:text="Symptom Tracker"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp"/>
+
         </androidx.appcompat.widget.Toolbar>
 
 
@@ -49,8 +52,8 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="68">
+            android:layout_height="0dp"
+            android:layout_weight="90">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/syt_rv"
@@ -61,31 +64,40 @@
 
         </androidx.core.widget.NestedScrollView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="14"
+            android:weightSum="100"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/syt_btn"
+                android:layout_width="0dp"
+                android:layout_weight="60"
+                android:layout_margin="8dp"
+                android:layout_height="match_parent"
+                android:text="@string/save"
+                android:fontFamily="sans-serif"
+                android:textSize="24sp"
+                android:textColor="#ffffff"
+                android:background="@color/blueAccent" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/syt_fab"
+                android:layout_width="0dp"
+                android:layout_weight="40"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginLeft="150dp"
+                android:src="@drawable/fab_add"
+                app:fab_colorNormal="@color/colorAccent"
+                app:fab_colorPressed="@color/colorAccent"
+                fab:fab_label="Add new folder"
+                fab:fab_size="normal" />
+
+        </LinearLayout>
+
     </LinearLayout>
-
-    <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/syt_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginStart="290dp"
-        android:layout_marginTop="380dp"
-        android:src="@drawable/fab_add"
-        app:fab_colorNormal="@color/colorAccent"
-        app:fab_colorPressed="@color/colorAccent"
-        fab:fab_label="Add new folder"
-        fab:fab_size="normal" />
-
-    <Button
-        android:id="@+id/syt_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="395dp"
-        android:text="SAVE"
-        android:fontFamily="sans-serif"
-        android:textSize="24sp"
-        android:textColor="#ffffff"
-        android:background="@color/blueAccent"
-        android:layout_marginLeft="20dp"/>
 
 </RelativeLayout>
