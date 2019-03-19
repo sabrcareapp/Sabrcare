@@ -161,8 +161,9 @@ public class ReportFolderActivity extends AppCompatActivity {
             imgFlag=1;
         }
 
-        else if(requestCode==PICK_PDF&& resultCode == RESULT_OK) {
+        else if(requestCode==PICK_PDF&& resultCode == RESULT_OK && data!=null) {
             filePath = PathUtil.getPath(this,data.getData());
+            System.out.println("path>>>>>."+filePath);
             showUploadDialog = true;
             imgFlag=0;
         }

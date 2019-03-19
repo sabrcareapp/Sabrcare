@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:fitsSystemWindows="true"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -70,8 +71,8 @@
         fab:menu_animationDelayPerItem="55"
         fab:menu_backgroundColor="#CCFFFFFF"
         fab:menu_buttonSpacing="0dp"
-        fab:menu_colorNormal="#98ff98"
-        fab:menu_colorPressed="#008577"
+        fab:menu_colorNormal="@color/purpleAccent"
+        fab:menu_colorPressed="@color/purpleAccentDark"
         fab:menu_colorRipple="#99d4d4d4"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
@@ -103,8 +104,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_add_a_photo_white_24dp"
-            fab:fab_colorNormal="#98ff98"
-            fab:fab_colorPressed="#008577"
+            fab:fab_colorNormal="@color/purpleAccent"
+            fab:fab_colorPressed="@color/purpleAccentDark"
             fab:fab_label="Upload a photo"
             fab:fab_size="normal" />
 
@@ -113,8 +114,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_note_add_black_24dp"
-            fab:fab_colorNormal="#98ff98"
-            fab:fab_colorPressed="#008577"
+            fab:fab_colorNormal="@color/purpleAccent"
+            fab:fab_colorPressed="@color/purpleAccentDark"
             fab:fab_label="Upload a file"
             fab:fab_size="normal" />
 

@@ -5,43 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LaunchActivity"
-    android:background="#0a2472"
-    >
-
-
+    android:background="@color/colorPrimary">
 
     <ImageView
 
         android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="1dp"
-        android:background="#0a2472"
-        android:src="@drawable/remedley_logo" />
+        android:src="@drawable/ic_remedley" />
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="5dp"
-        android:layout_below="@+id/logo"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="-13dp"
-        android:background="#000000" />
 
     <Button
         android:id="@+id/ButtonIntro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/logo"
-        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp"
-        android:layout_marginEnd="56dp"
-        android:background="#98ff98"
+        android:background="@drawable/button_custom"
         android:padding="20dp"
         android:text="Learn how it works"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:textSize="20sp"
         android:textStyle="bold" />
 
