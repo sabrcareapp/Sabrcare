@@ -21,7 +21,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="0dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/remedley_logo"
+            android:src="@drawable/ic_remedley"
             android:layout_marginStart="0dp"/>
         <TextView
             android:id="@+id/symptom_toolbar_text"

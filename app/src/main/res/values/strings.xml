@@ -28,4 +28,5 @@
     <string name="Mild">Mild</string>
     <string name="Moderate">Moderate</string>
     <string name="Severe">Severe</string>
+    <string name="save">SAVE</string>
 </resources>

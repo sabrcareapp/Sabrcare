@@ -32,12 +32,12 @@
         android:layout_below="@id/TutorialViewPager"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="104dp"
-        android:background="#98ff98"
+        android:background="@drawable/button_custom"
         android:padding="20dp"
         android:paddingStart="100dp"
         android:paddingEnd="100dp"
         android:text="Sign up"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:textSize="20sp"
         android:textStyle="bold" />
 
