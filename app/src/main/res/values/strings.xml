@@ -29,4 +29,17 @@
     <string name="Moderate">Moderate</string>
     <string name="Severe">Severe</string>
     <string name="save">SAVE</string>
+    <string name="most_common">MOST COMMON</string>
+    <string name="cardio_circulatory">CARDIO/CIRCULATORY</string>
+    <string name="gastrointestinal">GASTROINTESTINAL</string>
+    <string name="mood_attention_memory">MOOD/ATTENTION/MEMORY</string>
+    <string name="oral_mouth">ORAL/MOUTH</string>
+    <string name="pain">PAIN</string>
+    <string name="respiratory">RESPIRATORY</string>
+    <string name="sexual_gynecologic">SEXUAL/GYNECOLOGIC</string>
+    <string name="skin_nails">SKIN/NAILS</string>
+    <string name="urinary">URINARY</string>
+    <string name="visual_perception">VISUAL/PERCEPTION</string>
+    <string name="other">OTHER</string>
+    <string name="apply">APPLY</string>
 </resources>

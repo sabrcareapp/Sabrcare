@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.sabrcare.app.R;
 import com.sabrcare.app.HomeActivity;
@@ -18,20 +19,39 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SymptomAddActivity extends AppCompatActivity {
 
     public static ArrayList<ModelSymptom> symptoms = new ArrayList<>(0);
-    public static int flag = 0;
+    public static int flagIntent=0;
+    public int flag=0,flag1=0,flag2=0,flag3=0,flag4=0,flag5=0,flag6=0,flag7=0,flag8=0,flag9=0,flag10=0,flag11=0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_symptom_add);
 
-        RecyclerView sytaRv = findViewById(R.id.syta_rv),
+        TextView sytaTv = findViewById(R.id.syta_tv),
+                sytaTv1 = findViewById(R.id.syta_tv1),
+                sytaTv2 = findViewById(R.id.syta_tv2),
+                sytaTv3 = findViewById(R.id.syta_tv3),
+                sytaTv4 = findViewById(R.id.syta_tv4),
+                sytaTv5 = findViewById(R.id.syta_tv5),
+                sytaTv6 = findViewById(R.id.syta_tv6),
+                sytaTv7 = findViewById(R.id.syta_tv7),
+                sytaTv8 = findViewById(R.id.syta_tv8),
+                sytaTv9 = findViewById(R.id.syta_tv9),
+                sytaTv10 = findViewById(R.id.syta_tv10),
+                sytaTv11 = findViewById(R.id.syta_tv11);
+
+        final RecyclerView sytaRv = findViewById(R.id.syta_rv),
                 sytaRv1=findViewById(R.id.syta_rv1),
                 sytaRv2=findViewById(R.id.syta_rv2),
                 sytaRv3=findViewById(R.id.syta_rv3),
                 sytaRv4=findViewById(R.id.syta_rv4),
                 sytaRv5=findViewById(R.id.syta_rv5),
-                sytaRv6=findViewById(R.id.syta_rv6);
+                sytaRv6=findViewById(R.id.syta_rv6),
+                sytaRv7=findViewById(R.id.syta_rv7),
+                sytaRv8=findViewById(R.id.syta_rv8),
+                sytaRv9=findViewById(R.id.syta_rv9),
+                sytaRv10=findViewById(R.id.syta_rv10),
+                sytaRv11=findViewById(R.id.syta_rv11);
         Button sytaBtn = findViewById(R.id.syta_btn);
 
         if(symptoms.size()==0) {
@@ -266,6 +286,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaRv4.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
         sytaRv5.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
         sytaRv6.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        sytaRv7.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        sytaRv8.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        sytaRv9.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        sytaRv10.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        sytaRv11.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+
         AddSymptomAdapter symptomsAdapter = new AddSymptomAdapter("sytaRv");
         AddSymptomAdapter symptomsAdapter1 = new AddSymptomAdapter("sytaRv1");
         AddSymptomAdapter symptomsAdapter2 = new AddSymptomAdapter("sytaRv2");
@@ -273,6 +299,11 @@ public class SymptomAddActivity extends AppCompatActivity {
         AddSymptomAdapter symptomsAdapter4 = new AddSymptomAdapter("sytaRv4");
         AddSymptomAdapter symptomsAdapter5 = new AddSymptomAdapter("sytaRv5");
         AddSymptomAdapter symptomsAdapter6 = new AddSymptomAdapter("sytaRv6");
+        AddSymptomAdapter symptomsAdapter7 = new AddSymptomAdapter("sytaRv7");
+        AddSymptomAdapter symptomsAdapter8 = new AddSymptomAdapter("sytaRv8");
+        AddSymptomAdapter symptomsAdapter9 = new AddSymptomAdapter("sytaRv9");
+        AddSymptomAdapter symptomsAdapter10 = new AddSymptomAdapter("sytaRv10");
+        AddSymptomAdapter symptomsAdapter11 = new AddSymptomAdapter("sytaRv11");
 
         sytaRv.setAdapter(symptomsAdapter);
         sytaRv1.setAdapter(symptomsAdapter1);
@@ -281,12 +312,184 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaRv4.setAdapter(symptomsAdapter4);
         sytaRv5.setAdapter(symptomsAdapter5);
         sytaRv6.setAdapter(symptomsAdapter6);
+        sytaRv7.setAdapter(symptomsAdapter7);
+        sytaRv8.setAdapter(symptomsAdapter8);
+        sytaRv9.setAdapter(symptomsAdapter9);
+        sytaRv10.setAdapter(symptomsAdapter10);
+        sytaRv11.setAdapter(symptomsAdapter11);
 
+        sytaTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag==1) {
+                    sytaRv.setVisibility(View.GONE);
+                    flag=0;
+                }
+                else{
+                    sytaRv.setVisibility(View.VISIBLE);
+                    flag=1;
+                }
+            }
+        });
+
+        sytaTv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag1==1) {
+                    sytaRv1.setVisibility(View.GONE);
+                    flag1=0;
+                }
+                else{
+                    sytaRv1.setVisibility(View.VISIBLE);
+                    flag1=1;
+                }
+            }
+        });
+
+        sytaTv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag2==1) {
+                    sytaRv2.setVisibility(View.GONE);
+                    flag2=0;
+                }
+                else{
+                    sytaRv2.setVisibility(View.VISIBLE);
+                    flag2=1;
+                }
+            }
+        });
+
+        sytaTv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag3==1) {
+                    sytaRv3.setVisibility(View.GONE);
+                    flag3=0;
+                }
+                else{
+                    sytaRv3.setVisibility(View.VISIBLE);
+                    flag3=1;
+                }
+            }
+        });
+
+        sytaTv4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag4==1) {
+                    sytaRv4.setVisibility(View.GONE);
+                    flag4=0;
+                }
+                else{
+                    sytaRv4.setVisibility(View.VISIBLE);
+                    flag4=1;
+                }
+            }
+        });
+
+        sytaTv5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag5==1) {
+                    sytaRv5.setVisibility(View.GONE);
+                    flag5=0;
+                }
+                else{
+                    sytaRv5.setVisibility(View.VISIBLE);
+                    flag5=1;
+                }
+            }
+        });
+
+        sytaTv6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag6==1) {
+                    sytaRv6.setVisibility(View.GONE);
+                    flag6=0;
+                }
+                else{
+                    sytaRv6.setVisibility(View.VISIBLE);
+                    flag6=1;
+                }
+            }
+        });
+
+        sytaTv7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag7==1) {
+                    sytaRv7.setVisibility(View.GONE);
+                    flag7=0;
+                }
+                else{
+                    sytaRv7.setVisibility(View.VISIBLE);
+                    flag7=1;
+                }
+            }
+        });
+
+        sytaTv8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag8==1) {
+                    sytaRv8.setVisibility(View.GONE);
+                    flag8=0;
+                }
+                else{
+                    sytaRv8.setVisibility(View.VISIBLE);
+                    flag8=1;
+                }
+            }
+        });
+
+        sytaTv9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag9==1) {
+                    sytaRv9.setVisibility(View.GONE);
+                    flag9=0;
+                }
+                else{
+                    sytaRv9.setVisibility(View.VISIBLE);
+                    flag9=1;
+                }
+            }
+        });
+
+        sytaTv10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag10==1) {
+                    sytaRv10.setVisibility(View.GONE);
+                    flag10=0;
+                }
+                else{
+                    sytaRv10.setVisibility(View.VISIBLE);
+                    flag10=1;
+                }
+            }
+        });
+
+        sytaTv11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag11==1) {
+                    sytaRv11.setVisibility(View.GONE);
+                    flag11=0;
+                }
+                else{
+                    sytaRv11.setVisibility(View.VISIBLE);
+                    flag11=1;
+                }
+            }
+        });
 
         sytaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flag=1;
+                flagIntent=1;
                 Intent intent = new Intent(SymptomAddActivity.this,HomeActivity.class);
                 startActivity(intent);
             }
