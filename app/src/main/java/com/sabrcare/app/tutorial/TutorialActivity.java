@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.sabrcare.app.R;
-import com.sabrcare.app.auth.SignInActivity;
 import com.sabrcare.app.auth.SignUpActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
