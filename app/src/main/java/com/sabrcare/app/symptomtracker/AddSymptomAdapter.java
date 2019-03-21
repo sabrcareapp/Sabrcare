@@ -39,6 +39,21 @@ public class AddSymptomAdapter extends RecyclerView.Adapter<AddSymptomAdapter.Ad
         else if(("sytaRv6").equals(x)){
             i=32;
         }
+        else if(("sytaRv7").equals(x)){
+            i=34;
+        }
+        else if(("sytaRv8").equals(x)){
+            i=44;
+        }
+        else if(("sytaRv9").equals(x)){
+            i=58;
+        }
+        else if(("sytaRv10").equals(x)){
+            i=64;
+        }
+        else if(("sytaRv11").equals(x)){
+            i=69;
+        }
     }
 
     @NonNull
@@ -92,6 +107,21 @@ public class AddSymptomAdapter extends RecyclerView.Adapter<AddSymptomAdapter.Ad
         }
         else if(i==32){
             return 2;
+        }
+        else if(i==34){
+            return 10;
+        }
+        else if(i==44){
+            return 14;
+        }
+        else if(i==58){
+            return 6;
+        }
+        else if(i==64){
+            return 5;
+        }
+        else if(i==69){
+            return 5;
         }
         else
             return symptoms.size();

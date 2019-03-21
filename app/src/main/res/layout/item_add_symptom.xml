@@ -14,15 +14,16 @@
     android:requiresFadingEdge="vertical"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="100">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="90"
             android:layout_height="wrap_content"
             android:id="@+id/title"
             android:text="@string/title_here"
@@ -31,10 +32,10 @@
 
         <CheckBox
             android:id="@+id/checkbox"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="10"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="319dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_margin="10dp"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

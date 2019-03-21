@@ -15,6 +15,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/syta_tv"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/ef_white"
                 android:elevation="@dimen/activity_vertical_margin"
@@ -22,7 +23,7 @@
                 android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MOST COMMON"
+                android:text="@string/most_common"
                 android:textSize="30sp"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif" />
@@ -30,9 +31,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/syta_rv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <TextView
+                android:id="@+id/syta_tv1"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/ef_white"
                 android:elevation="@dimen/activity_vertical_margin"
@@ -41,16 +44,18 @@
                 android:textSize="30sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CARDIO/CIRCULATORY"
+                android:text="@string/cardio_circulatory"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/syta_rv1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <TextView
+                android:id="@+id/syta_tv2"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/ef_white"
                 android:elevation="@dimen/activity_vertical_margin"
@@ -58,7 +63,7 @@
                 android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="GASTROINTESTINAL"
+                android:text="@string/gastrointestinal"
                 android:textSize="30sp"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif" />
@@ -66,9 +71,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/syta_rv2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <TextView
+                android:id="@+id/syta_tv3"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/ef_white"
                 android:elevation="@dimen/activity_vertical_margin"
@@ -76,7 +83,7 @@
                 android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MOOD/ATTENTION/MEMORY"
+                android:text="@string/mood_attention_memory"
                 android:textSize="30sp"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif" />
@@ -84,9 +91,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/syta_rv3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <TextView
+                android:id="@+id/syta_tv4"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/ef_white"
                 android:elevation="@dimen/activity_vertical_margin"
@@ -94,7 +103,7 @@
                 android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ORAL/MOUTH"
+                android:text="@string/oral_mouth"
                 android:textSize="30sp"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif" />
@@ -102,9 +111,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/syta_rv4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <TextView
+                android:id="@+id/syta_tv5"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/ef_white"
                 android:elevation="@dimen/activity_vertical_margin"
@@ -112,7 +123,7 @@
                 android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PAIN"
+                android:text="@string/pain"
                 android:textSize="30sp"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif" />
@@ -120,9 +131,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/syta_rv5"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <TextView
+                android:id="@+id/syta_tv6"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/ef_white"
                 android:elevation="@dimen/activity_vertical_margin"
@@ -130,13 +143,114 @@
                 android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="RESPIRATORY"
+                android:text="@string/respiratory"
                 android:textSize="30sp"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/syta_rv6"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/syta_tv7"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sexual_gynecologic"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv7"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/syta_tv8"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/skin_nails"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv8"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/syta_tv9"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/urinary"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv9"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/syta_tv10"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/visual_perception"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv10"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/syta_tv11"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/ef_white"
+                android:elevation="@dimen/activity_vertical_margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/other"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syta_rv11"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -148,7 +262,7 @@
         android:id="@+id/syta_btn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="APPLY"
+        android:text="@string/apply"
         android:layout_alignBottom="@id/syta_rv"
         android:textSize="24sp"
         android:textColor="#ffffff"

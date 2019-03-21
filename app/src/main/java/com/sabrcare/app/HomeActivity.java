@@ -22,7 +22,7 @@ import android.view.MenuItem;
 
 import java.util.Objects;
 
-import static com.sabrcare.app.symptomtracker.SymptomAddActivity.flag;
+import static com.sabrcare.app.symptomtracker.SymptomAddActivity.flagIntent;
 
 public class HomeActivity extends AppCompatActivity  {
     private static final int REQUEST_EXIT = 2;
@@ -76,8 +76,8 @@ public class HomeActivity extends AppCompatActivity  {
             loadFragment(new MedicineFragment());
             navigation.setSelectedItemId(R.id.navigation_medicine);
         }
-        else if(flag==1){
-            flag=0;
+        else if(flagIntent==1){
+            flagIntent=0;
             loadFragment(new SymptomTrackerFragment());
             navigation.setSelectedItemId(R.id.navigation_symptom_tracker);
         }
