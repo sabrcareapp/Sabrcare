@@ -42,8 +42,8 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        username=findViewById(R.id.username);
-        password=findViewById(R.id.password);
+        username=findViewById(R.id.usernameLogin);
+        password=findViewById(R.id.passwordLogin);
         signIn_btn =findViewById(R.id.sign_in_btn);
         signIn_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,10 +59,11 @@ public class SignInActivity extends AppCompatActivity {
         requestHeaders.put("email",username.getText().toString());
 
         signInQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, requestEndpoint, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, requestEndpoint, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    Log.d("SIgnInResponse",response);
                     JSONObject responseData = new JSONObject(response);
                     String token = responseData.getString("token");
                     Intent launchHome = new Intent(SignInActivity.this,HomeActivity.class);
@@ -71,13 +72,13 @@ public class SignInActivity extends AppCompatActivity {
                     finishAffinity();
 
                 } catch (JSONException e) {
-                    Toast.makeText(SignInActivity.this,"Could not Sign You Up!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignInActivity.this,"Could not Sign You In!",Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(SignInActivity.this,"Could not Sign You Up!",Toast.LENGTH_LONG).show();
+                Toast.makeText(SignInActivity.this,"Could not Sign You in!",Toast.LENGTH_LONG).show();
             }
         }) {
             @Override

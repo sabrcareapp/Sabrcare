@@ -29,10 +29,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    TextInputEditText username;
-    TextInputEditText password;
+    TextInputEditText usernameTV;
+    TextInputEditText passwordTV;
     TextInputEditText password_confirm;
-    TextInputEditText email;
+    TextInputEditText emailTV;
     private Button signUp_btn;
     private RequestQueue questionRequestQueue;
     private Map<String,String> requestHeaders= new ArrayMap<String, String>();
@@ -44,10 +44,10 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        username=findViewById(R.id.username);
-        password=findViewById(R.id.password);
+        usernameTV=findViewById(R.id.name);
+        passwordTV=findViewById(R.id.password);
         password_confirm=findViewById(R.id.password2);
-        email=findViewById(R.id.email);
+        emailTV=findViewById(R.id.email);
         signUp_btn =findViewById(R.id.register_btn);
 
         signUp_btn.setOnClickListener(new View.OnClickListener() {
@@ -55,23 +55,24 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                if(password.getText().toString().equals(password_confirm.getText().toString())) {
-                    Toast.makeText(SignUpActivity.this, "Registered", Toast.LENGTH_LONG).show();
-                    getAuthorizeUser();
+                if(passwordTV.getText().toString().equals(password_confirm.getText().toString())) {
+                    Toast.makeText(SignUpActivity.this, "Registering", Toast.LENGTH_LONG).show();
+                    getAuthorizeUser(emailTV.getText().toString(),passwordTV.getText().toString(),usernameTV.getText().toString());
 
                 }
             }
-            private void getAuthorizeUser(){
+            private void getAuthorizeUser(String email, String password, String username){
 
-                requestHeaders.put("email",email.getText().toString());
-                requestHeaders.put("password",password.getText().toString());
-                requestHeaders.put("firstName",username.getText().toString());
+                requestHeaders.put("email",email);
+                requestHeaders.put("password",password);
+                requestHeaders.put("firstName",username);
 
                 questionRequestQueue = Volley.newRequestQueue(SignUpActivity.this);
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, requestEndpoint, new Response.Listener<String>() {
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, requestEndpoint, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            Log.d("serverResponse",response);
                             JSONObject responseData = new JSONObject(response);
                             String token = responseData.getString("token");
                             Intent launchHome = new Intent(SignUpActivity.this,HomeActivity.class);
@@ -80,6 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
                             finishAffinity();
 
                         } catch (JSONException e) {
+                            Log.d("signupError",e.toString());
                             Toast.makeText(SignUpActivity.this,"Could not Sign You Up!",Toast.LENGTH_LONG).show();
                         }
                     }
