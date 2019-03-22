@@ -118,6 +118,9 @@ public class NewMedActivity extends AppCompatActivity {
                 medicineModel.setTime(reminderTime.getText().toString());
                 medicineModel.setDayPhase(day_phase.getSelectedItem().toString());
 
+
+
+
                 alarmModel = realm.where(AlarmModel.class).equalTo("time", medicineModel.getTime()).findFirst();
                 System.out.println("TIME QUERY>>>>>>>>>>>>>" + medicineModel.getTime());
                 if (alarmModel == null) // No alarm already set for this particular time
