@@ -11,8 +11,8 @@
         android:id="@+id/medicine_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0a2472"
-        app:title=" "
+        android:background="@color/colorPrimary"
+        app:title=""
         app:titleTextColor="#FFFFFF">
 
         <ImageView
@@ -26,8 +26,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medicine"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             android:textColor="#FFFFFF"
-            android:textSize="25sp"/>
+            android:textSize="21sp"/>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView

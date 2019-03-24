@@ -68,7 +68,8 @@ public class RecordsFragment extends Fragment {
         recordsAdapter = new RecordsAdapter(records,getContext());
         recyclerView.setAdapter(recordsAdapter);
 
-        Toolbar records_toolbar = view.findViewById(R.id.symptom_toolbar);
+        Toolbar records_toolbar = view.findViewById(R.id.records_toolbar);
+        records_toolbar.setTitle("");
         ((AppCompatActivity)getActivity()).setSupportActionBar(records_toolbar);
         fabNewFolder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,12 +77,17 @@ public class RecordsFragment extends Fragment {
                 AlertDialog.Builder newFolderDialogBuilder = new AlertDialog.Builder(getContext());
                 newFolderDialogBuilder.setView(R.layout.fragment_new_folder);
                 newFolderDialogBuilder.setCancelable(false);
-                newFolderDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                newFolderDialogBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        materialDesignFAM.close(false);
                     }
-                }).setNegativeButton("Cancel",null);
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        materialDesignFAM.close(false);
+                    }
+                });
 
                 AlertDialog newFolderDialog = newFolderDialogBuilder.create();
                 newFolderDialog.show();
