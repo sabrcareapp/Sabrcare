@@ -43,6 +43,7 @@ public class MedicineFragment extends Fragment {
 
 
         Toolbar medicine_toolbar = view.findViewById(R.id.medicine_toolbar);
+        medicine_toolbar.setTitle("");
         ((AppCompatActivity)getActivity()).setSupportActionBar(medicine_toolbar);
 
         //TODO This data to be loaded from server.

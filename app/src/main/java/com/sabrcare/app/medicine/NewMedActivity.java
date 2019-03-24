@@ -1,9 +1,11 @@
 package com.sabrcare.app.medicine;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -64,7 +66,7 @@ public class NewMedActivity extends AppCompatActivity {
         realm = Realm.getDefaultInstance();
 
         if (getIntent().getAction().equalsIgnoreCase("Edit")) {
-            //Querying with medName only, change later.
+            //TODO Querying with medName only, change later.
             medicineModel = realm.where(MedicineModel.class).
                     equalTo("medName", getIntent().getStringExtra("MedName")).findFirst();
             med_name.setText(medicineModel.getMedName());
@@ -89,7 +91,36 @@ public class NewMedActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO Delete medicine.
+                AlertDialog.Builder builder = new AlertDialog.Builder(NewMedActivity.this);
+                builder.setMessage("Delete this medication? This action is permanent.")
+                        .setNegativeButton("Cancel",null).setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //TODO Update data in server for medicine
+                        alarmModel = realm.where(AlarmModel.class).equalTo("time", medicineModel.getTime()).findFirst();
+                        if(alarmModel!=null){
+                            System.out.println(">>>>>MED deleted, cancelling alarm");
+                            Intent cancelAlarm = new Intent(NewMedActivity.this, AlarmReceiver.class);
+                            cancelAlarm.putExtra("medications", alarmModel.getMedicines());
+                            pendingIntent = PendingIntent.getBroadcast(NewMedActivity.this, (int) alarmModel.getAlarmID(), cancelAlarm, 0);
+                            pendingIntent.cancel();
+                            alarmManager.cancel(pendingIntent);
+                        }
+
+                        realm.beginTransaction();
+                        medicineModel.deleteFromRealm();
+                        realm.commitTransaction();
+
+                        finish();
+                        Intent openMedFrag = new Intent(NewMedActivity.this, HomeActivity.class);
+                        openMedFrag.setAction("updateMeds");
+                        startActivity(openMedFrag);
+                        finishAffinity();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 

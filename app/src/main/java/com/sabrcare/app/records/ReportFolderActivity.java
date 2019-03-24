@@ -22,6 +22,9 @@ import android.widget.Toast;
 import com.esafirm.imagepicker.features.ReturnMode;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.jaiselrahman.filepicker.activity.FilePickerActivity;
+import com.jaiselrahman.filepicker.config.Configurations;
+import com.jaiselrahman.filepicker.model.MediaFile;
 import com.sabrcare.app.PathUtil;
 import com.sabrcare.app.R;
 import java.util.ArrayList;
@@ -107,7 +110,7 @@ public class ReportFolderActivity extends AppCompatActivity {
                             .toolbarFolderTitle("Select Image to upload")
                             .showCamera(true)
                             .single()
-                            .imageDirectory("SabrCare Records")
+                            .imageDirectory("Remedley Records")
                             .theme(R.style.AppThemeNoActionBar)
                             .start(PICK_IMAGE);
 
@@ -120,7 +123,7 @@ public class ReportFolderActivity extends AppCompatActivity {
             }
         });
 
-        uploadFileFab.setOnClickListener(new View.OnClickListener() {
+        uploadFileFab.setOnClickListener( new View.OnClickListener() {
             @Override
             @AfterPermissionGranted(RC_READ_STORAGE)
             public void onClick(View view) {
@@ -130,6 +133,18 @@ public class ReportFolderActivity extends AppCompatActivity {
                     fileIntent.addCategory(Intent.CATEGORY_OPENABLE);
                     fileIntent.setType("application/pdf");
                     startActivityForResult(Intent.createChooser(fileIntent,"Select PDF"),PICK_PDF);
+//                    Intent fileIntent = new Intent(ReportFolderActivity.this,FilePickerActivity.class);
+//                    fileIntent.putExtra(FilePickerActivity.CONFIGS,new Configurations.Builder()
+//                            .setCheckPermission(false)
+//                            .setShowImages(false)
+//                            .setShowVideos(false)
+//                            .setShowAudios(false)
+//                            .setSuffixes("pdf")
+//                            .setSingleChoiceMode(true)
+//                            .enableImageCapture(false)
+//                            .enableVideoCapture(false)
+//                            .build());
+//                    startActivityForResult(fileIntent,PICK_PDF);
 
                 } else {
                     EasyPermissions.requestPermissions(new PermissionRequest.Builder(ReportFolderActivity.this,RC_READ_STORAGE,
@@ -163,7 +178,10 @@ public class ReportFolderActivity extends AppCompatActivity {
 
         else if(requestCode==PICK_PDF&& resultCode == RESULT_OK && data!=null) {
             filePath = PathUtil.getPath(this,data.getData());
-            System.out.println("path>>>>>."+filePath);
+            //ArrayList<MediaFile> files = data.getParcelableArrayListExtra(FilePickerActivity.MEDIA_FILES);
+            //filePath=files.get(0).getPath();
+            System.out.println("data>>>>>>>"+data.getData());
+            System.out.println("filepath>>>>>"+filePath);
             showUploadDialog = true;
             imgFlag=0;
         }

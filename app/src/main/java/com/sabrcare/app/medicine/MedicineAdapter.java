@@ -3,11 +3,13 @@ package com.sabrcare.app.medicine;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sabrcare.app.R;
@@ -15,6 +17,7 @@ import com.sabrcare.app.R;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -56,6 +59,8 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         public TextView day_phase;
         public TextView remState;
         public Button edit;
+        public ImageView pillIcon;
+        public CardView recViewItem;
 
         public MedicineVH(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +68,8 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
             day_phase=itemView.findViewById(R.id.dayPhase);
             remState=itemView.findViewById(R.id.isReminderSet);
             edit=itemView.findViewById(R.id.editMed);
+            pillIcon=itemView.findViewById(R.id.pill);
+            recViewItem=itemView.findViewById(R.id.cv2);
         }
 
         public boolean onLongClick(View v) {
@@ -88,6 +95,18 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
                     ctx.startActivity(editMed);
                 }
             });
+
+            recViewItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent editMed = new Intent(ctx,NewMedActivity.class);
+                    editMed.setAction("Edit");
+                    editMed.putExtra("MedName",medicine.getMedName());
+                    ctx.startActivity(editMed);
+                }
+            });
+
+            pillIcon.setColorFilter(Color.parseColor("#00428c"));
         }
     }
 }

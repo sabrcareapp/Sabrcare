@@ -39,6 +39,7 @@ public class SymptomTrackerFragment extends Fragment {
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
         Toolbar symptom_tracker_toolbar = view.findViewById(R.id.symptom_toolbar);
+        symptom_tracker_toolbar.setTitle("");
         ((AppCompatActivity)getActivity()).setSupportActionBar(symptom_tracker_toolbar);
 
 

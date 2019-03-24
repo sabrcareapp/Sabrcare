@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
-            android:textColorHint="#ff0000"
+            android:textColorHint="#ffffff"
             app:boxBackgroundColor="#ffffff"
             app:hintTextColor="#ffffff"
             >
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:textColorHint="#ff0000"
+            android:textColorHint="#ffffff"
             app:boxBackgroundColor="#ffffff"
             app:hintTextColor="#ffffff">
 
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:textColorHint="#ff0000"
+            android:textColorHint="#ffffff"
             app:boxBackgroundColor="#ffffff"
             app:hintTextColor="#ffffff">
 
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:textColorHint="#ff0000"
+            android:textColorHint="#ffffff"
             app:boxBackgroundColor="#ffffff"
             app:hintTextColor="#ffffff">
 
@@ -144,5 +144,5 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_remedley" />
+        android:src="@drawable/remedley_logo" />
 </RelativeLayout>
