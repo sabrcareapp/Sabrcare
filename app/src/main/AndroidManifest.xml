@@ -29,7 +29,8 @@
             android:name=".tutorial.TutorialActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".HomeActivity"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:theme="@style/AppThemeNoActionBar">
+        </activity>
         <activity
             android:name=".auth.SignInActivity"
             android:theme="@style/AppThemeNoActionBar" />

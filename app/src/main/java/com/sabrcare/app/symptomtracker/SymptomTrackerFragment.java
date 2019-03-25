@@ -10,20 +10,37 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.ArrayMap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 
-
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.sabrcare.app.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
+import java.util.Map;
+
+import static com.sabrcare.app.symptomtracker.SymptomAddActivity.symptoms;
 
 public class SymptomTrackerFragment extends Fragment {
 
     public int flag=0;
+    private RequestQueue symptomQueue;
+    private Map<String,String> symptomHeaders = new ArrayMap<String, String>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,5 +79,63 @@ public class SymptomTrackerFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        sytBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(int i=0;i<74;i++){
+                    if(symptoms.get(i).isCheck==1){
+                        if(symptoms.get(i).severity.equals("null")){
+                            Toast.makeText(getContext(),
+                                    "Please select the severity of each Symptom",
+                                    Toast.LENGTH_SHORT);
+                            return;
+                        }
+                    }
+                }
+
+                JSONArray jsonArray = new JSONArray();
+                for(int i=0;i<74;i++){
+                    if(symptoms.get(i).isCheck==1){
+                        JSONObject symptom = new JSONObject();
+                        try {
+                            symptom.put("symptomName",symptoms.get(i).name);
+                            symptom.put("symptomSeverity",symptoms.get(i).severity);
+                            jsonArray.put(symptom);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                postDataItem(jsonArray);
+            }
+        });
+
+    }
+
+    // TODO: Don't hardcode token
+    void postDataItem(JSONArray symptomArray){
+        symptomQueue = Volley.newRequestQueue(getContext());
+        String url = getResources().getString(R.string.apiUrl)+"symptom/add";
+        symptomHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+        symptomHeaders.put("symptomArray",symptomArray.toString());
+        StringRequest symptomAddition = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response",response);
+                Toast.makeText(getContext(),"Symptom Added successfully",Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("symerror", error.toString());
+            }
+        }){
+            @Override
+            public Map<String,String> getHeaders(){
+                return symptomHeaders;
+            }
+        };
+        symptomQueue.add(symptomAddition);
     }
 }

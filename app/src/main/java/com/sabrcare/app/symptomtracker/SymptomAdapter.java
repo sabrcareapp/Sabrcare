@@ -131,22 +131,22 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
             switch (view.getId()){
                 case R.id.none: if(checked){
                                     c=1;
-                                    s = "none";
+                                    s = "None";
                                 }
                                 break;
                 case R.id.mild: if(checked){
                                     c=1;
-                                    s = "mild";
+                                    s = "Mild";
                                 }
                                 break;
                 case R.id.moderate: if(checked){
                                     c=1;
-                                    s = "moderate";
+                                    s = "Moderate";
                                 }
                                 break;
                 case R.id.severe: if(checked){
                                         c=1;
-                                        s = "severe";
+                                        s = "Severe";
                                     }
                                     break;
 //                case R.id.unbearable: if(checked){
