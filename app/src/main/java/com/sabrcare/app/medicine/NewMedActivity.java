@@ -19,10 +19,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
+import com.sabrcare.app.R;
 import com.sabrcare.app.AlarmReceiver;
 import com.sabrcare.app.HomeActivity;
-import com.sabrcare.app.R;
+
 
 
 import java.util.Calendar;

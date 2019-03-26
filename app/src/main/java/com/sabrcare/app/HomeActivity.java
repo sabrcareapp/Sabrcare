@@ -36,13 +36,13 @@ public class HomeActivity extends AppCompatActivity  {
             Fragment fragment = null;
 
             switch (item.getItemId()) {
-//                case R.id.navigation_home:
-//                    fragment = new HomeFragment();
-//                    break;
-//
-//                case R.id.navigation_timeline:
-//                    fragment = new TimelineFragment();
-//                    break;
+                case R.id.navigation_home:
+                    fragment = new HomeFragment();
+                    break;
+
+                case R.id.navigation_timeline:
+                    fragment = new TimelineFragment();
+                    break;
 
                 case R.id.navigation_medicine:
                     fragment = new MedicineFragment();

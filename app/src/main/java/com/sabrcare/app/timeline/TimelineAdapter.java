@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sabrcare.app.ModelTimeline;
 import com.sabrcare.app.R;
 
 import java.util.ArrayList;
@@ -16,13 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.TimelineVH> {
 
-    private ArrayList<TimelineModel> timeline;
-    public Context ctx;
-    public TimelineAdapter(ArrayList<TimelineModel> timeline,Context ctx) {
+    private ArrayList<ModelTimeline> timeline;
 
+    public Context ctx;
+
+    public TimelineAdapter(ArrayList<ModelTimeline> timelineModel, Context ctx) {
 
         this.ctx=ctx;
-        this.timeline=timeline;
+        this.timeline=timelineModel;
     }
 
     @NonNull
@@ -35,6 +37,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
     public void onBindViewHolder(@NonNull TimelineVH holder, int position) {
         holder.title.setText(timeline.get(position).getTitle());
         holder.subtitle.setText(timeline.get(position).getSubtitle());
+        holder.pic.setImageURI(timeline.get(position).getImageUri());
     }
 
     @Override
