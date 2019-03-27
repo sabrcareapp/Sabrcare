@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -64,6 +65,7 @@ public class NewMedActivity extends AppCompatActivity {
     MedicineModel medicineModel;
     AlarmModel alarmModel;
     Realm realm;
+    SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("TOKEN",Context.MODE_PRIVATE);
 
     boolean timeFlag;
 
@@ -141,8 +143,6 @@ public class NewMedActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         //TODO Handle token
-
-
                         deleteMedicine(token,
                                 medicineModel.getMedID());
                       //  deleteMedicine("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s",
