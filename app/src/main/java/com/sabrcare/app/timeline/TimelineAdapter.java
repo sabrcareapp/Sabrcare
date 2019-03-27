@@ -1,28 +1,55 @@
 package com.sabrcare.app.timeline;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.util.ArrayMap;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.sabrcare.app.ModelTimeline;
 import com.sabrcare.app.R;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static java.security.AccessController.getContext;
+
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.TimelineVH> {
 
-    private ArrayList<TimelineModel> timeline;
+
     public Context ctx;
-    public TimelineAdapter(ArrayList<TimelineModel> timeline,Context ctx) {
+
+    ArrayList<ModelTimeline> timeline;
+
+    RequestOptions options;
 
 
-        this.ctx=ctx;
+    public TimelineAdapter(Context ctx,ArrayList<ModelTimeline> timeline) {
         this.timeline=timeline;
+        this.ctx=ctx;
+        options = new RequestOptions().centerCrop().placeholder(android.R.drawable.alert_dark_frame).error(android.R.drawable.alert_dark_frame);
+        Log.e("INSIDE ADAPTER","HELLO");
     }
 
     @NonNull
@@ -33,8 +60,21 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
 
     @Override
     public void onBindViewHolder(@NonNull TimelineVH holder, int position) {
+
+        Log.e("INSIDE ONBIND",timeline.get(position).getTitle());
+      //  Log.e("timelineValues",timeline.get(position).getTitle());
         holder.title.setText(timeline.get(position).getTitle());
         holder.subtitle.setText(timeline.get(position).getSubtitle());
+
+        if(timeline.get(position).getTimelineType().equals("Record"))
+            holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_records_image));
+       else if(timeline.get(position).getTimelineType().equals("Medicine"))
+            holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_pills_solid));
+
+        else if(timeline.get(position).getTimelineType().equals("Symptom"))
+            holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_stethoscope_solid));
+
+
     }
 
     @Override
@@ -57,4 +97,5 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
         }
 
     }
+
 }

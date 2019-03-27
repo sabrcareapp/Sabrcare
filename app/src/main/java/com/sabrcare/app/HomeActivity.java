@@ -39,10 +39,10 @@ public class HomeActivity extends AppCompatActivity  {
 //                case R.id.navigation_home:
 //                    fragment = new HomeFragment();
 //                    break;
-//
-//                case R.id.navigation_timeline:
-//                    fragment = new TimelineFragment();
-//                    break;
+
+                case R.id.navigation_timeline:
+                    fragment = new TimelineFragment();
+                    break;
 
                 case R.id.navigation_medicine:
                     fragment = new MedicineFragment();
@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fresco.initialize(this);
+        //Fresco.initialize(this);
         setContentView(R.layout.activity_home);
 
        // String username = Objects.requireNonNull(getIntent().getExtras()).get("username").toString();

@@ -25,7 +25,8 @@
             android:name=".tutorial.TutorialActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".HomeActivity"
-            android:theme="@style/AppThemeNoActionBar" >
+
+            android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -52,9 +53,6 @@
 
         <receiver android:name=".AlarmReceiver" />
 
-        <service
-            android:name="com.onecode.s3.service.S3UploadService"
-            android:exported="false" />
 
         <activity android:name=".activities.ProfileActivity"></activity>
         <activity android:name=".activities.HExpertActivity"></activity>
