@@ -58,7 +58,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
     @Override
     public void onBindViewHolder(@NonNull TimelineVH holder, int position) {
 
-        Log.e("timelineValues",timeline.get(position).getTitle());
+        Log.e("INSIDE ONBIND",timeline.get(position).getTitle());
+      //  Log.e("timelineValues",timeline.get(position).getTitle());
         holder.title.setText(timeline.get(position).getTitle());
         holder.subtitle.setText(timeline.get(position).getSubtitle());
 

@@ -4,10 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import de.hdodenhof.circleimageview.CircleImageView;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.util.ArrayMap;
@@ -15,8 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -72,9 +67,9 @@ public class TimelineFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                  //  Log.d("timelineResponse", response);
+                    Log.d("timelineResponse", response);
 
-                   JSONArray timelineArray = new JSONArray(response);
+                   JSONArray timelineArray = new JSONObject(response).getJSONArray("data");
 //                    JSONObject hello = timelineArray.getJSONObject(0);
 //                    Log.e("PUSSY",hello.getString("recordsName"));
                     JSONObject timelineObject = null;
@@ -114,6 +109,7 @@ public class TimelineFragment extends Fragment {
                 } catch (Exception e) {
                     //   Toast.makeText(getContext(), "Could not Sign You In!", Toast.LENGTH_LONG).show();
                 }
+                Log.e("TIMELINEFRAGMENT VALUES",timeline.size()+" ");
                 setupRecyclerView(timeline);
             }
         }, new Response.ErrorListener() {
