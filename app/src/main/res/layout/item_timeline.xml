@@ -18,10 +18,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/pic"
             android:layout_width="96dp"
-            card_view:cardCornerRadius="10dp"
             android:layout_height="96dp"
             android:src="@drawable/remedley_logo"
 

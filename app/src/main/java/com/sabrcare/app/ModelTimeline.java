@@ -8,11 +8,14 @@ public class ModelTimeline  {
     private String title;
     private String subtitle;
     private String imageUri;
+    private String timelineType;
 
-    public ModelTimeline(String title, String subtitle, String imageUri) {
+
+    public ModelTimeline(String title, String subtitle, String imageUri, String timelineType) {
         this.title = title;
         this.subtitle = subtitle;
         this.imageUri = imageUri;
+        this.timelineType=timelineType;
     }
 
     public ModelTimeline() {
@@ -35,11 +38,12 @@ public class ModelTimeline  {
     }
 
 
-    public String getImageUri() {
-        return imageUri;
+
+    public String getTimelineType() {
+        return timelineType;
     }
 
-    public void setImageUri(String imageUri) {
-        this.imageUri = imageUri;
+    public void setTimelineType(String timelineType) {
+        this.timelineType = timelineType;
     }
 }

@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.sabrcare.app.ModelTimeline;
 import com.sabrcare.app.R;
 
@@ -46,7 +47,7 @@ public class TimelineFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        Fresco.initialize(getContext());
         View view= inflater.inflate(R.layout.fragment_timeline, container, false);
 
         timeline_rv = view.findViewById(R.id.timeline_rv);
@@ -82,22 +83,27 @@ public class TimelineFragment extends Fragment {
                         if(timelineObject.getString("timelineType").equals("Record")) {
                             Log.e("INSIDE API",timelineObject.getString("recordsName"));
 
+                            modelTimeline.setTimelineType(timelineObject.getString("timelineType"));
                             modelTimeline.setTitle(timelineObject.getString("recordsName"));
                             modelTimeline.setSubtitle(timelineObject.getString("date"));
-                            modelTimeline.setImageUri("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Places-folder-red-icon.png");
+                           // modelTimeline.setImageUri("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Places-folder-red-icon.png");
 
                         }
                         else if (timelineObject.getString("timelineType").equals("Symptom")) {
+
+                            modelTimeline.setTimelineType(timelineObject.getString("timelineType"));
                             modelTimeline.setTitle(timelineObject.getString("symptomName"));
                             modelTimeline.setSubtitle(timelineObject.getString("symptomSeverity"));
-                            modelTimeline.setImageUri("http://icons.iconarchive.com/icons/dapino/medical-people/128/stethoscope-icon.png");
+                            //modelTimeline.setImageUri("http://icons.iconarchive.com/icons/dapino/medical-people/128/stethoscope-icon.png");
 
                         }
                         else if (timelineObject.getString("timelineType").equals("Medicine"))
                         {
+                            modelTimeline.setTimelineType(timelineObject.getString("timelineType"));
                             modelTimeline.setTitle(timelineObject.getString("medicineName"));
                             modelTimeline.setSubtitle(timelineObject.getString("medicineTimeHealthExpert"));
-                            modelTimeline.setImageUri("http://icons.iconarchive.com/icons/icons8/windows-8/512/Healthcare-Pill-icon.png");
+                            //modelTimeline.setImageUri("https://ibb.co/HBBdZdZ");
+                            //http://icons.iconarchive.com/icons/icons8/windows-8/512/Healthcare-Pill-icon.png
                         }
 
                         timeline.add (modelTimeline);

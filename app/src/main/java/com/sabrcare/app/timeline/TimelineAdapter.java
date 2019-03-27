@@ -1,6 +1,7 @@
 package com.sabrcare.app.timeline;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -31,6 +32,8 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import static java.security.AccessController.getContext;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.TimelineVH> {
 
@@ -63,10 +66,15 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
         holder.title.setText(timeline.get(position).getTitle());
         holder.subtitle.setText(timeline.get(position).getSubtitle());
 
+        if(timeline.get(position).getTimelineType().equals("Record"))
+            holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_records_image));
+       else if(timeline.get(position).getTimelineType().equals("Medicine"))
+            holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_pills_solid));
 
-        //loading image using Glide
+        else if(timeline.get(position).getTimelineType().equals("Symptom"))
+            holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_stethoscope_solid));
 
-        Glide.with(ctx).load(timeline.get(position).getImageUri()).apply(options).into(holder.pic);
+
     }
 
     @Override
