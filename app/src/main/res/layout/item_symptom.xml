@@ -66,7 +66,7 @@
 
 
             <RadioButton
-                android:id="@+id/moderate"
+                android:id="@+id/mild"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/radio"
@@ -77,7 +77,7 @@
                 android:text="@string/Mild"/>
 
             <RadioButton
-                android:id="@+id/severe"
+                android:id="@+id/moderate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/radio"
@@ -88,7 +88,7 @@
                 android:textStyle="bold"/>
 
             <RadioButton
-                android:id="@+id/mild"
+                android:id="@+id/severe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

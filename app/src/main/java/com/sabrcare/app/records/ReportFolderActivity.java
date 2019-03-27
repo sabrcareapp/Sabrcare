@@ -14,6 +14,7 @@ import pub.devrel.easypermissions.PermissionRequest;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.ArrayMap;
@@ -34,6 +35,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.sabrcare.app.PathUtil;
 import com.sabrcare.app.R;
 import com.sabrcare.app.auth.SignInActivity;
+import com.sabrcare.app.medicine.NewMedActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +43,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import static com.sabrcare.app.HomeActivity.FILE;
 
 public class ReportFolderActivity extends AppCompatActivity {
 
@@ -73,6 +77,11 @@ public class ReportFolderActivity extends AppCompatActivity {
     ImageRecordsAdapter imageRecordsAdapter;
     FileRecordsAdapter fileRecordsAdapter;
 
+
+    SharedPreferences setting;
+    String token=null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +97,20 @@ public class ReportFolderActivity extends AppCompatActivity {
                 ReportFolderActivity.this.finish();
             }
         });
+
+
+       setting = getSharedPreferences(FILE,MODE_PRIVATE);
+
+        token = setting.getString("Token","null");
+
+        if(token.equals("null"))
+        {
+            Intent launchHome = new Intent(ReportFolderActivity.this,SignInActivity.class);
+            startActivity(launchHome);
+            finishAffinity();
+            return ;
+        }
+
 
         folderName=getIntent().getStringExtra("folderName");
         imgList = findViewById(R.id.ImagesRV);
@@ -157,7 +180,10 @@ public class ReportFolderActivity extends AppCompatActivity {
         String baseUrl = getResources().getString(R.string.apiUrl);
         String filesURL = baseUrl+"records/show/files";
         //TODO Maintain auth token
-        fileHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+
+
+        fileHeaders.put("token",token);
+       // fileHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
         fileHeaders.put("folderName",folderName);
 
         listFiles = Volley.newRequestQueue(this);

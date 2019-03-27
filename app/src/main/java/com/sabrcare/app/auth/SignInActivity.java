@@ -36,7 +36,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private final String requestEndpoint= "http://api.remedley.com/api/client/login";
 
-    public static String TOKEN;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +68,7 @@ public class SignInActivity extends AppCompatActivity {
                     JSONObject responseData = new JSONObject(response);
                     String token = responseData.getString("token");
                     Intent launchHome = new Intent(SignInActivity.this,HomeActivity.class);
-                    launchHome.putExtra("authToken",token);
-                    TOKEN=token;
+                  //  launchHome.putExtra("authToken",token);
                     startActivity(launchHome);
                     finishAffinity();
 

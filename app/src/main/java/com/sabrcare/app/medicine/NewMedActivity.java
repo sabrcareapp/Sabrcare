@@ -7,6 +7,7 @@ import android.app.TimePickerDialog;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.ArrayMap;
@@ -31,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import com.sabrcare.app.AlarmReceiver;
 import com.sabrcare.app.HomeActivity;
 import com.sabrcare.app.R;
+import com.sabrcare.app.auth.SignInActivity;
 
 
 import org.json.JSONArray;
@@ -42,6 +44,8 @@ import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import io.realm.Realm;
+
+import static com.sabrcare.app.HomeActivity.FILE;
 
 
 public class NewMedActivity extends AppCompatActivity {
@@ -67,6 +71,12 @@ public class NewMedActivity extends AppCompatActivity {
     Map<String,String> medicineDelMap =new ArrayMap<>();
     private RequestQueue pushMeds;
 
+
+    SharedPreferences setting;
+
+    String token=null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +91,20 @@ public class NewMedActivity extends AppCompatActivity {
         remCount.setAdapter(adapter_med_times);
 
         realm = Realm.getDefaultInstance();
+
+
+        setting= getSharedPreferences(FILE,MODE_PRIVATE);
+        token = setting.getString("Token","null");
+
+        if(token.equals("null"))
+        {
+            Intent launchHome = new Intent(NewMedActivity.this,SignInActivity.class);
+            startActivity(launchHome);
+            finishAffinity();
+            return ;
+        }
+
+
 
         if (getIntent().getAction().equalsIgnoreCase("Edit")){
 
@@ -117,8 +141,12 @@ public class NewMedActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         //TODO Handle token
-                        deleteMedicine("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s",
+
+
+                        deleteMedicine(token,
                                 medicineModel.getMedID());
+                      //  deleteMedicine("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s",
+                         //       medicineModel.getMedID());
 
                         alarmModel = realm.where(AlarmModel.class).equalTo("time", medicineModel.getTime()).findFirst();
                         if(alarmModel!=null){
@@ -318,7 +346,9 @@ public class NewMedActivity extends AppCompatActivity {
         pushMeds = Volley.newRequestQueue(NewMedActivity.this);
 
         //TODO Handle token
-        medicineMap.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+
+        medicineMap.put("token",token);
+     //   medicineMap.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
         medicineMap.put("medicineName",medicineModel.getMedName());
         medicineMap.put("realmId",medicineModel.getMedID());
         medicineMap.put("healthExpertTimings",medicineModel.getDayPhase());

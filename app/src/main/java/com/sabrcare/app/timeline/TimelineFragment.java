@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.util.ArrayMap;
@@ -23,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.sabrcare.app.ModelTimeline;
 import com.sabrcare.app.R;
+import com.sabrcare.app.auth.SignInActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,6 +34,9 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.sabrcare.app.HomeActivity.FILE;
 
 public class TimelineFragment extends Fragment {
 
@@ -45,12 +51,30 @@ public class TimelineFragment extends Fragment {
 
     ArrayList<ModelTimeline> timeline = new ArrayList<>();
 
+    SharedPreferences setting;
+    String token=null;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Fresco.initialize(getContext());
         View view= inflater.inflate(R.layout.fragment_timeline, container, false);
 
         timeline_rv = view.findViewById(R.id.timeline_rv);
+
+        setting= getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
+
+        token = setting.getString("Token","null");
+
+        if(token.equals("null"))
+        {
+            Intent launchHome = new Intent(getActivity(),SignInActivity.class);
+            startActivity(launchHome);
+            getActivity().finishAffinity();
+            return view;
+        }
+
+
 
         loadTimeline();//generate 10 items just for now.WIll be changed later
         return view;
@@ -62,7 +86,9 @@ public class TimelineFragment extends Fragment {
         Log.e("LOADTIMELINE","LOADTIMELINE CALLED");
         String requestEndpoint= getResources().getString(R.string.apiUrl)+"timeline/show";
         final Map<String,String> timelineHeaders = new ArrayMap<String, String>();
-        timelineHeaders.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+
+        timelineHeaders.put("token", token);
+        //   timelineHeaders.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
         RequestQueue timelineQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, requestEndpoint, new Response.Listener<String>() {
             @Override
