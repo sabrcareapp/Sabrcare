@@ -88,10 +88,10 @@ public class UploadDialogFragment extends DialogFragment {
     }
 
     void uploadFile(){
-        String finalUrl="https://i.pinimg.com/236x/c3/d1/18/c3d118cef16ca8c2c5161d70504859e3.jpg";
+        String finalUrl="";
         String uploadUrl = getResources().getString(R.string.apiUrl) + "records/add/files";
-
-        recordsMap.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+        //TODO Handle token
+        //recordsMap.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
         recordsMap.put("folderName",ReportFolderActivity.folderName);
         if(ReportFolderActivity.isImage){
             recordsMap.put("fileType","Image");

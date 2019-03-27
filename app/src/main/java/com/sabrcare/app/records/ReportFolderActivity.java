@@ -2,6 +2,7 @@ package com.sabrcare.app.records;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
@@ -131,25 +132,29 @@ public class ReportFolderActivity extends AppCompatActivity {
             @Override
             @AfterPermissionGranted(RC_CAMERA_STORAGE)
             public void onClick(View view) {
-                if(EasyPermissions.hasPermissions(ReportFolderActivity.this,perms)){
-                   ImagePicker.create(ReportFolderActivity.this)
-                            .folderMode(true)
-                            .toolbarArrowColor(Color.parseColor("#FFFFFF"))
-                            .limit(1)
-                            .returnMode(ReturnMode.CAMERA_ONLY)
-                            .toolbarFolderTitle("Select Image to upload")
-                            .showCamera(true)
-                            .single()
-                            .imageDirectory("Remedley Records")
-                            .theme(R.style.AppThemeNoActionBar)
-                            .start(PICK_IMAGE);
-
-
-                }else {
-                    EasyPermissions.requestPermissions(new PermissionRequest.Builder(ReportFolderActivity.this,RC_CAMERA_STORAGE,perms)
-                            .setRationale(R.string.rationale_camera_storage)
-                            .build());
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(ReportFolderActivity.this);
+                builder.setTitle("Coming Soon!").setCancelable(true).setPositiveButton("Ok",null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+//                if(EasyPermissions.hasPermissions(ReportFolderActivity.this,perms)){
+//                   ImagePicker.create(ReportFolderActivity.this)
+//                            .folderMode(true)
+//                            .toolbarArrowColor(Color.parseColor("#FFFFFF"))
+//                            .limit(1)
+//                            .returnMode(ReturnMode.CAMERA_ONLY)
+//                            .toolbarFolderTitle("Select Image to upload")
+//                            .showCamera(true)
+//                            .single()
+//                            .imageDirectory("Remedley Records")
+//                            .theme(R.style.AppThemeNoActionBar)
+//                            .start(PICK_IMAGE);
+//
+//
+//                }else {
+//                    EasyPermissions.requestPermissions(new PermissionRequest.Builder(ReportFolderActivity.this,RC_CAMERA_STORAGE,perms)
+//                            .setRationale(R.string.rationale_camera_storage)
+//                            .build());
+//                }
             }
         });
 
@@ -157,6 +162,12 @@ public class ReportFolderActivity extends AppCompatActivity {
             @Override
             @AfterPermissionGranted(RC_READ_STORAGE)
             public void onClick(View view) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ReportFolderActivity.this);
+                builder.setTitle("Coming Soon!").setCancelable(true).setPositiveButton("Ok",null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
                 if(EasyPermissions.hasPermissions(ReportFolderActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE)){
                     Intent fileIntent = new Intent(Intent.ACTION_GET_CONTENT);

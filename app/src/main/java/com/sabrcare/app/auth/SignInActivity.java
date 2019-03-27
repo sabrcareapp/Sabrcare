@@ -1,6 +1,7 @@
 package com.sabrcare.app.auth;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -35,7 +36,8 @@ public class SignInActivity extends AppCompatActivity {
     private Map<String,String> requestHeaders= new ArrayMap<String, String>();
 
     private final String requestEndpoint= "http://api.remedley.com/api/client/login";
-
+    public static final String FILE="MyFile";
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -67,6 +69,9 @@ public class SignInActivity extends AppCompatActivity {
                     Log.d("SIgnInResponse",response);
                     JSONObject responseData = new JSONObject(response);
                     String token = responseData.getString("token");
+                    editor= getSharedPreferences(FILE,MODE_PRIVATE).edit();
+                    editor.putString("Token",token);
+                    editor.apply();
                     Intent launchHome = new Intent(SignInActivity.this,HomeActivity.class);
                   //  launchHome.putExtra("authToken",token);
                     startActivity(launchHome);

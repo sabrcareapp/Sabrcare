@@ -73,6 +73,7 @@
                 android:backgroundTint="@color/blueAccent"
                 android:hint="Email Id"
                 android:inputType="textEmailAddress"
+                android:textColor="#ffffff"
                 android:textColorHint="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
 
