@@ -13,7 +13,9 @@ import pub.devrel.easypermissions.EasyPermissions;
 import pub.devrel.easypermissions.PermissionRequest;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.ArrayMap;
@@ -72,6 +74,7 @@ public class ReportFolderActivity extends AppCompatActivity {
 
     ImageRecordsAdapter imageRecordsAdapter;
     FileRecordsAdapter fileRecordsAdapter;
+    SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +160,7 @@ public class ReportFolderActivity extends AppCompatActivity {
         String baseUrl = getResources().getString(R.string.apiUrl);
         String filesURL = baseUrl+"records/show/files";
         //TODO Maintain auth token
-        fileHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+        fileHeaders.put("token",sharedPreferences.getString("token", "Null"));
         fileHeaders.put("folderName",folderName);
 
         listFiles = Volley.newRequestQueue(this);

@@ -42,7 +42,8 @@ public class SymptomTrackerFragment extends Fragment {
 
     public int flag=0;
     private RequestQueue symptomQueue;
-    SharedPreferences sharedPreferences=getActivity().getPreferences(Context.MODE_PRIVATE);
+    Context context=getActivity();
+    SharedPreferences sharedPreferences=context.getSharedPreferences("TOKEN",Context.MODE_PRIVATE);
     SharedPreferences.Editor editor=sharedPreferences.edit();
     private Map<String,String> symptomHeaders = new ArrayMap<String, String>();
 
@@ -124,7 +125,7 @@ public class SymptomTrackerFragment extends Fragment {
         editor.putString("token",
                 "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
         editor.commit();
-        symptomHeaders.put("token", sharedPreferences.getString("token",""));
+        symptomHeaders.put("token", sharedPreferences.getString("token","Null"));
         symptomHeaders.put("symptomArray",symptomArray.toString());
         StringRequest symptomAddition = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
