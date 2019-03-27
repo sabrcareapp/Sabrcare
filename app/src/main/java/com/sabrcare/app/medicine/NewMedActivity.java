@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.ArrayMap;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,13 +21,24 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import com.sabrcare.app.R;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.sabrcare.app.AlarmReceiver;
 import com.sabrcare.app.HomeActivity;
+import com.sabrcare.app.R;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import io.realm.Realm;
@@ -50,6 +63,10 @@ public class NewMedActivity extends AppCompatActivity {
 
     boolean timeFlag;
 
+    Map<String,String> medicineMap =new ArrayMap<>();
+    Map<String,String> medicineDelMap =new ArrayMap<>();
+    private RequestQueue pushMeds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +82,11 @@ public class NewMedActivity extends AppCompatActivity {
 
         realm = Realm.getDefaultInstance();
 
-        if (getIntent().getAction().equalsIgnoreCase("Edit")) {
-            //TODO Querying with medName only, change later.
+        if (getIntent().getAction().equalsIgnoreCase("Edit")){
+
             medicineModel = realm.where(MedicineModel.class).
-                    equalTo("medName", getIntent().getStringExtra("MedName")).findFirst();
+                    equalTo("medID", getIntent().getStringExtra("MedID")).findFirst();
+            System.out.println("QUERIED MED ID>>>>>>>>>>>"+getIntent().getStringExtra("MedID"));
             med_name.setText(medicineModel.getMedName());
             int selectedDayPhase = adapter_day_phase.getPosition(medicineModel.getDayPhase());
             day_phase.setSelection(selectedDayPhase);
@@ -77,7 +95,8 @@ public class NewMedActivity extends AppCompatActivity {
 
             timeFlag=false;
 
-        } else {
+        }
+        else{
             medicineModel = new MedicineModel();
             timeFlag=true;
             delete.setVisibility(View.INVISIBLE);
@@ -92,12 +111,15 @@ public class NewMedActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(NewMedActivity.this);
-                builder.setMessage("Delete this medication? This action is permanent.")
+                builder.setMessage("Delete this medication? This action is permanent. The history of this medicine intake will  not be affected.")
                         .setNegativeButton("Cancel",null).setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        //TODO Update data in server for medicine
+                        //TODO Handle token
+                        deleteMedicine("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s",
+                                medicineModel.getMedID());
+
                         alarmModel = realm.where(AlarmModel.class).equalTo("time", medicineModel.getTime()).findFirst();
                         if(alarmModel!=null){
                             System.out.println(">>>>>MED deleted, cancelling alarm");
@@ -143,13 +165,13 @@ public class NewMedActivity extends AppCompatActivity {
                     return;
                 }
 
+
                 realm.beginTransaction();
+                System.out.println("Local MedID>>>>>>"+medicineModel.getMedID());
                 medicineModel.setMedName(med_name.getText().toString());
                 medicineModel.setReminderOn(alarmSwitch.isChecked());
                 medicineModel.setTime(reminderTime.getText().toString());
                 medicineModel.setDayPhase(day_phase.getSelectedItem().toString());
-
-
 
 
                 alarmModel = realm.where(AlarmModel.class).equalTo("time", medicineModel.getTime()).findFirst();
@@ -179,10 +201,13 @@ public class NewMedActivity extends AppCompatActivity {
                     alarmModel.removeMedicineFromAlarm(medicineModel.getMedName());
                 }
                 System.out.println(">>>>>>>>Meds in ALARM after adding/removing " + alarmModel.getMedicines());
+
+                uploadMedicineData();
+
                 realm.insertOrUpdate(medicineModel);
                 realm.insertOrUpdate(alarmModel);
                 realm.commitTransaction();
-                //TODO Update data in server for medicine
+
 
                 if (alarmModel.isOn() || (!alarmModel.getMedicines().equalsIgnoreCase(""))) {
                     Intent openAlarm = new Intent(NewMedActivity.this, AlarmReceiver.class);
@@ -205,7 +230,6 @@ public class NewMedActivity extends AppCompatActivity {
                 Toast.makeText(NewMedActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                 NewMedActivity.this.finish();
 
-                //Finishing home activity from here, launch new intent with updateMeds action.
                 Intent openMedFrag = new Intent(NewMedActivity.this, HomeActivity.class);
                 openMedFrag.setAction("updateMeds");
                 startActivity(openMedFrag);
@@ -289,4 +313,65 @@ public class NewMedActivity extends AppCompatActivity {
 
     }
 
+    void uploadMedicineData(){
+        String finalUrl = getResources().getString(R.string.apiUrl)+"medicines/add";
+        pushMeds = Volley.newRequestQueue(NewMedActivity.this);
+
+        //TODO Handle token
+        medicineMap.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+        medicineMap.put("medicineName",medicineModel.getMedName());
+        medicineMap.put("realmId",medicineModel.getMedID());
+        medicineMap.put("healthExpertTimings",medicineModel.getDayPhase());
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put(medicineModel.getTime());
+        medicineMap.put("medicineReminderTimings",jsonArray.toString());
+
+        StringRequest medicineRequest   = new StringRequest(Request.Method.POST, finalUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println(">>>>>"+response);
+                try {
+                    String medID = new JSONObject(response).getString("id");
+                    Log.d("addedmed",medicineModel.getMedID());
+                    System.out.println("ID SET for new med>>>"+medicineModel.getMedID());
+                    } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("failedmedadd",error.toString());
+
+            }
+        }){
+            @Override
+            public Map<String,String> getHeaders(){
+                return medicineMap;
+            }
+        };;
+        pushMeds.add(medicineRequest);
+    }
+
+    void deleteMedicine(String token,String id){
+        medicineDelMap.put("token",token);
+        medicineDelMap.put("medicineID",id);
+        String finalUrl = getResources().getString(R.string.apiUrl)+"medicines/delete";
+        pushMeds = Volley.newRequestQueue(NewMedActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.DELETE, finalUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println("Delete response>>>>>>>>>>"+response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+        };
+        pushMeds.add(stringRequest);
+    }
 }
