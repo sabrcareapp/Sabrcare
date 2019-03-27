@@ -16,23 +16,40 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.ArrayMap;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.features.ReturnMode;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-import com.jaiselrahman.filepicker.activity.FilePickerActivity;
-import com.jaiselrahman.filepicker.config.Configurations;
-import com.jaiselrahman.filepicker.model.MediaFile;
 import com.sabrcare.app.PathUtil;
 import com.sabrcare.app.R;
+import com.sabrcare.app.auth.SignInActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ReportFolderActivity extends AppCompatActivity {
 
     RecyclerView imgList;
     RecyclerView pdfList;
+    ArrayList<String> imageName;
+    ArrayList<String> imageURL;
+    ArrayList<String> pdfName;
+    ArrayList<String> pdfURL;
 
     private boolean showUploadDialog;
     private int imgFlag;
@@ -42,10 +59,19 @@ public class ReportFolderActivity extends AppCompatActivity {
 
     private String filePath;
 
+    static String folderName = "";
+    static boolean isImage;
+
     private static final int RC_CAMERA_STORAGE = 123;
     private static final int RC_READ_STORAGE = 120;
     private static final int PICK_IMAGE = 100;
     private static final int PICK_PDF = 1;
+
+    Map<String,String> fileHeaders = new ArrayMap<>();
+    private RequestQueue listFiles;
+
+    ImageRecordsAdapter imageRecordsAdapter;
+    FileRecordsAdapter fileRecordsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,38 +89,19 @@ public class ReportFolderActivity extends AppCompatActivity {
             }
         });
 
+        folderName=getIntent().getStringExtra("folderName");
         imgList = findViewById(R.id.ImagesRV);
         pdfList = findViewById(R.id.pdfsRV);
         photoFab = findViewById(R.id.TakePhoto);
         uploadFileFab = findViewById(R.id.UploadFile);
         fabMenu = findViewById(R.id.material_design_android_floating_action_menu2);
 
-
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this,3);
         imgList.setLayoutManager(gridLayoutManager);
         pdfList.setLayoutManager(gridLayoutManager2);
 
-        ArrayList<String> imagefiles = new ArrayList<>();
-        ArrayList<String> pdffiles = new ArrayList<>();
-
-        pdffiles.add("File 1");
-        pdffiles.add("File 2");
-        pdffiles.add("File 3");
-        pdffiles.add("File 4");
-        pdffiles.add("File 5");
-
-        imagefiles.add("Image 1");
-        imagefiles.add("Image 2");
-        imagefiles.add("Image 3");
-        imagefiles.add("Image 4");
-        imagefiles.add("Image 5");
-
-        ImageRecordsAdapter adapter = new ImageRecordsAdapter(imagefiles,this);
-        imgList.setAdapter(adapter);
-
-        FileRecordsAdapter fileRecordsAdapter = new FileRecordsAdapter(pdffiles,this);
-        pdfList.setAdapter(fileRecordsAdapter);
+        loadFiles();
 
         final String[] perms = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         photoFab.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +109,7 @@ public class ReportFolderActivity extends AppCompatActivity {
             @AfterPermissionGranted(RC_CAMERA_STORAGE)
             public void onClick(View view) {
                 if(EasyPermissions.hasPermissions(ReportFolderActivity.this,perms)){
-                    com.esafirm.imagepicker.features.ImagePicker.create(ReportFolderActivity.this)
+                   ImagePicker.create(ReportFolderActivity.this)
                             .folderMode(true)
                             .toolbarArrowColor(Color.parseColor("#FFFFFF"))
                             .limit(1)
@@ -133,18 +140,6 @@ public class ReportFolderActivity extends AppCompatActivity {
                     fileIntent.addCategory(Intent.CATEGORY_OPENABLE);
                     fileIntent.setType("application/pdf");
                     startActivityForResult(Intent.createChooser(fileIntent,"Select PDF"),PICK_PDF);
-//                    Intent fileIntent = new Intent(ReportFolderActivity.this,FilePickerActivity.class);
-//                    fileIntent.putExtra(FilePickerActivity.CONFIGS,new Configurations.Builder()
-//                            .setCheckPermission(false)
-//                            .setShowImages(false)
-//                            .setShowVideos(false)
-//                            .setShowAudios(false)
-//                            .setSuffixes("pdf")
-//                            .setSingleChoiceMode(true)
-//                            .enableImageCapture(false)
-//                            .enableVideoCapture(false)
-//                            .build());
-//                    startActivityForResult(fileIntent,PICK_PDF);
 
                 } else {
                     EasyPermissions.requestPermissions(new PermissionRequest.Builder(ReportFolderActivity.this,RC_READ_STORAGE,
@@ -156,6 +151,65 @@ public class ReportFolderActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    void loadFiles(){
+        String baseUrl = getResources().getString(R.string.apiUrl);
+        String filesURL = baseUrl+"records/show/files";
+        //TODO Maintain auth token
+        fileHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+        fileHeaders.put("folderName",folderName);
+
+        listFiles = Volley.newRequestQueue(this);
+        StringRequest getfiles = new StringRequest(Request.Method.GET, filesURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                imageName=new ArrayList<>();
+                imageURL = new ArrayList<>();
+                pdfName = new ArrayList<>();
+                pdfURL = new ArrayList<>();
+                try {
+                    JSONArray jsonArray = new JSONObject(response).getJSONArray("data");
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        if(jsonObject.getString("recordsFileType").equals("Image")){
+                            imageName.add(jsonObject.getString("recordsName"));
+                            imageURL.add(jsonObject.getString("recordsURL"));
+                        }
+                        else{
+                            pdfName.add(jsonObject.getString("recordsName"));
+                            pdfURL.add(jsonObject.getString("recordsURL"));
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    Log.e("RecordsError",e.toString());
+                }
+
+                imageRecordsAdapter = new ImageRecordsAdapter(imageName,imageURL,ReportFolderActivity.this);
+                fileRecordsAdapter = new FileRecordsAdapter(pdfName,pdfURL,ReportFolderActivity.this);
+                imgList.setAdapter(imageRecordsAdapter);
+                pdfList.setAdapter(fileRecordsAdapter);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("LoadError",error.toString());
+                Toast.makeText(ReportFolderActivity.this,"File loading error. Please try again",Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            public Map<String,String> getHeaders(){
+                return fileHeaders;
+            }
+        };
+        listFiles.add(getfiles);
+        //header--> token,folderName
+        //add hardcode fetch url
+
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -173,6 +227,7 @@ public class ReportFolderActivity extends AppCompatActivity {
             com.esafirm.imagepicker.model.Image image = com.esafirm.imagepicker.features.ImagePicker.getFirstImageOrNull(data);
             filePath = image.getPath();
             showUploadDialog = true;
+            isImage=true;
             imgFlag=1;
         }
 
@@ -183,6 +238,7 @@ public class ReportFolderActivity extends AppCompatActivity {
             System.out.println("data>>>>>>>"+data.getData());
             System.out.println("filepath>>>>>"+filePath);
             showUploadDialog = true;
+            isImage=false;
             imgFlag=0;
         }
         else {
@@ -222,3 +278,6 @@ public class ReportFolderActivity extends AppCompatActivity {
         }
     }
 }
+
+//eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s
+//TODO Load files

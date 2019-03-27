@@ -16,10 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class FileRecordsAdapter extends RecyclerView.Adapter<FileRecordsAdapter.FileRecordsVH> {
 
     private ArrayList<String> FilesList;
+    private ArrayList<String> fileURLs;
     Context context;
 
-    public FileRecordsAdapter(ArrayList<String> filesList, Context context) {
+
+    public FileRecordsAdapter(ArrayList<String> filesList, ArrayList<String> fileURLs, Context context) {
         FilesList = filesList;
+        this.fileURLs = fileURLs;
         this.context = context;
     }
 
@@ -48,6 +51,7 @@ public class FileRecordsAdapter extends RecyclerView.Adapter<FileRecordsAdapter.
 
         void setFile(String name){
             filename.setText(name);
+            //TODO onClick download of pdf
         }
     }
 }

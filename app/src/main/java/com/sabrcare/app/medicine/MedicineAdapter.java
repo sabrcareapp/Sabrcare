@@ -77,6 +77,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
             return true;
         }
         void populateMedicine(final MedicineModel medicine){
+            System.out.println("IDs in the adapter>>>>>>>."+medicine.getMedID());
             med_name.setText(medicine.getMedName());
             day_phase.setText(medicine.getDayPhase());
 
@@ -91,7 +92,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
                 public void onClick(View view) {
                     Intent editMed = new Intent(ctx,NewMedActivity.class);
                     editMed.setAction("Edit");
-                    editMed.putExtra("MedName",medicine.getMedName());
+                    editMed.putExtra("MedID",medicine.getMedID());
                     ctx.startActivity(editMed);
                 }
             });
@@ -101,7 +102,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
                 public void onClick(View view) {
                     Intent editMed = new Intent(ctx,NewMedActivity.class);
                     editMed.setAction("Edit");
-                    editMed.putExtra("MedName",medicine.getMedName());
+                    editMed.putExtra("MedID",medicine.getMedID());
                     ctx.startActivity(editMed);
                 }
             });
