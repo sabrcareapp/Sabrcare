@@ -1,23 +1,22 @@
 package com.sabrcare.app.medicine;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import io.realm.RealmObject;
 
 public class MedicineModel extends RealmObject {
 
+    private String medID;
     private String medName;
     private String dayPhase;
     private String time;
     private boolean reminderOn;
-
-    private static final AtomicInteger alarmCountID=new AtomicInteger();
 
     public MedicineModel() {
         this.medName = "";
         this.dayPhase = "";
         this.time = "";
         this.reminderOn = false;
+
+        medID=String.valueOf(System.currentTimeMillis());
     }
 
     public MedicineModel(String medName, String dayPhase, String time, boolean reminderOn) {
@@ -58,4 +57,9 @@ public class MedicineModel extends RealmObject {
     public void setTime(String time) {
         this.time = time;
     }
+
+    public String getMedID() {
+        return medID;
+    }
+
 }

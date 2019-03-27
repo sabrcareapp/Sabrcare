@@ -3,6 +3,7 @@
     package="com.sabrcare.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -18,18 +19,19 @@
         <activity
             android:name=".LaunchActivity"
             android:theme="@style/AppThemeNoActionBar">
+
+        </activity>
+        <activity
+            android:name=".tutorial.TutorialActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".HomeActivity"
+            android:theme="@style/AppThemeNoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".tutorial.TutorialActivity"
-            android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".HomeActivity"
-            android:theme="@style/AppThemeNoActionBar">
         </activity>
         <activity
             android:name=".auth.SignInActivity"
@@ -49,6 +51,10 @@
             android:theme="@style/AppThemeNoActionBar"/>
 
         <receiver android:name=".AlarmReceiver" />
+
+        <service
+            android:name="com.onecode.s3.service.S3UploadService"
+            android:exported="false" />
 
         <activity android:name=".activities.ProfileActivity"></activity>
         <activity android:name=".activities.HExpertActivity"></activity>

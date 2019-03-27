@@ -47,6 +47,7 @@ public class MedicineFragment extends Fragment {
         ((AppCompatActivity)getActivity()).setSupportActionBar(medicine_toolbar);
 
         //TODO This data to be loaded from server.
+
         RealmResults<MedicineModel> medicineModels = realm.where(MedicineModel.class).findAll();
         ArrayList<MedicineModel> medicineModelArrayList = new ArrayList<>(medicineModels);
 
