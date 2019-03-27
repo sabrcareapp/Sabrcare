@@ -2,6 +2,7 @@ package com.sabrcare.app.auth;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -37,6 +38,9 @@ public class SignUpActivity extends AppCompatActivity {
     private RequestQueue questionRequestQueue;
     private Map<String,String> requestHeaders= new ArrayMap<String, String>();
 
+    public static final String FILE="MyFile";
+    SharedPreferences.Editor editor;
+
 
     private final String requestEndpoint= "http://api.remedley.com/api/client/signup";
     @Override
@@ -49,6 +53,9 @@ public class SignUpActivity extends AppCompatActivity {
         password_confirm=findViewById(R.id.password2);
         emailTV=findViewById(R.id.email);
         signUp_btn =findViewById(R.id.register_btn);
+
+
+        editor= getSharedPreferences(FILE,MODE_PRIVATE).edit();
 
         signUp_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,8 +82,12 @@ public class SignUpActivity extends AppCompatActivity {
                             Log.d("serverResponse",response);
                             JSONObject responseData = new JSONObject(response);
                             String token = responseData.getString("token");
+                            editor.putString("Token",token);
+                            editor.apply();
                             Intent launchHome = new Intent(SignUpActivity.this,HomeActivity.class);
-                            launchHome.putExtra("authToken",token);
+
+
+                            launchHome.putExtra("Filename",FILE);
                             startActivity(launchHome);
                             finishAffinity();
 
@@ -88,6 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        System.out.println(">>>>>>>"+error.toString());
                         Toast.makeText(SignUpActivity.this,"Could not Sign You Up!",Toast.LENGTH_LONG).show();
                     }
                 }) {

@@ -4,6 +4,8 @@ package com.sabrcare.app.records;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +31,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.clans.fab.FloatingActionMenu;
+import com.sabrcare.app.HomeActivity;
 import com.sabrcare.app.R;
+import com.sabrcare.app.auth.SignInActivity;
+import com.sabrcare.app.auth.SignUpActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +42,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.sabrcare.app.HomeActivity.FILE;
 
 
 /**
@@ -58,6 +66,10 @@ public class RecordsFragment extends Fragment {
     Map<String, String> requestHeaders = new ArrayMap<>();
     Map<String, String> addFolders = new ArrayMap<>();
 
+    SharedPreferences setting;
+
+    String token=null;
+
 
     public RecordsFragment() {
         // Required empty public constructor
@@ -72,6 +84,17 @@ public class RecordsFragment extends Fragment {
         materialDesignFAM = view.findViewById(R.id.material_design_android_floating_action_menu);
         fabNewFolder = view.findViewById(R.id.NewFolderFAB);
 
+
+        setting= getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
+        token = setting.getString("Token","null");
+
+        if(token.equals("null"))
+        {
+            Intent launchHome = new Intent(getActivity(),SignInActivity.class);
+            startActivity(launchHome);
+            getActivity().finishAffinity();
+            return view;
+        }
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -122,7 +145,8 @@ public class RecordsFragment extends Fragment {
         url += "records/add/folders";
         listFolders = Volley.newRequestQueue(getContext());
         //TODO handle token
-        addFolders.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+        addFolders.put("token", token);
+      //  addFolders.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
         addFolders.put("folderName", folderName);
         StringRequest addFolder = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -148,7 +172,9 @@ public class RecordsFragment extends Fragment {
         String url = getResources().getString(R.string.apiUrl);
         url += "records/show/folders";
         //TODO Handle Token
-        requestHeaders.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+
+        requestHeaders.put("token", token);
+        //requestHeaders.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
         listFolders = Volley.newRequestQueue(getContext());
         StringRequest getFolders = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

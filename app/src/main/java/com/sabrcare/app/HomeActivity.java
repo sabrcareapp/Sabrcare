@@ -2,12 +2,15 @@ package com.sabrcare.app;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sabrcare.app.auth.SignInActivity;
+import com.sabrcare.app.auth.SignUpActivity;
 import com.sabrcare.app.medicine.MedicineFragment;
 import com.sabrcare.app.records.RecordsFragment;
 import com.sabrcare.app.symptomtracker.SymptomTrackerFragment;
@@ -26,6 +29,10 @@ import static com.sabrcare.app.symptomtracker.SymptomAddActivity.flagIntent;
 
 public class HomeActivity extends AppCompatActivity  {
     private static final int REQUEST_EXIT = 2;
+
+    public static final String FILE="MyFile";
+    SharedPreferences setting;
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -65,9 +72,21 @@ public class HomeActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Fresco.initialize(this);
+
+
         setContentView(R.layout.activity_home);
 
-       // String username = Objects.requireNonNull(getIntent().getExtras()).get("username").toString();
+        setting= this.getSharedPreferences(FILE,MODE_PRIVATE);
+
+        String token_value = setting.getString("Token","null");
+
+        if(token_value.equals("null"))
+        {
+            Intent launchHome = new Intent(HomeActivity.this,LaunchActivity.class);
+            startActivity(launchHome);
+            finishAffinity();
+            return ;
+        }
 
 
 

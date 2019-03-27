@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.util.ArrayMap;
@@ -26,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.sabrcare.app.R;
+import com.sabrcare.app.auth.SignInActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +36,8 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.util.Map;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.sabrcare.app.HomeActivity.FILE;
 import static com.sabrcare.app.symptomtracker.SymptomAddActivity.symptoms;
 
 public class SymptomTrackerFragment extends Fragment {
@@ -41,6 +45,11 @@ public class SymptomTrackerFragment extends Fragment {
     public int flag=0;
     private RequestQueue symptomQueue;
     private Map<String,String> symptomHeaders = new ArrayMap<String, String>();
+
+    SharedPreferences setting;
+
+    String token=null;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,6 +67,20 @@ public class SymptomTrackerFragment extends Fragment {
         Toolbar symptom_tracker_toolbar = view.findViewById(R.id.symptom_toolbar);
         symptom_tracker_toolbar.setTitle("");
         ((AppCompatActivity)getActivity()).setSupportActionBar(symptom_tracker_toolbar);
+
+
+        //SHARED PREFERENCES HERE!!!!!!!!!!
+
+       setting = getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
+        token = setting.getString("Token","null");
+
+        if(token.equals("null"))
+        {
+            Intent launchHome = new Intent(getActivity(),SignInActivity.class);
+            startActivity(launchHome);
+            getActivity().finishAffinity();
+            return ;
+        }
 
 
         RecyclerView sytRv = view.findViewById(R.id.syt_rv);
@@ -101,6 +124,8 @@ public class SymptomTrackerFragment extends Fragment {
                         try {
                             symptom.put("symptomName",symptoms.get(i).name);
                             symptom.put("symptomSeverity",symptoms.get(i).severity);
+
+                            Toast.makeText(getContext(),symptoms.get(i).severity,Toast.LENGTH_LONG).show();
                             jsonArray.put(symptom);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -117,7 +142,8 @@ public class SymptomTrackerFragment extends Fragment {
     void postDataItem(JSONArray symptomArray){
         symptomQueue = Volley.newRequestQueue(getContext());
         String url = getResources().getString(R.string.apiUrl)+"symptom/add";
-        symptomHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+        symptomHeaders.put("token",token);
+        //   symptomHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
         symptomHeaders.put("symptomArray",symptomArray.toString());
         StringRequest symptomAddition = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
