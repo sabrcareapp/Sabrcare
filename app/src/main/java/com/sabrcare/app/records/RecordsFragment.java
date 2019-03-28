@@ -126,6 +126,11 @@ public class RecordsFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         String foldername = nameField.getText().toString();
+                        if(foldername.isEmpty()||foldername.matches(""))
+                        {
+                            Toast.makeText(getContext(),"Enter valid folder name",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         System.out.println(">>>>>>>>>>.foldername>>>" + foldername);
                         addFolder(foldername);
                         newFolderDialog.dismiss();
@@ -144,9 +149,7 @@ public class RecordsFragment extends Fragment {
         String url = getResources().getString(R.string.apiUrl);
         url += "records/add/folders";
         listFolders = Volley.newRequestQueue(getContext());
-        //TODO handle token
         addFolders.put("token", token);
-      //  addFolders.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
         addFolders.put("folderName", folderName);
         StringRequest addFolder = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
