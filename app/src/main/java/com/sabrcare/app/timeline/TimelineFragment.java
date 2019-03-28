@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -55,12 +56,14 @@ public class TimelineFragment extends Fragment {
     String token=null;
 
 
+    public static Button browseTimeline;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Fresco.initialize(getContext());
         View view= inflater.inflate(R.layout.fragment_timeline, container, false);
 
         timeline_rv = view.findViewById(R.id.timeline_rv);
+
 
         setting= getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
 
@@ -76,7 +79,11 @@ public class TimelineFragment extends Fragment {
 
 
 
+
         loadTimeline();//generate 10 items just for now.WIll be changed later
+
+
+
         return view;
 
     }
