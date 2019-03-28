@@ -1,5 +1,6 @@
 package com.sabrcare.app.timeline;
 
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -9,8 +10,10 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -21,16 +24,24 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.sabrcare.app.HomeActivity;
 import com.sabrcare.app.ModelTimeline;
+import com.sabrcare.app.HomeActivity.*;
 import com.sabrcare.app.R;
+import com.sabrcare.app.medicine.MedicineFragment;
+import com.sabrcare.app.records.RecordsFragment;
+import com.sabrcare.app.symptomtracker.SymptomTrackerFragment;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ReportFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static java.security.AccessController.getContext;
@@ -77,6 +88,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
 
     }
 
+
+
+
     @Override
     public int getItemCount() {
         return timeline.size();
@@ -86,13 +100,15 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
 
         public TextView title;
         public TextView subtitle;
-        public ImageView pic;               //will be changed to using Fresco library later
+        public ImageView pic;
+        public Button browseTimeline;//will be changed to using Fresco library later
 
         public TimelineVH(@NonNull View itemView) {
             super(itemView);
             title=itemView.findViewById(R.id.title);
             subtitle=itemView.findViewById(R.id.subtitle);
             pic=itemView.findViewById(R.id.pic);
+            browseTimeline = itemView.findViewById(R.id.browseTimeline);
 
         }
 
