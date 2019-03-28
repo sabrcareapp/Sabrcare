@@ -168,20 +168,20 @@ public class ReportFolderActivity extends AppCompatActivity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
-                if(EasyPermissions.hasPermissions(ReportFolderActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE)){
-                    Intent fileIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                    fileIntent.addCategory(Intent.CATEGORY_OPENABLE);
-                    fileIntent.setType("application/pdf");
-                    startActivityForResult(Intent.createChooser(fileIntent,"Select PDF"),PICK_PDF);
-
-                } else {
-                    EasyPermissions.requestPermissions(new PermissionRequest.Builder(ReportFolderActivity.this,RC_READ_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE)
-                            .setRationale(R.string.rationale_read_storage)
-                            .build());
-                }
+//                if(EasyPermissions.hasPermissions(ReportFolderActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                        Manifest.permission.READ_EXTERNAL_STORAGE)){
+//                    Intent fileIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//                    fileIntent.addCategory(Intent.CATEGORY_OPENABLE);
+//                    fileIntent.setType("application/pdf");
+//                    startActivityForResult(Intent.createChooser(fileIntent,"Select PDF"),PICK_PDF);
+//
+//                } else {
+//                    EasyPermissions.requestPermissions(new PermissionRequest.Builder(ReportFolderActivity.this,RC_READ_STORAGE,
+//                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                            Manifest.permission.READ_EXTERNAL_STORAGE)
+//                            .setRationale(R.string.rationale_read_storage)
+//                            .build());
+//                }
             }
         });
     }
@@ -190,11 +190,8 @@ public class ReportFolderActivity extends AppCompatActivity {
     void loadFiles(){
         String baseUrl = getResources().getString(R.string.apiUrl);
         String filesURL = baseUrl+"records/show/files";
-        //TODO Maintain auth token
-
 
         fileHeaders.put("token",token);
-       // fileHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
         fileHeaders.put("folderName",folderName);
 
         listFiles = Volley.newRequestQueue(this);
@@ -242,9 +239,6 @@ public class ReportFolderActivity extends AppCompatActivity {
             }
         };
         listFiles.add(getfiles);
-        //header--> token,folderName
-        //add hardcode fetch url
-
     }
 
 
@@ -317,4 +311,4 @@ public class ReportFolderActivity extends AppCompatActivity {
 }
 
 //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s
-//TODO Load files
+//TODO upload files
