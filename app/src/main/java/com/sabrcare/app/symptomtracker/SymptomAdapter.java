@@ -60,28 +60,28 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
             @Override
             public void onClick(View view) {
                 holder.onRadioButtonClicked(view);
-                symptoms.get(a.get(position)).severity=s;
+                symptoms.get(c).severity=s;
             }
         });
         holder.mild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.onRadioButtonClicked(view);
-                symptoms.get(a.get(position)).severity=s;
+                symptoms.get(c).severity=s;
             }
         });
         holder.moderate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.onRadioButtonClicked(view);
-                symptoms.get(a.get(position)).severity=s;
+                symptoms.get(c).severity=s;
             }
         });
         holder.severe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.onRadioButtonClicked(view);
-                symptoms.get(a.get(position)).severity=s;
+                symptoms.get(c).severity=s;
             }
         });
 //        holder.unbearable.setOnClickListener(new View.OnClickListener() {
