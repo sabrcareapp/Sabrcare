@@ -143,7 +143,7 @@ public class NewMedActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         //TODO Handle token
-                        deleteMedicine(token,
+       deleteMedicine(token,
                                 medicineModel.getMedID());
                       //  deleteMedicine("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s",
                          //       medicineModel.getMedID());

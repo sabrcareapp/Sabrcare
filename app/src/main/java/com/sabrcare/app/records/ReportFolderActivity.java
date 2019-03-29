@@ -84,7 +84,6 @@ public class ReportFolderActivity extends AppCompatActivity {
     SharedPreferences setting;
     String token=null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
