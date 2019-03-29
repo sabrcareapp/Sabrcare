@@ -46,8 +46,6 @@ public class SymptomTrackerFragment extends Fragment {
     public int flag=0;
     private RequestQueue symptomQueue;
     Context context=getActivity();
-    SharedPreferences sharedPreferences=context.getSharedPreferences("TOKEN",Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor=sharedPreferences.edit();
     private Map<String,String> symptomHeaders = new ArrayMap<String, String>();
 
     SharedPreferences setting;

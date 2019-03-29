@@ -42,13 +42,13 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
 
         if(!(symptoms.get(c).severity.equals("null"))){
             switch(symptoms.get(c).severity){
-                case "none": holder.none1.setChecked(true);
+                case "None": holder.none1.setChecked(true);
                              break;
-                case "mild": holder.mild.setChecked(true);
+                case "Mild": holder.mild.setChecked(true);
                              break;
-                case "moderate": holder.moderate.setChecked(true);
+                case "Moderate": holder.moderate.setChecked(true);
                              break;
-                case "severe": holder.severe.setChecked(true);
+                case "Severe": holder.severe.setChecked(true);
                              break;
 //                case "unbearable": holder.unbearable.setChecked(true);
 //                             break;
@@ -60,28 +60,49 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
             @Override
             public void onClick(View view) {
                 holder.onRadioButtonClicked(view);
-                symptoms.get(c).severity=s;
+                int i=0;
+                for(;i<73;i++){
+                    if (holder.symptomname1.getText().equals(symptoms.get(i).name))
+                        break;
+                }
+                symptoms.get(i).severity="None";
+                //Log.e("<<<<<", ""+i);
             }
         });
         holder.mild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.onRadioButtonClicked(view);
-                symptoms.get(c).severity=s;
+                int i=0;
+                for(;i<73;i++){
+                    if (holder.symptomname1.getText().equals(symptoms.get(i).name))
+                        break;
+                }
+                symptoms.get(i).severity="Mild";
             }
         });
         holder.moderate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.onRadioButtonClicked(view);
-                symptoms.get(c).severity=s;
+                int i=0;
+                for(;i<73;i++){
+                    if (holder.symptomname1.getText().equals(symptoms.get(i).name))
+                        break;
+                }
+                symptoms.get(i).severity="Moderate";
             }
         });
         holder.severe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.onRadioButtonClicked(view);
-                symptoms.get(c).severity=s;
+                int i=0;
+                for(;i<73;i++){
+                    if (holder.symptomname1.getText().equals(symptoms.get(i).name))
+                        break;
+                }
+                symptoms.get(i).severity="Severe";
             }
         });
 //        holder.unbearable.setOnClickListener(new View.OnClickListener() {
@@ -130,22 +151,18 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
             boolean checked = ((RadioButton) view).isChecked();
             switch (view.getId()){
                 case R.id.none: if(checked){
-                                    c=1;
                                     s = "None";
                                 }
                                 break;
                 case R.id.mild: if(checked){
-                                    c=1;
                                     s = "Mild";
                                 }
                                 break;
                 case R.id.moderate: if(checked){
-                                    c=1;
                                     s = "Moderate";
                                 }
                                 break;
                 case R.id.severe: if(checked){
-                                        c=1;
                                         s = "Severe";
                                     }
                                     break;
