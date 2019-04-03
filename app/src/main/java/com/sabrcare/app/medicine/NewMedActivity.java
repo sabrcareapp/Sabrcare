@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,7 +34,6 @@ import com.sabrcare.app.HomeActivity;
 import com.sabrcare.app.R;
 import com.sabrcare.app.auth.SignInActivity;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +45,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import io.realm.Realm;
 
 import static com.sabrcare.app.HomeActivity.FILE;
-
 
 public class NewMedActivity extends AppCompatActivity {
     public Spinner day_phase,remCount;
@@ -65,19 +62,13 @@ public class NewMedActivity extends AppCompatActivity {
     MedicineModel medicineModel;
     AlarmModel alarmModel;
     Realm realm;
-    SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("TOKEN",Context.MODE_PRIVATE);
-
     boolean timeFlag;
 
     Map<String,String> medicineMap =new ArrayMap<>();
     Map<String,String> medicineDelMap =new ArrayMap<>();
     private RequestQueue pushMeds;
-
-
     SharedPreferences setting;
-
     String token=null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

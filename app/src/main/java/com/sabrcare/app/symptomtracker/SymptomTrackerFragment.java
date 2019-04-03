@@ -43,7 +43,7 @@ import static com.sabrcare.app.symptomtracker.SymptomAddActivity.symptoms;
 
 public class SymptomTrackerFragment extends Fragment {
 
-    public int flag=0;
+    public int flag=0, fl=0;
     private RequestQueue symptomQueue;
     Context context=getActivity();
     private Map<String,String> symptomHeaders = new ArrayMap<String, String>();
@@ -108,6 +108,18 @@ public class SymptomTrackerFragment extends Fragment {
         sytBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                for(int i=0;i<symptoms.size();i++){
+                    if (symptoms.get(i).isCheck==1){
+                        fl=1;
+                        break;
+                    }
+                }
+                if(fl==0){
+                    return;
+                }
+                else{
+                    fl=0;
+                }
                 for(int i=0;i<74;i++){
                     if(symptoms.get(i).isCheck==1){
                         if(symptoms.get(i).severity.equals("null")){
