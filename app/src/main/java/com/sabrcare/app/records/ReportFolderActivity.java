@@ -14,6 +14,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 import pub.devrel.easypermissions.PermissionRequest;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -77,11 +78,11 @@ public class ReportFolderActivity extends AppCompatActivity {
 
     ImageRecordsAdapter imageRecordsAdapter;
     FileRecordsAdapter fileRecordsAdapter;
+    SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
 
 
     SharedPreferences setting;
     String token=null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

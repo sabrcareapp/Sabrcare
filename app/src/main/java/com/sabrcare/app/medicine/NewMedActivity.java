@@ -34,7 +34,6 @@ import com.sabrcare.app.HomeActivity;
 import com.sabrcare.app.R;
 import com.sabrcare.app.auth.SignInActivity;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +45,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import io.realm.Realm;
 
 import static com.sabrcare.app.HomeActivity.FILE;
-
 
 public class NewMedActivity extends AppCompatActivity {
     public Spinner day_phase,remCount;
@@ -64,18 +62,13 @@ public class NewMedActivity extends AppCompatActivity {
     MedicineModel medicineModel;
     AlarmModel alarmModel;
     Realm realm;
-
     boolean timeFlag;
 
     Map<String,String> medicineMap =new ArrayMap<>();
     Map<String,String> medicineDelMap =new ArrayMap<>();
     private RequestQueue pushMeds;
-
-
     SharedPreferences setting;
-
     String token=null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,9 +134,7 @@ public class NewMedActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         //TODO Handle token
-
-
-                        deleteMedicine(token,
+       deleteMedicine(token,
                                 medicineModel.getMedID());
                       //  deleteMedicine("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s",
                          //       medicineModel.getMedID());

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -42,8 +43,9 @@ import static com.sabrcare.app.symptomtracker.SymptomAddActivity.symptoms;
 
 public class SymptomTrackerFragment extends Fragment {
 
-    public int flag=0;
+    public int flag=0, fl=0;
     private RequestQueue symptomQueue;
+    Context context=getActivity();
     private Map<String,String> symptomHeaders = new ArrayMap<String, String>();
 
     SharedPreferences setting;
@@ -106,6 +108,18 @@ public class SymptomTrackerFragment extends Fragment {
         sytBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                for(int i=0;i<symptoms.size();i++){
+                    if (symptoms.get(i).isCheck==1){
+                        fl=1;
+                        break;
+                    }
+                }
+                if(fl==0){
+                    return;
+                }
+                else{
+                    fl=0;
+                }
                 for(int i=0;i<74;i++){
                     if(symptoms.get(i).isCheck==1){
                         if(symptoms.get(i).severity.equals("null")){
@@ -143,7 +157,7 @@ public class SymptomTrackerFragment extends Fragment {
         symptomQueue = Volley.newRequestQueue(getContext());
         String url = getResources().getString(R.string.apiUrl)+"symptom/add";
         symptomHeaders.put("token",token);
-        //   symptomHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
+        //   symptomHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s")
         symptomHeaders.put("symptomArray",symptomArray.toString());
         StringRequest symptomAddition = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
