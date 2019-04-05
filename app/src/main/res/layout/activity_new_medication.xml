@@ -146,29 +146,29 @@
 
 
     <Button
+        android:layout_below="@id/card2"
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toStartOf="@id/done"
-        android:layout_alignParentBottom="true"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="88dp"
         android:background="@drawable/button_custom"
         android:textColor="#fff"
+        android:layout_marginTop="16dp"
         android:text="Delete"
         android:textAlignment="center"
         />
 
     <Button
+        android:layout_below="@id/card2"
         android:id="@+id/done"
         android:background="@drawable/button_custom"
         android:textColor="#fff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
         android:text="Save"
         android:textAlignment="center"
         />

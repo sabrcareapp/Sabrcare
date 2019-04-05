@@ -6,15 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".tutorial.TutorialFragment_3">
 
+    <ImageView
+        android:id="@+id/img3"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/GetSupport"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/pill_icon"
+        />
+
     <TextView
         android:id="@+id/GetSupport"
-        android:text="Share your burden by being a part of the community"
+        android:text="Track your symptoms and medicines with ease"
         android:layout_marginStart="100dp"
         android:layout_width="wrap_content"
         android:textSize="18sp"
         android:textColor="@color/blueAccent"
         android:layout_centerInParent="true"
-
         android:padding="10dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
