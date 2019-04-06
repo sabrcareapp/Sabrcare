@@ -23,12 +23,13 @@
 
     <Button
         android:id="@+id/dismissAlarm"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="36dp"
         android:layout_below="@id/med"
+        android:background="@drawable/button_custom"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="164dp"
-        android:background="#ff0000"
+        android:layout_centerInParent="true"
         android:foreground="@drawable/ic_close_black_24dp"
         android:padding="10dp" />
 

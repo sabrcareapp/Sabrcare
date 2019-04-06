@@ -3,8 +3,10 @@ package com.sabrcare.app;
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
@@ -38,10 +40,15 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification() {
-        return new NotificationCompat.Builder(getApplicationContext(), channelID)
+        NotificationCompat.Builder builder =  new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setContentTitle("Time for you medicine")
                 .setContentText("Tap here for details")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setAutoCancel(true);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0,new Intent(this,HomeActivity.class),
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+        return builder;
     }
 }

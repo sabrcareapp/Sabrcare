@@ -60,7 +60,7 @@ public class ReportFolderActivity extends AppCompatActivity {
     private boolean showUploadDialog;
     private int imgFlag;
 
-    public FloatingActionButton photoFab,uploadFileFab;
+    public FloatingActionButton photoFab, uploadFileFab;
     public FloatingActionMenu fabMenu;
 
     private String filePath;
@@ -73,16 +73,16 @@ public class ReportFolderActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     private static final int PICK_PDF = 1;
 
-    Map<String,String> fileHeaders = new ArrayMap<>();
+    Map<String, String> fileHeaders = new ArrayMap<>();
     private RequestQueue listFiles;
 
     ImageRecordsAdapter imageRecordsAdapter;
     FileRecordsAdapter fileRecordsAdapter;
-    SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+    SharedPreferences sharedPreferences;
 
 
     SharedPreferences setting;
-    String token=null;
+    String token = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,29 +100,28 @@ public class ReportFolderActivity extends AppCompatActivity {
             }
         });
 
+        sharedPreferences = getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+        setting = getSharedPreferences(FILE, MODE_PRIVATE);
 
-       setting = getSharedPreferences(FILE,MODE_PRIVATE);
+        token = setting.getString("Token", "null");
 
-        token = setting.getString("Token","null");
-
-        if(token.equals("null"))
-        {
-            Intent launchHome = new Intent(ReportFolderActivity.this,SignInActivity.class);
+        if (token.equals("null")) {
+            Intent launchHome = new Intent(ReportFolderActivity.this, SignInActivity.class);
             startActivity(launchHome);
             finishAffinity();
-            return ;
+            return;
         }
 
 
-        folderName=getIntent().getStringExtra("folderName");
+        folderName = getIntent().getStringExtra("folderName");
         imgList = findViewById(R.id.ImagesRV);
         pdfList = findViewById(R.id.pdfsRV);
         photoFab = findViewById(R.id.TakePhoto);
         uploadFileFab = findViewById(R.id.UploadFile);
         fabMenu = findViewById(R.id.material_design_android_floating_action_menu2);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this,3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this, 3);
         imgList.setLayoutManager(gridLayoutManager);
         pdfList.setLayoutManager(gridLayoutManager2);
 
@@ -134,7 +133,7 @@ public class ReportFolderActivity extends AppCompatActivity {
             @AfterPermissionGranted(RC_CAMERA_STORAGE)
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ReportFolderActivity.this);
-                builder.setTitle("Coming Soon!").setCancelable(true).setPositiveButton("Ok",null);
+                builder.setTitle("Coming Soon!").setCancelable(true).setPositiveButton("Ok", null);
                 AlertDialog dialog = builder.create();
                 dialog.show();
 //                if(EasyPermissions.hasPermissions(ReportFolderActivity.this,perms)){
@@ -159,13 +158,13 @@ public class ReportFolderActivity extends AppCompatActivity {
             }
         });
 
-        uploadFileFab.setOnClickListener( new View.OnClickListener() {
+        uploadFileFab.setOnClickListener(new View.OnClickListener() {
             @Override
             @AfterPermissionGranted(RC_READ_STORAGE)
             public void onClick(View view) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ReportFolderActivity.this);
-                builder.setTitle("Coming Soon!").setCancelable(true).setPositiveButton("Ok",null);
+                builder.setTitle("Coming Soon!").setCancelable(true).setPositiveButton("Ok", null);
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
@@ -188,41 +187,40 @@ public class ReportFolderActivity extends AppCompatActivity {
     }
 
 
-    void loadFiles(){
+    void loadFiles() {
         String baseUrl = getResources().getString(R.string.apiUrl);
-        String filesURL = baseUrl+"records/show/files";
+        String filesURL = baseUrl + "records/show/files";
 
-        fileHeaders.put("token",token);
-        fileHeaders.put("folderName",folderName);
+        fileHeaders.put("token", token);
+        fileHeaders.put("folderName", folderName);
 
         listFiles = Volley.newRequestQueue(this);
         StringRequest getfiles = new StringRequest(Request.Method.GET, filesURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                imageName=new ArrayList<>();
+                imageName = new ArrayList<>();
                 imageURL = new ArrayList<>();
                 pdfName = new ArrayList<>();
                 pdfURL = new ArrayList<>();
                 try {
                     JSONArray jsonArray = new JSONObject(response).getJSONArray("data");
-                    for(int i=0;i<jsonArray.length();i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        if(jsonObject.getString("recordsFileType").equals("Image")){
+                        if (jsonObject.getString("recordsFileType").equals("Image")) {
                             imageName.add(jsonObject.getString("recordsName"));
                             imageURL.add(jsonObject.getString("recordsURL"));
-                        }
-                        else{
+                        } else {
                             pdfName.add(jsonObject.getString("recordsName"));
                             pdfURL.add(jsonObject.getString("recordsURL"));
                         }
 
                     }
                 } catch (JSONException e) {
-                    Log.e("RecordsError",e.toString());
+                    Log.e("RecordsError", e.toString());
                 }
 
-                imageRecordsAdapter = new ImageRecordsAdapter(imageName,imageURL,ReportFolderActivity.this);
-                fileRecordsAdapter = new FileRecordsAdapter(pdfName,pdfURL,ReportFolderActivity.this);
+                imageRecordsAdapter = new ImageRecordsAdapter(imageName, imageURL, ReportFolderActivity.this);
+                fileRecordsAdapter = new FileRecordsAdapter(pdfName, pdfURL, ReportFolderActivity.this);
                 imgList.setAdapter(imageRecordsAdapter);
                 pdfList.setAdapter(fileRecordsAdapter);
 
@@ -230,12 +228,12 @@ public class ReportFolderActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("LoadError",error.toString());
-                Toast.makeText(ReportFolderActivity.this,"File loading error. Please try again",Toast.LENGTH_SHORT).show();
+                Log.d("LoadError", error.toString());
+                Toast.makeText(ReportFolderActivity.this, "File loading error. Please try again", Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Override
-            public Map<String,String> getHeaders(){
+            public Map<String, String> getHeaders() {
                 return fileHeaders;
             }
         };
@@ -247,7 +245,7 @@ public class ReportFolderActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
     @Override
@@ -255,28 +253,25 @@ public class ReportFolderActivity extends AppCompatActivity {
 
         fabMenu.close(false);
 
-        if(requestCode==PICK_IMAGE && resultCode == RESULT_OK && data != null){
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
             com.esafirm.imagepicker.model.Image image = com.esafirm.imagepicker.features.ImagePicker.getFirstImageOrNull(data);
             filePath = image.getPath();
             showUploadDialog = true;
-            isImage=true;
-            imgFlag=1;
-        }
-
-        else if(requestCode==PICK_PDF&& resultCode == RESULT_OK && data!=null) {
-            filePath = PathUtil.getPath(this,data.getData());
+            isImage = true;
+            imgFlag = 1;
+        } else if (requestCode == PICK_PDF && resultCode == RESULT_OK && data != null) {
+            filePath = PathUtil.getPath(this, data.getData());
             //ArrayList<MediaFile> files = data.getParcelableArrayListExtra(FilePickerActivity.MEDIA_FILES);
             //filePath=files.get(0).getPath();
-            System.out.println("data>>>>>>>"+data.getData());
-            System.out.println("filepath>>>>>"+filePath);
+            System.out.println("data>>>>>>>" + data.getData());
+            System.out.println("filepath>>>>>" + filePath);
             showUploadDialog = true;
-            isImage=false;
-            imgFlag=0;
-        }
-        else {
-            Toast.makeText(getApplicationContext(),"Error loading file. Please try again",Toast.LENGTH_SHORT).show();
-            showUploadDialog=false;
-            imgFlag=0;
+            isImage = false;
+            imgFlag = 0;
+        } else {
+            Toast.makeText(getApplicationContext(), "Error loading file. Please try again", Toast.LENGTH_SHORT).show();
+            showUploadDialog = false;
+            imgFlag = 0;
         }
 
     }
@@ -285,31 +280,29 @@ public class ReportFolderActivity extends AppCompatActivity {
     protected void onResumeFragments() {
         super.onResumeFragments();
 
-        if(showUploadDialog && imgFlag==0){
+        if (showUploadDialog && imgFlag == 0) {
             final FragmentManager fm = getSupportFragmentManager();
             final FragmentTransaction ft = fm.beginTransaction();
             DialogFragment uploadDialog = UploadDialogFragment.newInstance(filePath);
-            ((UploadDialogFragment) uploadDialog).filepath=filePath;
+            ((UploadDialogFragment) uploadDialog).filepath = filePath;
             ft.addToBackStack("Upload Fragment Dialog");
 
-            uploadDialog.show(ft,"");
+            uploadDialog.show(ft, "");
 
             showUploadDialog = false;
-        }
-        else if(showUploadDialog && imgFlag==1){
+        } else if (showUploadDialog && imgFlag == 1) {
             final FragmentManager fm = getSupportFragmentManager();
             final FragmentTransaction ft = fm.beginTransaction();
 
             DialogFragment uploadDialog = UploadDialogFragment.newInstance(filePath);
-            ((UploadDialogFragment) uploadDialog).filepath=filePath;
+            ((UploadDialogFragment) uploadDialog).filepath = filePath;
             ft.addToBackStack("Upload Fragment Dialog");
 
-            uploadDialog.show(ft,"");
+            uploadDialog.show(ft, "");
 
             showUploadDialog = false;
         }
     }
 }
 
-//eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s
 //TODO upload files

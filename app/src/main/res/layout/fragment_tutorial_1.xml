@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".tutorial.TutorialFragment_1">
 
+    <ImageView
+        android:id="@+id/img1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/GetSupport"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_stethoscope_solid"
+        />
+
     <TextView
         android:id="@+id/GetSupport"
         android:text="Get the quick support you deserve."
