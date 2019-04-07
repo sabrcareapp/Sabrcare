@@ -7,24 +7,18 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.sabrcare.app.auth.SignInActivity;
-import com.sabrcare.app.auth.SignUpActivity;
 import com.sabrcare.app.medicine.MedicineFragment;
 import com.sabrcare.app.records.RecordsFragment;
 import com.sabrcare.app.symptomtracker.SymptomTrackerFragment;
 import com.sabrcare.app.timeline.TimelineFragment;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.MenuItem;
-
-import java.util.Objects;
 
 import static com.sabrcare.app.symptomtracker.SymptomAddActivity.flagIntent;
 
