@@ -45,11 +45,11 @@ import static com.sabrcare.app.symptomtracker.SymptomAddActivity.symptoms;
 
 public class SymptomTrackerFragment extends Fragment {
 
-    public int flag=0, fl=0;
+    public int flag = 0, fl = 0;
     private RequestQueue symptomQueue;
-    private Map<String,String> symptomHeaders = new ArrayMap<String, String>();
+    private Map<String, String> symptomHeaders = new ArrayMap<String, String>();
     SharedPreferences setting;
-    String token=null;
+    String token = null;
     Button profile;
 
     @Override
@@ -67,13 +67,13 @@ public class SymptomTrackerFragment extends Fragment {
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
         Toolbar symptom_tracker_toolbar = view.findViewById(R.id.symptom_toolbar);
         symptom_tracker_toolbar.setTitle("");
-        ((AppCompatActivity)getActivity()).setSupportActionBar(symptom_tracker_toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(symptom_tracker_toolbar);
 
 
         //SHARED PREFERENCES HERE!!!!!!!!!!
 
-        setting = getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
-        token = setting.getString("Token","null");
+        setting = getActivity().getSharedPreferences(FILE, MODE_PRIVATE);
+        token = setting.getString("Token", "null");
 
 
         profile = view.findViewById(R.id.profile);
@@ -83,28 +83,27 @@ public class SymptomTrackerFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent loadprofile = new Intent(getContext(),ProfileActivity.class);
+                Intent loadprofile = new Intent(getContext(), ProfileActivity.class);
                 getContext().startActivity(loadprofile);
 
             }
         });
 
-        if(token.equals("null"))
-        {
-            Intent launchHome = new Intent(getActivity(),SignInActivity.class);
+        if (token.equals("null")) {
+            Intent launchHome = new Intent(getActivity(), SignInActivity.class);
             startActivity(launchHome);
             getActivity().finishAffinity();
-            return ;
+            return;
         }
 
         Realm.init(getActivity());
         final Realm db = Realm.getDefaultInstance();
 
 
-        if(db.where(ModelSymptom.class).count() != 0){
-                //Log.e("imp <<<<", db.where(ModelSymptom.class).count()+"");
-                //Log.e("imp <<<<", db.where(ModelSymptom.class).findAll()+"");
-                symptoms.addAll(db.where(ModelSymptom.class).findAll());
+        if (db.where(ModelSymptom.class).count() != 0) {
+            //Log.e("imp <<<<", db.where(ModelSymptom.class).count()+"");
+            //Log.e("imp <<<<", db.where(ModelSymptom.class).findAll()+"");
+            symptoms.addAll(db.where(ModelSymptom.class).findAll());
         }
 
         RecyclerView sytRv = view.findViewById(R.id.syt_rv);
@@ -112,16 +111,16 @@ public class SymptomTrackerFragment extends Fragment {
         SymptomAdapter symptomAdapter = new SymptomAdapter();
         sytRv.setAdapter(symptomAdapter);
 
-       // TextView sytDate = view.findViewById(R.id.syt_date);
+        // TextView sytDate = view.findViewById(R.id.syt_date);
         Button sytBtn = view.findViewById(R.id.syt_btn);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new java.util.Date()); //HAS CURRENT TIME DATE
-       // sytDate.setText(currentDateTimeString);
+        // sytDate.setText(currentDateTimeString);
 
         com.github.clans.fab.FloatingActionButton sytFab = view.findViewById(R.id.syt_fab);
         sytFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flag=1;
+                flag = 1;
                 Intent intent = new Intent(getActivity(), SymptomAddActivity.class);
                 startActivity(intent);
             }
@@ -130,21 +129,20 @@ public class SymptomTrackerFragment extends Fragment {
         sytBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(int i=0;i<symptoms.size();i++){
-                    if (symptoms.get(i).isCheck==1){
-                        fl=1;
+                for (int i = 0; i < symptoms.size(); i++) {
+                    if (symptoms.get(i).isCheck == 1) {
+                        fl = 1;
                         break;
                     }
                 }
-                if(fl==0){
+                if (fl == 0) {
                     return;
+                } else {
+                    fl = 0;
                 }
-                else{
-                    fl=0;
-                }
-                for(int i=0;i<74;i++){
-                    if(symptoms.get(i).isCheck==1){
-                        if(symptoms.get(i).severity.equals("null")){
+                for (int i = 0; i < 74; i++) {
+                    if (symptoms.get(i).isCheck == 1) {
+                        if (symptoms.get(i).severity.equals("null")) {
                             Toast.makeText(getContext(),
                                     "Please select the severity of each Symptom",
                                     Toast.LENGTH_SHORT);
@@ -153,7 +151,7 @@ public class SymptomTrackerFragment extends Fragment {
                     }
                 }
 
-                for(int i=0;i<74;i++) {
+                for (int i = 0; i < 74; i++) {
                     final int finalI = i;
                     db.executeTransaction(
                             new Realm.Transaction() {
@@ -166,14 +164,14 @@ public class SymptomTrackerFragment extends Fragment {
                 }
 
                 JSONArray jsonArray = new JSONArray();
-                for(int i=0;i<74;i++){
-                    if(symptoms.get(i).isCheck==1){
+                for (int i = 0; i < 74; i++) {
+                    if (symptoms.get(i).isCheck == 1) {
                         JSONObject symptom = new JSONObject();
                         try {
-                            symptom.put("symptomName",symptoms.get(i).name);
-                            symptom.put("symptomSeverity",symptoms.get(i).severity);
+                            symptom.put("symptomName", symptoms.get(i).name);
+                            symptom.put("symptomSeverity", symptoms.get(i).severity);
 
-                            Toast.makeText(getContext(),symptoms.get(i).severity,Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), symptoms.get(i).severity, Toast.LENGTH_LONG).show();
                             jsonArray.put(symptom);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -187,26 +185,26 @@ public class SymptomTrackerFragment extends Fragment {
     }
 
     // TODO: Don't hardcode token
-    void postDataItem(JSONArray symptomArray){
+    void postDataItem(JSONArray symptomArray) {
         symptomQueue = Volley.newRequestQueue(getContext());
-        String url = getResources().getString(R.string.apiUrl)+"symptom/add";
-        symptomHeaders.put("token",token);
+        String url = getResources().getString(R.string.apiUrl) + "symptom/add";
+        symptomHeaders.put("token", token);
         //   symptomHeaders.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s")
-        symptomHeaders.put("symptomArray",symptomArray.toString());
+        symptomHeaders.put("symptomArray", symptomArray.toString());
         StringRequest symptomAddition = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Response",response);
-                Toast.makeText(getContext(),"Symptom Added successfully",Toast.LENGTH_LONG).show();
+                Log.d("Response", response);
+                Toast.makeText(getContext(), "Symptom Added successfully", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("symerror", error.toString());
             }
-        }){
+        }) {
             @Override
-            public Map<String,String> getHeaders(){
+            public Map<String, String> getHeaders() {
                 return symptomHeaders;
             }
         };

@@ -2,7 +2,7 @@ package com.sabrcare.app.timeline;
 
 import android.net.Uri;
 
-public class TimelineModel  {
+public class TimelineModel {
 
     private String title;
     private String subtitle;

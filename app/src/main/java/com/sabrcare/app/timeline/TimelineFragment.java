@@ -41,12 +41,12 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.sabrcare.app.HomeActivity.FILE;
 
 public class TimelineFragment extends Fragment {
-//    private RequestQueue timelineQueue;
+    //    private RequestQueue timelineQueue;
 //    private Map<String,String> timelineHeaders = new ArrayMap<String, String>();
     RecyclerView timeline_rv;
     ArrayList<ModelTimeline> timeline = new ArrayList<>();
     SharedPreferences setting;
-    String token=null;
+    String token = null;
     public static Button browseTimeline;
 
     Button profile;
@@ -54,33 +54,30 @@ public class TimelineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Fresco.initialize(getContext());
-        View view= inflater.inflate(R.layout.fragment_timeline, container, false);
+        View view = inflater.inflate(R.layout.fragment_timeline, container, false);
 
         timeline_rv = view.findViewById(R.id.timeline_rv);
 
         profile = view.findViewById(R.id.profile);
 
 
+        setting = getActivity().getSharedPreferences(FILE, MODE_PRIVATE);
 
-        setting= getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
-
-        token = setting.getString("Token","null");
-
+        token = setting.getString("Token", "null");
 
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent loadprofile = new Intent(getContext(),ProfileActivity.class);
+                Intent loadprofile = new Intent(getContext(), ProfileActivity.class);
                 getContext().startActivity(loadprofile);
 
             }
         });
 
-        if(token.equals("null"))
-        {
-            Intent launchHome = new Intent(getActivity(),SignInActivity.class);
+        if (token.equals("null")) {
+            Intent launchHome = new Intent(getActivity(), SignInActivity.class);
             startActivity(launchHome);
             getActivity().finishAffinity();
             return view;
@@ -93,9 +90,9 @@ public class TimelineFragment extends Fragment {
 
     private void loadTimeline() {
 
-        Log.e("LOADTIMELINE","LOADTIMELINE CALLED");
-        String requestEndpoint= getResources().getString(R.string.apiUrl)+"timeline/show";
-        final Map<String,String> timelineHeaders = new ArrayMap<String, String>();
+        Log.e("LOADTIMELINE", "LOADTIMELINE CALLED");
+        String requestEndpoint = getResources().getString(R.string.apiUrl) + "timeline/show";
+        final Map<String, String> timelineHeaders = new ArrayMap<String, String>();
 
         timelineHeaders.put("token", token);
         //   timelineHeaders.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaGFyaS4yNTk5QGdtYWlsLmNvLmluIiwiZXhwIjoxNTU0Mjk4OTUyfQ.qy7W-tdcSVGrEoZrNialM4VFURvX3UJ9o6Ifde5HN6s");
@@ -106,18 +103,17 @@ public class TimelineFragment extends Fragment {
                 try {
                     Log.d("timelineResponse", response);
 
-                   JSONArray timelineArray = new JSONObject(response).getJSONArray("data");
+                    JSONArray timelineArray = new JSONObject(response).getJSONArray("data");
 //                    JSONObject hello = timelineArray.getJSONObject(0);
 //                    Log.e("PUSSY",hello.getString("recordsName"));
                     JSONObject timelineObject = null;
-                    for(int i=0;i<timelineArray.length();i++)
-                    {
+                    for (int i = 0; i < timelineArray.length(); i++) {
                         timelineObject = timelineArray.getJSONObject(i);
 
                         ModelTimeline modelTimeline = new ModelTimeline();
 
-                        if(timelineObject.getString("timelineType").equals("Record")) {
-                            Log.e("INSIDE API",timelineObject.getString("recordsName"));
+                        if (timelineObject.getString("timelineType").equals("Record")) {
+                            Log.e("INSIDE API", timelineObject.getString("recordsName"));
 
                             Date date = new Date(timelineObject.getJSONObject("date").getLong("$date"));
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -127,10 +123,9 @@ public class TimelineFragment extends Fragment {
                             modelTimeline.setTimelineType(timelineObject.getString("timelineType"));
                             modelTimeline.setTitle(timelineObject.getString("recordsName"));
                             modelTimeline.setSubtitle(timelineObject.getString("date"));
-                           // modelTimeline.setImageUri("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Places-folder-red-icon.png");
+                            // modelTimeline.setImageUri("http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Places-folder-red-icon.png");
 
-                        }
-                        else if (timelineObject.getString("timelineType").equals("Symptom")) {
+                        } else if (timelineObject.getString("timelineType").equals("Symptom")) {
 
                             Date date = new Date(timelineObject.getJSONObject("date").getLong("$date"));
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -142,9 +137,7 @@ public class TimelineFragment extends Fragment {
                             modelTimeline.setSubtitle(timelineObject.getString("symptomSeverity"));
                             //modelTimeline.setImageUri("http://icons.iconarchive.com/icons/dapino/medical-people/128/stethoscope-icon.png");
 
-                        }
-                        else if (timelineObject.getString("timelineType").equals("Medicine"))
-                        {
+                        } else if (timelineObject.getString("timelineType").equals("Medicine")) {
                             Date date = new Date(timelineObject.getJSONObject("date").getLong("$date"));
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                             SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:MM");
@@ -157,16 +150,15 @@ public class TimelineFragment extends Fragment {
                             //http://icons.iconarchive.com/icons/icons8/windows-8/512/Healthcare-Pill-icon.png
                         }
 
-                        timeline.add (modelTimeline);
+                        timeline.add(modelTimeline);
 
                     }
-
 
 
                 } catch (Exception e) {
                     //   Toast.makeText(getContext(), "Could not Sign You In!", Toast.LENGTH_LONG).show();
                 }
-                Log.e("TIMELINEFRAGMENT VALUES",timeline.size()+" ");
+                Log.e("TIMELINEFRAGMENT VALUES", timeline.size() + " ");
                 setupRecyclerView(timeline);
             }
         }, new Response.ErrorListener() {
@@ -193,7 +185,7 @@ public class TimelineFragment extends Fragment {
     private void setupRecyclerView(ArrayList<ModelTimeline> timeline) {
 
         timeline_rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        TimelineAdapter adapter = new TimelineAdapter(getContext(),timeline);
+        TimelineAdapter adapter = new TimelineAdapter(getContext(), timeline);
         timeline_rv.setAdapter(adapter);
 
     }

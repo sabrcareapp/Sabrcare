@@ -41,14 +41,14 @@ public class MedicineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_medicine, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.medicine_rv);
-        realm=Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
         materialDesignFAM = view.findViewById(R.id.material_design_android_floating_action_menu);
         fabNewMed = view.findViewById(R.id.NewMedicineFAB);
 
 
         Toolbar medicine_toolbar = view.findViewById(R.id.medicine_toolbar);
         medicine_toolbar.setTitle("");
-        ((AppCompatActivity)getActivity()).setSupportActionBar(medicine_toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(medicine_toolbar);
 
         //TODO This data to be loaded from server.
 
@@ -66,7 +66,7 @@ public class MedicineFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent loadprofile = new Intent(getContext(),ProfileActivity.class);
+                Intent loadprofile = new Intent(getContext(), ProfileActivity.class);
                 getContext().startActivity(loadprofile);
 
             }

@@ -20,8 +20,8 @@ import io.realm.Realm;
 public class SymptomAddActivity extends AppCompatActivity {
 
     public static ArrayList<ModelSymptom> symptoms = new ArrayList<>(0);
-    public static int flagIntent=0;
-    public int flag=0,flag1=0,flag2=0,flag3=0,flag4=0,flag5=0,flag6=0,flag7=0,flag8=0,flag9=0,flag10=0,flag11=0;
+    public static int flagIntent = 0;
+    public int flag = 0, flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 0, flag6 = 0, flag7 = 0, flag8 = 0, flag9 = 0, flag10 = 0, flag11 = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,24 +42,24 @@ public class SymptomAddActivity extends AppCompatActivity {
                 sytaTv11 = findViewById(R.id.syta_tv11);
 
         final RecyclerView sytaRv = findViewById(R.id.syta_rv),
-                sytaRv1=findViewById(R.id.syta_rv1),
-                sytaRv2=findViewById(R.id.syta_rv2),
-                sytaRv3=findViewById(R.id.syta_rv3),
-                sytaRv4=findViewById(R.id.syta_rv4),
-                sytaRv5=findViewById(R.id.syta_rv5),
-                sytaRv6=findViewById(R.id.syta_rv6),
-                sytaRv7=findViewById(R.id.syta_rv7),
-                sytaRv8=findViewById(R.id.syta_rv8),
-                sytaRv9=findViewById(R.id.syta_rv9),
-                sytaRv10=findViewById(R.id.syta_rv10),
-                sytaRv11=findViewById(R.id.syta_rv11);
+                sytaRv1 = findViewById(R.id.syta_rv1),
+                sytaRv2 = findViewById(R.id.syta_rv2),
+                sytaRv3 = findViewById(R.id.syta_rv3),
+                sytaRv4 = findViewById(R.id.syta_rv4),
+                sytaRv5 = findViewById(R.id.syta_rv5),
+                sytaRv6 = findViewById(R.id.syta_rv6),
+                sytaRv7 = findViewById(R.id.syta_rv7),
+                sytaRv8 = findViewById(R.id.syta_rv8),
+                sytaRv9 = findViewById(R.id.syta_rv9),
+                sytaRv10 = findViewById(R.id.syta_rv10),
+                sytaRv11 = findViewById(R.id.syta_rv11);
         Button sytaBtn = findViewById(R.id.syta_btn);
 
         Realm.init(SymptomAddActivity.this);
         final Realm db = Realm.getDefaultInstance();
 
 
-        if(symptoms.size()==0 && db.where(ModelSymptom.class).count() == 0) {
+        if (symptoms.size() == 0 && db.where(ModelSymptom.class).count() == 0) {
             ModelSymptom modelSymptom = new ModelSymptom(
                     "CONSTIPATION", 0, "null");
             symptoms.add(modelSymptom);
@@ -326,13 +326,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag==1) {
+                if (flag == 1) {
                     sytaRv.setVisibility(View.GONE);
-                    flag=0;
-                }
-                else{
+                    flag = 0;
+                } else {
                     sytaRv.setVisibility(View.VISIBLE);
-                    flag=1;
+                    flag = 1;
                 }
             }
         });
@@ -340,13 +339,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag1==1) {
+                if (flag1 == 1) {
                     sytaRv1.setVisibility(View.GONE);
-                    flag1=0;
-                }
-                else{
+                    flag1 = 0;
+                } else {
                     sytaRv1.setVisibility(View.VISIBLE);
-                    flag1=1;
+                    flag1 = 1;
                 }
             }
         });
@@ -354,13 +352,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag2==1) {
+                if (flag2 == 1) {
                     sytaRv2.setVisibility(View.GONE);
-                    flag2=0;
-                }
-                else{
+                    flag2 = 0;
+                } else {
                     sytaRv2.setVisibility(View.VISIBLE);
-                    flag2=1;
+                    flag2 = 1;
                 }
             }
         });
@@ -368,13 +365,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag3==1) {
+                if (flag3 == 1) {
                     sytaRv3.setVisibility(View.GONE);
-                    flag3=0;
-                }
-                else{
+                    flag3 = 0;
+                } else {
                     sytaRv3.setVisibility(View.VISIBLE);
-                    flag3=1;
+                    flag3 = 1;
                 }
             }
         });
@@ -382,13 +378,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag4==1) {
+                if (flag4 == 1) {
                     sytaRv4.setVisibility(View.GONE);
-                    flag4=0;
-                }
-                else{
+                    flag4 = 0;
+                } else {
                     sytaRv4.setVisibility(View.VISIBLE);
-                    flag4=1;
+                    flag4 = 1;
                 }
             }
         });
@@ -396,13 +391,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag5==1) {
+                if (flag5 == 1) {
                     sytaRv5.setVisibility(View.GONE);
-                    flag5=0;
-                }
-                else{
+                    flag5 = 0;
+                } else {
                     sytaRv5.setVisibility(View.VISIBLE);
-                    flag5=1;
+                    flag5 = 1;
                 }
             }
         });
@@ -410,13 +404,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag6==1) {
+                if (flag6 == 1) {
                     sytaRv6.setVisibility(View.GONE);
-                    flag6=0;
-                }
-                else{
+                    flag6 = 0;
+                } else {
                     sytaRv6.setVisibility(View.VISIBLE);
-                    flag6=1;
+                    flag6 = 1;
                 }
             }
         });
@@ -424,13 +417,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag7==1) {
+                if (flag7 == 1) {
                     sytaRv7.setVisibility(View.GONE);
-                    flag7=0;
-                }
-                else{
+                    flag7 = 0;
+                } else {
                     sytaRv7.setVisibility(View.VISIBLE);
-                    flag7=1;
+                    flag7 = 1;
                 }
             }
         });
@@ -438,13 +430,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag8==1) {
+                if (flag8 == 1) {
                     sytaRv8.setVisibility(View.GONE);
-                    flag8=0;
-                }
-                else{
+                    flag8 = 0;
+                } else {
                     sytaRv8.setVisibility(View.VISIBLE);
-                    flag8=1;
+                    flag8 = 1;
                 }
             }
         });
@@ -452,13 +443,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag9==1) {
+                if (flag9 == 1) {
                     sytaRv9.setVisibility(View.GONE);
-                    flag9=0;
-                }
-                else{
+                    flag9 = 0;
+                } else {
                     sytaRv9.setVisibility(View.VISIBLE);
-                    flag9=1;
+                    flag9 = 1;
                 }
             }
         });
@@ -466,13 +456,12 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag10==1) {
+                if (flag10 == 1) {
                     sytaRv10.setVisibility(View.GONE);
-                    flag10=0;
-                }
-                else{
+                    flag10 = 0;
+                } else {
                     sytaRv10.setVisibility(View.VISIBLE);
-                    flag10=1;
+                    flag10 = 1;
                 }
             }
         });
@@ -480,25 +469,23 @@ public class SymptomAddActivity extends AppCompatActivity {
         sytaTv11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag11==1) {
+                if (flag11 == 1) {
                     sytaRv11.setVisibility(View.GONE);
-                    flag11=0;
-                }
-                else{
+                    flag11 = 0;
+                } else {
                     sytaRv11.setVisibility(View.VISIBLE);
-                    flag11=1;
+                    flag11 = 1;
                 }
             }
         });
 
 
-
         sytaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flagIntent=1;
+                flagIntent = 1;
 
-                for(int i=0;i<74;i++) {
+                for (int i = 0; i < 74; i++) {
                     final int finalI = i;
                     db.executeTransaction(
                             new Realm.Transaction() {
@@ -509,7 +496,7 @@ public class SymptomAddActivity extends AppCompatActivity {
                             }
                     );
                 }
-                Intent intent = new Intent(SymptomAddActivity.this,HomeActivity.class);
+                Intent intent = new Intent(SymptomAddActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });

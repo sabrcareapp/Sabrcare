@@ -40,13 +40,13 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification() {
-        NotificationCompat.Builder builder =  new NotificationCompat.Builder(getApplicationContext(), channelID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setContentTitle("Time for you medicine")
                 .setContentText("Tap here for details")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setAutoCancel(true);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0,new Intent(this,HomeActivity.class),
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, HomeActivity.class),
                 PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(contentIntent);
         return builder;

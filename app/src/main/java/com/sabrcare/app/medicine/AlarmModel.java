@@ -8,32 +8,33 @@ import io.realm.annotations.PrimaryKey;
 
 public class AlarmModel extends RealmObject {
     private String Medicines;
-    @PrimaryKey private String time;
+    @PrimaryKey
+    private String time;
     private boolean isOn;
 
     private long alarmID;
 
 
     public AlarmModel() {
-        this.Medicines="";
-        this.isOn=false;
-        time="";
+        this.Medicines = "";
+        this.isOn = false;
+        time = "";
     }
 
-    public void addMedicineToAlarm(String medicine){
-        this.Medicines+=medicine+" ";
+    public void addMedicineToAlarm(String medicine) {
+        this.Medicines += medicine + " ";
     }
 
-    public void removeMedicineFromAlarm(String medicine){
-        StringTokenizer st = new StringTokenizer(this.Medicines," ");
+    public void removeMedicineFromAlarm(String medicine) {
+        StringTokenizer st = new StringTokenizer(this.Medicines, " ");
         ArrayList<String> meds = new ArrayList<>();
-        while (st.hasMoreTokens()){
+        while (st.hasMoreTokens()) {
             meds.add(st.nextToken());
         }
-        this.Medicines="";
+        this.Medicines = "";
         meds.remove(medicine);
-        for(int i = 0;i<meds.size();i++){
-            this.Medicines+=meds.get(i)+' ';
+        for (int i = 0; i < meds.size(); i++) {
+            this.Medicines += meds.get(i) + ' ';
         }
     }
 
@@ -42,7 +43,7 @@ public class AlarmModel extends RealmObject {
     }
 
     public void setAlarmID() {
-        alarmID=System.currentTimeMillis();
+        alarmID = System.currentTimeMillis();
     }
 
     public String getMedicines() {

@@ -22,10 +22,10 @@ import android.view.MenuItem;
 
 import static com.sabrcare.app.symptomtracker.SymptomAddActivity.flagIntent;
 
-public class HomeActivity extends AppCompatActivity  {
+public class HomeActivity extends AppCompatActivity {
     private static final int REQUEST_EXIT = 2;
 
-    public static final String FILE="MyFile";
+    public static final String FILE = "MyFile";
     SharedPreferences setting;
     int transfer;
 
@@ -51,7 +51,7 @@ public class HomeActivity extends AppCompatActivity  {
                     break;
 
                 case R.id.navigation_records:
-                    fragment= new RecordsFragment();
+                    fragment = new RecordsFragment();
                     break;
 
                 case R.id.navigation_symptom_tracker:
@@ -72,53 +72,49 @@ public class HomeActivity extends AppCompatActivity  {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         transfer = getIntent().getIntExtra("transfer", 0);
 
-        if(transfer==1){
+        if (transfer == 1) {
             loadFragment(new RecordsFragment());
             navigation.setSelectedItemId(R.id.navigation_records);
-        }else if(transfer==2){
+        } else if (transfer == 2) {
             loadFragment(new SymptomTrackerFragment());
             navigation.setSelectedItemId(R.id.navigation_medicine);
-        }else if(transfer==3){
+        } else if (transfer == 3) {
             Log.e("<<<<<<<", "in 3");
             loadFragment(new SymptomTrackerFragment());
             navigation.setSelectedItemId(R.id.navigation_symptom_tracker);
         }
 
-        setting= this.getSharedPreferences(FILE,MODE_PRIVATE);
+        setting = this.getSharedPreferences(FILE, MODE_PRIVATE);
 
-        String token_value = setting.getString("Token","null");
+        String token_value = setting.getString("Token", "null");
 
-        if(token_value.equals("null"))
-        {
-            Intent launchHome = new Intent(HomeActivity.this,LaunchActivity.class);
+        if (token_value.equals("null")) {
+            Intent launchHome = new Intent(HomeActivity.this, LaunchActivity.class);
             startActivity(launchHome);
             finishAffinity();
-            return ;
+            return;
         }
 
-        if(getIntent().getAction()!=null && getIntent().getAction().equalsIgnoreCase("updateMeds")){
+        if (getIntent().getAction() != null && getIntent().getAction().equalsIgnoreCase("updateMeds")) {
             loadFragment(new MedicineFragment());
             navigation.setSelectedItemId(R.id.navigation_medicine);
-        }
-        else if(flagIntent==1){
-            flagIntent=0;
+        } else if (flagIntent == 1) {
+            flagIntent = 0;
             loadFragment(new SymptomTrackerFragment());
             navigation.setSelectedItemId(R.id.navigation_symptom_tracker);
-        }
-        else if (transfer != 0){
-            if(transfer==1){
+        } else if (transfer != 0) {
+            if (transfer == 1) {
                 loadFragment(new RecordsFragment());
                 navigation.setSelectedItemId(R.id.navigation_records);
-            }else if(transfer==2){
+            } else if (transfer == 2) {
                 loadFragment(new MedicineFragment());
                 navigation.setSelectedItemId(R.id.navigation_medicine);
-            }else if(transfer==3){
+            } else if (transfer == 3) {
                 //Log.e("<<<<<<<", "in 3");
                 loadFragment(new SymptomTrackerFragment());
                 navigation.setSelectedItemId(R.id.navigation_symptom_tracker);
             } //change this back to homefragment
-        }
-        else{
+        } else {
             loadFragment(new MedicineFragment());
         }
 

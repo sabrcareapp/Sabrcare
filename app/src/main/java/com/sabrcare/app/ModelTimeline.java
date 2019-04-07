@@ -3,7 +3,7 @@ package com.sabrcare.app;
 
 import android.net.Uri;
 
-public class ModelTimeline  {
+public class ModelTimeline {
 
     private String title;
     private String subtitle;
@@ -14,13 +14,13 @@ public class ModelTimeline  {
     private String time;
 
 
-    public ModelTimeline(String title, String subtitle, String imageUri, String timelineType,String date,String time) {
+    public ModelTimeline(String title, String subtitle, String imageUri, String timelineType, String date, String time) {
         this.title = title;
         this.subtitle = subtitle;
         this.imageUri = imageUri;
-        this.timelineType=timelineType;
-        this.date=date;
-        this.time=time;
+        this.timelineType = timelineType;
+        this.date = date;
+        this.time = time;
     }
 
     public ModelTimeline() {
@@ -41,7 +41,6 @@ public class ModelTimeline  {
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
     }
-
 
 
     public String getTimelineType() {

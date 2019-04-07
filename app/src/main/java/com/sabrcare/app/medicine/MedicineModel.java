@@ -16,7 +16,7 @@ public class MedicineModel extends RealmObject {
         this.time = "";
         this.reminderOn = false;
 
-        medID=String.valueOf(System.currentTimeMillis());
+        medID = String.valueOf(System.currentTimeMillis());
     }
 
     public MedicineModel(String medName, String dayPhase, String time, boolean reminderOn) {
