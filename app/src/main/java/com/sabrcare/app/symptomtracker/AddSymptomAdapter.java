@@ -1,5 +1,6 @@
 package com.sabrcare.app.symptomtracker;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,13 @@ import com.sabrcare.app.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import io.realm.Realm;
 
 import static com.sabrcare.app.symptomtracker.SymptomAddActivity.symptoms;
 
 public class AddSymptomAdapter extends RecyclerView.Adapter<AddSymptomAdapter.AddSymptomVH> {
 
+    private Realm db = Realm.getDefaultInstance();
     private int i;
 
     public AddSymptomAdapter(String x){
@@ -65,8 +68,9 @@ public class AddSymptomAdapter extends RecyclerView.Adapter<AddSymptomAdapter.Ad
 
     @Override
     public void onBindViewHolder(@NonNull final AddSymptomAdapter.AddSymptomVH holder, final int position) {
-        holder.addSymptom(symptoms.get(position+i).name);
-        if(symptoms.get(position+i).isCheck==1){
+        //Log.e("imp <<<<", symptoms.get(4).getName()+"");
+        holder.addSymptom(symptoms.get(position+i).getName());
+        if(symptoms.get(position+i).getIsCheck()==1){
             holder.checkBox.setChecked(true);
         }
         else{
@@ -76,10 +80,28 @@ public class AddSymptomAdapter extends RecyclerView.Adapter<AddSymptomAdapter.Ad
             @Override
             public void onClick(View view) {
                 if(holder.checkBox.isChecked()){
-                    symptoms.get(position+i).isCheck=1;
+                    final int finalI = position+i;
+                    db.executeTransaction(
+                            new Realm.Transaction() {
+                                @Override
+                                public void execute(Realm realm) {
+                                    symptoms.get(finalI).setIsCheck(1);
+                                    db.insertOrUpdate(symptoms.get(finalI));
+                                }
+                            }
+                    );
                 }
                 else{
-                    symptoms.get(position+i).isCheck=0;
+                    final int finalI = position+i;
+                    db.executeTransaction(
+                            new Realm.Transaction() {
+                                @Override
+                                public void execute(Realm realm) {
+                                    symptoms.get(finalI).setIsCheck(0);
+                                    db.insertOrUpdate(symptoms.get(finalI));
+                                }
+                            }
+                    );
                 }
             }
         });
