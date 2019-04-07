@@ -30,9 +30,6 @@ import com.sabrcare.app.auth.SignInActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -40,23 +37,14 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.sabrcare.app.HomeActivity.FILE;
 
 public class TimelineFragment extends Fragment {
-
-
-
-
 //    private RequestQueue timelineQueue;
 //    private Map<String,String> timelineHeaders = new ArrayMap<String, String>();
-
     RecyclerView timeline_rv;
-
-
     ArrayList<ModelTimeline> timeline = new ArrayList<>();
-
     SharedPreferences setting;
     String token=null;
-
-
     public static Button browseTimeline;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Fresco.initialize(getContext());
@@ -77,13 +65,7 @@ public class TimelineFragment extends Fragment {
             return view;
         }
 
-
-
-
         loadTimeline();//generate 10 items just for now.WIll be changed later
-
-
-
         return view;
 
     }

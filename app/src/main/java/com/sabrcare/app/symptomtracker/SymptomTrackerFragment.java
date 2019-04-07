@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import io.realm.Realm;
 
 import android.content.Context;
 import android.content.Intent;
@@ -45,13 +46,9 @@ public class SymptomTrackerFragment extends Fragment {
 
     public int flag=0, fl=0;
     private RequestQueue symptomQueue;
-    Context context=getActivity();
     private Map<String,String> symptomHeaders = new ArrayMap<String, String>();
-
     SharedPreferences setting;
-
     String token=null;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,7 +70,7 @@ public class SymptomTrackerFragment extends Fragment {
 
         //SHARED PREFERENCES HERE!!!!!!!!!!
 
-       setting = getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
+        setting = getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
         token = setting.getString("Token","null");
 
         if(token.equals("null"))
@@ -84,6 +81,15 @@ public class SymptomTrackerFragment extends Fragment {
             return ;
         }
 
+        Realm.init(getActivity());
+        final Realm db = Realm.getDefaultInstance();
+
+
+        if(db.where(ModelSymptom.class).count() != 0){
+                //Log.e("imp <<<<", db.where(ModelSymptom.class).count()+"");
+                //Log.e("imp <<<<", db.where(ModelSymptom.class).findAll()+"");
+                symptoms.addAll(db.where(ModelSymptom.class).findAll());
+        }
 
         RecyclerView sytRv = view.findViewById(R.id.syt_rv);
         sytRv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -129,6 +135,18 @@ public class SymptomTrackerFragment extends Fragment {
                             return;
                         }
                     }
+                }
+
+                for(int i=0;i<74;i++) {
+                    final int finalI = i;
+                    db.executeTransaction(
+                            new Realm.Transaction() {
+                                @Override
+                                public void execute(Realm realm) {
+                                    db.insertOrUpdate(symptoms.get(finalI));
+                                }
+                            }
+                    );
                 }
 
                 JSONArray jsonArray = new JSONArray();

@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import io.realm.Realm;
 
 public class SymptomAddActivity extends AppCompatActivity {
 
@@ -54,7 +55,11 @@ public class SymptomAddActivity extends AppCompatActivity {
                 sytaRv11=findViewById(R.id.syta_rv11);
         Button sytaBtn = findViewById(R.id.syta_btn);
 
-        if(symptoms.size()==0) {
+        Realm.init(SymptomAddActivity.this);
+        final Realm db = Realm.getDefaultInstance();
+
+
+        if(symptoms.size()==0 && db.where(ModelSymptom.class).count() == 0) {
             ModelSymptom modelSymptom = new ModelSymptom(
                     "CONSTIPATION", 0, "null");
             symptoms.add(modelSymptom);
@@ -486,10 +491,24 @@ public class SymptomAddActivity extends AppCompatActivity {
             }
         });
 
+
+
         sytaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 flagIntent=1;
+
+                for(int i=0;i<74;i++) {
+                    final int finalI = i;
+                    db.executeTransaction(
+                            new Realm.Transaction() {
+                                @Override
+                                public void execute(Realm realm) {
+                                    db.insertOrUpdate(symptoms.get(finalI));
+                                }
+                            }
+                    );
+                }
                 Intent intent = new Intent(SymptomAddActivity.this,HomeActivity.class);
                 startActivity(intent);
             }

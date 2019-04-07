@@ -1,12 +1,8 @@
 package com.sabrcare.app.timeline;
 
-
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.util.ArrayMap;
+import android.content.Intent;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,47 +10,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.sabrcare.app.HomeActivity;
 import com.sabrcare.app.ModelTimeline;
-import com.sabrcare.app.HomeActivity.*;
 import com.sabrcare.app.R;
-import com.sabrcare.app.medicine.MedicineFragment;
-import com.sabrcare.app.records.RecordsFragment;
-import com.sabrcare.app.symptomtracker.SymptomTrackerFragment;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
-import java.util.Map;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ReportFragment;
 import androidx.recyclerview.widget.RecyclerView;
-
-import static java.security.AccessController.getContext;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.TimelineVH> {
 
-
     public Context ctx;
-
-    ArrayList<ModelTimeline> timeline;
-
-    RequestOptions options;
-
+    private ArrayList<ModelTimeline> timeline;
+    private RequestOptions options;
 
     public TimelineAdapter(Context ctx,ArrayList<ModelTimeline> timeline) {
         this.timeline=timeline;
@@ -77,19 +47,124 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
         holder.title.setText(timeline.get(position).getTitle());
         holder.subtitle.setText(timeline.get(position).getSubtitle());
 
-        if(timeline.get(position).getTimelineType().equals("Record"))
+        if(timeline.get(position).getTimelineType().equals("Record")) {
             holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_records_image));
-       else if(timeline.get(position).getTimelineType().equals("Medicine"))
+            holder.pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 1);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 1);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.subtitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 1);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.browseTimeline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 1);
+                    ctx.startActivity(intent);
+                }
+            });
+        }
+        else if(timeline.get(position).getTimelineType().equals("Medicine")) {
             holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_pills_solid));
-
-        else if(timeline.get(position).getTimelineType().equals("Symptom"))
+            holder.pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 2);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 2);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.subtitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 2);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.browseTimeline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 2);
+                    ctx.startActivity(intent);
+                }
+            });
+        }
+        else if(timeline.get(position).getTimelineType().equals("Symptom")) {
             holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_stethoscope_solid));
-
-
+            holder.pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 3);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 3);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.subtitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 3);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.browseTimeline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 3);
+                    ctx.startActivity(intent);
+                }
+            });
+        }
     }
-
-
-
 
     @Override
     public int getItemCount() {
@@ -109,9 +184,23 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
             subtitle=itemView.findViewById(R.id.subtitle);
             pic=itemView.findViewById(R.id.pic);
             browseTimeline = itemView.findViewById(R.id.browseTimeline);
-
         }
 
     }
+/*
+    public boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
 
+    private FragmentManager getSupportFragmentManager() {
+    }
+*/
 }
