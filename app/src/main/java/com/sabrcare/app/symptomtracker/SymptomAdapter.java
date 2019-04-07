@@ -1,6 +1,6 @@
 package com.sabrcare.app.symptomtracker;
 
-import android.util.Log;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +14,16 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import io.realm.Realm;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.sabrcare.app.symptomtracker.SymptomAddActivity.symptoms;
 
 public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomVH> {
 
-    public static String s;
+    private static String s;
     private int c=0;
     private ArrayList<Integer> a=new ArrayList<>(0);
+    private Realm db = Realm.getDefaultInstance();
 
     @NonNull
     @Override
@@ -34,14 +35,14 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
     @Override
     public void onBindViewHolder(@NonNull final SymptomAdapter.SymptomVH holder, final int position) {
 
-        while(symptoms.get(c).isCheck!=1){
-            Log.e(TAG, "x1"+c);
+        while(symptoms.get(c).getIsCheck()!=1){
+            //Log.e(TAG, "x1"+c);
             c++;
         }
         a.add(position, c);
 
-        if(!(symptoms.get(c).severity.equals("null"))){
-            switch(symptoms.get(c).severity){
+        if(!(symptoms.get(c).getSeverity().equals("null"))){
+            switch(symptoms.get(c).getSeverity()){
                 case "None": holder.none1.setChecked(true);
                              break;
                 case "Mild": holder.mild.setChecked(true);
@@ -55,17 +56,26 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
             }
         }
 
-        holder.adSymptom(symptoms.get(c).name);
+        holder.adSymptom(symptoms.get(c).getName());
         holder.none1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.onRadioButtonClicked(view);
                 int i=0;
                 for(;i<73;i++){
-                    if (holder.symptomname1.getText().equals(symptoms.get(i).name))
+                    if (holder.symptomname1.getText().equals(symptoms.get(i).getName()))
                         break;
                 }
-                symptoms.get(i).severity="None";
+                final int finalI = i;
+                db.executeTransaction(
+                        new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                symptoms.get(finalI).setSeverity("None");
+                                db.insertOrUpdate(symptoms.get(finalI));
+                            }
+                        }
+                );
                 //Log.e("<<<<<", ""+i);
             }
         });
@@ -75,10 +85,19 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
                 holder.onRadioButtonClicked(view);
                 int i=0;
                 for(;i<73;i++){
-                    if (holder.symptomname1.getText().equals(symptoms.get(i).name))
+                    if (holder.symptomname1.getText().equals(symptoms.get(i).getName()))
                         break;
                 }
-                symptoms.get(i).severity="Mild";
+                final int finalI = i;
+                db.executeTransaction(
+                        new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                symptoms.get(finalI).setSeverity("Mild");
+                                db.insertOrUpdate(symptoms.get(finalI));
+                            }
+                        }
+                );
             }
         });
         holder.moderate.setOnClickListener(new View.OnClickListener() {
@@ -87,10 +106,19 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
                 holder.onRadioButtonClicked(view);
                 int i=0;
                 for(;i<73;i++){
-                    if (holder.symptomname1.getText().equals(symptoms.get(i).name))
+                    if (holder.symptomname1.getText().equals(symptoms.get(i).getName()))
                         break;
                 }
-                symptoms.get(i).severity="Moderate";
+                final int finalI = i;
+                db.executeTransaction(
+                        new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                symptoms.get(finalI).setSeverity("Moderate");
+                                db.insertOrUpdate(symptoms.get(finalI));
+                            }
+                        }
+                );
             }
         });
         holder.severe.setOnClickListener(new View.OnClickListener() {
@@ -99,10 +127,19 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
                 holder.onRadioButtonClicked(view);
                 int i=0;
                 for(;i<73;i++){
-                    if (holder.symptomname1.getText().equals(symptoms.get(i).name))
+                    if (holder.symptomname1.getText().equals(symptoms.get(i).getName()))
                         break;
                 }
-                symptoms.get(i).severity="Severe";
+                final int finalI = i;
+                db.executeTransaction(
+                        new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                symptoms.get(finalI).setSeverity("Severe");
+                                db.insertOrUpdate(symptoms.get(finalI));
+                            }
+                        }
+                );
             }
         });
 //        holder.unbearable.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +158,7 @@ public class SymptomAdapter extends RecyclerView.Adapter<SymptomAdapter.SymptomV
         int x=0;
         if(symptoms.size()!=0) {
             for (int i = 0; i < 74; i++) {
-                if (symptoms.get(i).isCheck == 1)
+                if (symptoms.get(i).getIsCheck() == 1)
                     x++;
             }
         }
