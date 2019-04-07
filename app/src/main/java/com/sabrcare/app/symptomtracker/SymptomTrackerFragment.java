@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.sabrcare.app.R;
+import com.sabrcare.app.activities.ProfileActivity;
 import com.sabrcare.app.auth.SignInActivity;
 
 import org.json.JSONArray;
@@ -49,6 +50,7 @@ public class SymptomTrackerFragment extends Fragment {
     private Map<String,String> symptomHeaders = new ArrayMap<String, String>();
     SharedPreferences setting;
     String token=null;
+    Button profile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,6 +74,20 @@ public class SymptomTrackerFragment extends Fragment {
 
         setting = getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
         token = setting.getString("Token","null");
+
+
+        profile = view.findViewById(R.id.profile);
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent loadprofile = new Intent(getContext(),ProfileActivity.class);
+                getContext().startActivity(loadprofile);
+
+            }
+        });
 
         if(token.equals("null"))
         {

@@ -16,10 +16,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 import com.github.clans.fab.FloatingActionMenu;
 import com.sabrcare.app.R;
+import com.sabrcare.app.activities.ProfileActivity;
 
 import java.util.ArrayList;
 
@@ -32,6 +34,8 @@ public class MedicineFragment extends Fragment {
     public FloatingActionMenu materialDesignFAM;
     private Realm realm;
     private MedicineAdapter medicineAdapter;
+
+    Button profile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,6 +58,20 @@ public class MedicineFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         medicineAdapter = new MedicineAdapter(medicineModelArrayList, getContext());
         recyclerView.setAdapter(medicineAdapter);
+
+        profile = view.findViewById(R.id.profile);
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent loadprofile = new Intent(getContext(),ProfileActivity.class);
+                getContext().startActivity(loadprofile);
+
+            }
+        });
+
 
         fabNewMed.setOnClickListener(new View.OnClickListener() {
             @Override

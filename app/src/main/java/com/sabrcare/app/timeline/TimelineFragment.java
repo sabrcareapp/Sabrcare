@@ -26,11 +26,15 @@ import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.sabrcare.app.ModelTimeline;
 import com.sabrcare.app.R;
+import com.sabrcare.app.activities.ProfileActivity;
 import com.sabrcare.app.auth.SignInActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -45,6 +49,8 @@ public class TimelineFragment extends Fragment {
     String token=null;
     public static Button browseTimeline;
 
+    Button profile;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Fresco.initialize(getContext());
@@ -52,10 +58,25 @@ public class TimelineFragment extends Fragment {
 
         timeline_rv = view.findViewById(R.id.timeline_rv);
 
+        profile = view.findViewById(R.id.profile);
+
+
 
         setting= getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
 
         token = setting.getString("Token","null");
+
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent loadprofile = new Intent(getContext(),ProfileActivity.class);
+                getContext().startActivity(loadprofile);
+
+            }
+        });
 
         if(token.equals("null"))
         {
@@ -98,6 +119,11 @@ public class TimelineFragment extends Fragment {
                         if(timelineObject.getString("timelineType").equals("Record")) {
                             Log.e("INSIDE API",timelineObject.getString("recordsName"));
 
+                            Date date = new Date(timelineObject.getJSONObject("date").getLong("$date"));
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:MM");
+                            modelTimeline.setDate(simpleDateFormat.format(date));
+                            modelTimeline.setTime(simpleTimeFormat.format(date));
                             modelTimeline.setTimelineType(timelineObject.getString("timelineType"));
                             modelTimeline.setTitle(timelineObject.getString("recordsName"));
                             modelTimeline.setSubtitle(timelineObject.getString("date"));
@@ -106,6 +132,11 @@ public class TimelineFragment extends Fragment {
                         }
                         else if (timelineObject.getString("timelineType").equals("Symptom")) {
 
+                            Date date = new Date(timelineObject.getJSONObject("date").getLong("$date"));
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:MM");
+                            modelTimeline.setDate(simpleDateFormat.format(date));
+                            modelTimeline.setTime(simpleTimeFormat.format(date));
                             modelTimeline.setTimelineType(timelineObject.getString("timelineType"));
                             modelTimeline.setTitle(timelineObject.getString("symptomName"));
                             modelTimeline.setSubtitle(timelineObject.getString("symptomSeverity"));
@@ -114,6 +145,11 @@ public class TimelineFragment extends Fragment {
                         }
                         else if (timelineObject.getString("timelineType").equals("Medicine"))
                         {
+                            Date date = new Date(timelineObject.getJSONObject("date").getLong("$date"));
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:MM");
+                            modelTimeline.setDate(simpleDateFormat.format(date));
+                            modelTimeline.setTime(simpleTimeFormat.format(date));
                             modelTimeline.setTimelineType(timelineObject.getString("timelineType"));
                             modelTimeline.setTitle(timelineObject.getString("medicineName"));
                             modelTimeline.setSubtitle(timelineObject.getString("medicineTimeHealthExpert"));

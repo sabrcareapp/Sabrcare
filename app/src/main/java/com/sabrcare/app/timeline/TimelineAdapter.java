@@ -46,6 +46,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
       //  Log.e("timelineValues",timeline.get(position).getTitle());
         holder.title.setText(timeline.get(position).getTitle());
         holder.subtitle.setText(timeline.get(position).getSubtitle());
+        holder.date.setText(timeline.get(position).getDate());
+        holder.time.setText(timeline.get(position).getTime());
 
         if(timeline.get(position).getTimelineType().equals("Record")) {
             holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_records_image));
@@ -175,6 +177,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
 
         public TextView title;
         public TextView subtitle;
+        public TextView date;
+        public TextView time;
         public ImageView pic;
         public Button browseTimeline;//will be changed to using Fresco library later
 
@@ -184,6 +188,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
             subtitle=itemView.findViewById(R.id.subtitle);
             pic=itemView.findViewById(R.id.pic);
             browseTimeline = itemView.findViewById(R.id.browseTimeline);
+            time = itemView.findViewById(R.id.time);
+            date=itemView.findViewById(R.id.date);
         }
 
     }
