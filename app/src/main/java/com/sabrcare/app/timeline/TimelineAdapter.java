@@ -2,6 +2,7 @@ package com.sabrcare.app.timeline;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.ArrayMap;
@@ -48,13 +49,10 @@ import static java.security.AccessController.getContext;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.TimelineVH> {
 
-
     public Context ctx;
-
-    ArrayList<ModelTimeline> timeline;
-
-    RequestOptions options;
-
+    private ArrayList<ModelTimeline> timeline;
+    private RequestOptions options;
+    private int transfer;
 
     public TimelineAdapter(Context ctx,ArrayList<ModelTimeline> timeline) {
         this.timeline=timeline;
@@ -77,19 +75,124 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
         holder.title.setText(timeline.get(position).getTitle());
         holder.subtitle.setText(timeline.get(position).getSubtitle());
 
-        if(timeline.get(position).getTimelineType().equals("Record"))
+        if(timeline.get(position).getTimelineType().equals("Record")) {
             holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_records_image));
-       else if(timeline.get(position).getTimelineType().equals("Medicine"))
+            holder.pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 1);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 1);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.subtitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 1);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.browseTimeline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 1);
+                    ctx.startActivity(intent);
+                }
+            });
+        }
+        else if(timeline.get(position).getTimelineType().equals("Medicine")) {
             holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_pills_solid));
-
-        else if(timeline.get(position).getTimelineType().equals("Symptom"))
+            holder.pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 2);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 2);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.subtitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 2);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.browseTimeline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 2);
+                    ctx.startActivity(intent);
+                }
+            });
+        }
+        else if(timeline.get(position).getTimelineType().equals("Symptom")) {
             holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_stethoscope_solid));
-
-
+            holder.pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 3);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 3);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.subtitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 3);
+                    ctx.startActivity(intent);
+                }
+            });
+            holder.browseTimeline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("<<<<<<", "in pic");
+                    Intent intent = new Intent(ctx, HomeActivity.class);
+                    intent.putExtra("transfer", 3);
+                    ctx.startActivity(intent);
+                }
+            });
+        }
     }
-
-
-
 
     @Override
     public int getItemCount() {
@@ -109,9 +212,23 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
             subtitle=itemView.findViewById(R.id.subtitle);
             pic=itemView.findViewById(R.id.pic);
             browseTimeline = itemView.findViewById(R.id.browseTimeline);
-
         }
 
     }
+/*
+    public boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
 
+    private FragmentManager getSupportFragmentManager() {
+    }
+*/
 }

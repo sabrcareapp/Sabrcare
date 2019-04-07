@@ -68,7 +68,7 @@ public class AddSymptomAdapter extends RecyclerView.Adapter<AddSymptomAdapter.Ad
 
     @Override
     public void onBindViewHolder(@NonNull final AddSymptomAdapter.AddSymptomVH holder, final int position) {
-        Log.e("imp <<<<", symptoms.get(4).getName()+"");
+        //Log.e("imp <<<<", symptoms.get(4).getName()+"");
         holder.addSymptom(symptoms.get(position+i).getName());
         if(symptoms.get(position+i).getIsCheck()==1){
             holder.checkBox.setChecked(true);

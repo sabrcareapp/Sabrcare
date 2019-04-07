@@ -70,7 +70,7 @@ public class SymptomTrackerFragment extends Fragment {
 
         //SHARED PREFERENCES HERE!!!!!!!!!!
 
-       setting = getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
+        setting = getActivity().getSharedPreferences(FILE,MODE_PRIVATE);
         token = setting.getString("Token","null");
 
         if(token.equals("null"))

@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.Objects;
@@ -32,7 +33,7 @@ public class HomeActivity extends AppCompatActivity  {
 
     public static final String FILE="MyFile";
     SharedPreferences setting;
-
+    int transfer;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -71,10 +72,23 @@ public class HomeActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
         //Fresco.initialize(this);
 
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        transfer = getIntent().getIntExtra("transfer", 0);
 
-        setContentView(R.layout.activity_home);
+        if(transfer==1){
+            loadFragment(new RecordsFragment());
+            navigation.setSelectedItemId(R.id.navigation_records);
+        }else if(transfer==2){
+            loadFragment(new SymptomTrackerFragment());
+            navigation.setSelectedItemId(R.id.navigation_medicine);
+        }else if(transfer==3){
+            Log.e("<<<<<<<", "in 3");
+            loadFragment(new SymptomTrackerFragment());
+            navigation.setSelectedItemId(R.id.navigation_symptom_tracker);
+        }
 
         setting= this.getSharedPreferences(FILE,MODE_PRIVATE);
 
@@ -88,9 +102,6 @@ public class HomeActivity extends AppCompatActivity  {
             return ;
         }
 
-
-
-        BottomNavigationView navigation = findViewById(R.id.navigation);
         if(getIntent().getAction()!=null && getIntent().getAction().equalsIgnoreCase("updateMeds")){
             loadFragment(new MedicineFragment());
             navigation.setSelectedItemId(R.id.navigation_medicine);
@@ -100,8 +111,21 @@ public class HomeActivity extends AppCompatActivity  {
             loadFragment(new SymptomTrackerFragment());
             navigation.setSelectedItemId(R.id.navigation_symptom_tracker);
         }
-        else {
-            loadFragment(new MedicineFragment());     //change this back to homefragment
+        else if (transfer != 0){
+            if(transfer==1){
+                loadFragment(new RecordsFragment());
+                navigation.setSelectedItemId(R.id.navigation_records);
+            }else if(transfer==2){
+                loadFragment(new MedicineFragment());
+                navigation.setSelectedItemId(R.id.navigation_medicine);
+            }else if(transfer==3){
+                //Log.e("<<<<<<<", "in 3");
+                loadFragment(new SymptomTrackerFragment());
+                navigation.setSelectedItemId(R.id.navigation_symptom_tracker);
+            } //change this back to homefragment
+        }
+        else{
+            loadFragment(new MedicineFragment());
         }
 
 //        mTextMessage = (TextView) findViewById(R.id.message);
