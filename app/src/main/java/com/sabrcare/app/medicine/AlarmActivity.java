@@ -25,23 +25,23 @@ public class AlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
 
-        dismiss=findViewById(R.id.dismissAlarm);
-        medTV=findViewById(R.id.med);
-        mediaPlayer=MediaPlayer.create(getBaseContext(),getAlarmUri());
+        dismiss = findViewById(R.id.dismissAlarm);
+        medTV = findViewById(R.id.med);
+        mediaPlayer = MediaPlayer.create(getBaseContext(), getAlarmUri());
         mediaPlayer.start();
         String med = getIntent().getStringExtra("medications");
 
         ArrayList<String> medList = new ArrayList<>();
-        StringTokenizer st = new StringTokenizer(med," ");
-        while(st.hasMoreTokens()){
+        StringTokenizer st = new StringTokenizer(med, " ");
+        while (st.hasMoreTokens()) {
             medList.add(st.nextToken());
         }
-        String displayMed="";
-        for(int j = 0;j<medList.size();j++){
-            displayMed+=medList.get(j)+"\n";
+        String displayMed = "";
+        for (int j = 0; j < medList.size(); j++) {
+            displayMed += medList.get(j) + "\n";
         }
-        System.out.println("MED IN ALARM ACTIVITY>>>>>>>>>>>>>>>>>>"+med);
-        medTV.setText(new StringBuilder("Take your medicine - \n"+displayMed));
+        System.out.println("MED IN ALARM ACTIVITY>>>>>>>>>>>>>>>>>>" + med);
+        medTV.setText(new StringBuilder("Take your medicine - \n" + displayMed));
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +53,7 @@ public class AlarmActivity extends AppCompatActivity {
 
     private Uri getAlarmUri() {
         //TODO Add vibrate if needed.
-        return RingtoneManager.getActualDefaultRingtoneUri(this,RingtoneManager.TYPE_RINGTONE);
+        return RingtoneManager.getActualDefaultRingtoneUri(this, RingtoneManager.TYPE_RINGTONE);
     }
 }
 

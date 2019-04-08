@@ -5,28 +5,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-    /**
-     * Created by HarshRaj
-     */
+/**
+ * Created by HarshRaj
+ */
 
-    public class SplashActivity extends Activity {
+public class SplashActivity extends Activity {
 
-        Handler handler;
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_splash);
+    Handler handler;
 
-            handler=new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent=new Intent(SplashActivity.this,HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            },3000);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
 
-        }
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 3000);
+
     }
+}
 

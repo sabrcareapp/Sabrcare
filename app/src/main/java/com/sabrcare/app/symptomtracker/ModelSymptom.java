@@ -12,36 +12,36 @@ public class ModelSymptom extends RealmObject {
     public int isCheck;
     public String severity;
 
-    public ModelSymptom(){
+    public ModelSymptom() {
     }
 
-    public ModelSymptom(String name,int isCheck, String severity ){
+    public ModelSymptom(String name, int isCheck, String severity) {
         this.name = name;
         this.isCheck = isCheck;
         this.severity = severity;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public int getIsCheck(){
+    public int getIsCheck() {
         return isCheck;
     }
 
-    public String getSeverity(){
+    public String getSeverity() {
         return severity;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setIsCheck(int isCheck){
+    public void setIsCheck(int isCheck) {
         this.isCheck = isCheck;
     }
 
-    public void setSeverity(String severity){
-        this.severity=severity;
+    public void setSeverity(String severity) {
+        this.severity = severity;
     }
 }

@@ -16,10 +16,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 import com.github.clans.fab.FloatingActionMenu;
 import com.sabrcare.app.R;
+import com.sabrcare.app.activities.ProfileActivity;
 
 import java.util.ArrayList;
 
@@ -33,18 +35,20 @@ public class MedicineFragment extends Fragment {
     private Realm realm;
     private MedicineAdapter medicineAdapter;
 
+    Button profile;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_medicine, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.medicine_rv);
-        realm=Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
         materialDesignFAM = view.findViewById(R.id.material_design_android_floating_action_menu);
         fabNewMed = view.findViewById(R.id.NewMedicineFAB);
 
 
         Toolbar medicine_toolbar = view.findViewById(R.id.medicine_toolbar);
         medicine_toolbar.setTitle("");
-        ((AppCompatActivity)getActivity()).setSupportActionBar(medicine_toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(medicine_toolbar);
 
         //TODO This data to be loaded from server.
 
@@ -54,6 +58,20 @@ public class MedicineFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         medicineAdapter = new MedicineAdapter(medicineModelArrayList, getContext());
         recyclerView.setAdapter(medicineAdapter);
+
+        profile = view.findViewById(R.id.profile);
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent loadprofile = new Intent(getContext(), ProfileActivity.class);
+                getContext().startActivity(loadprofile);
+
+            }
+        });
+
 
         fabNewMed.setOnClickListener(new View.OnClickListener() {
             @Override

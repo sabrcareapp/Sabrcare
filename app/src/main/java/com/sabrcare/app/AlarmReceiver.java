@@ -23,9 +23,9 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         String medList = intent.getStringExtra("medications");
 
-        Intent openAlarm = new Intent(context,AlarmActivity.class);
+        Intent openAlarm = new Intent(context, AlarmActivity.class);
         openAlarm.putExtra("medications", medList);
-        System.out.println("RECIEVED MEDS>>>>>>>>>>>>>"+medList);
+        System.out.println("RECIEVED MEDS>>>>>>>>>>>>>" + medList);
         context.startActivity(openAlarm);
     }
 }

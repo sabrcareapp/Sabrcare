@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#0a2472"
     android:orientation="vertical">
 
@@ -47,11 +47,11 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#ffffff"
             android:hint="Email Id"
-            android:textColorLink="#ffffff"
-            android:textColorHighlight="#ffffff"
             android:inputType="textEmailAddress"
             android:textColor="#ffffff"
-            android:textColorHint="#ffffff" />
+            android:textColorHighlight="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textColorLink="#ffffff" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -65,8 +65,7 @@
         android:layout_marginBottom="8dp"
         android:textColorHint="#ffffff"
         app:boxBackgroundColor="#ffffff"
-        app:hintTextColor="#ffffff"
-        >
+        app:hintTextColor="#ffffff">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordLogin"
@@ -74,10 +73,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#ffffff"
             android:hint="Password"
-            android:textColorHighlight="#ffffff"
-            android:shadowColor="#ffffff"
             android:inputType="textPassword"
+            android:shadowColor="#ffffff"
             android:textColor="#ffffff"
+            android:textColorHighlight="#ffffff"
             android:textColorHint="#ffffff"
             android:windowSoftInputMode="adjustPan" />
     </com.google.android.material.textfield.TextInputLayout>

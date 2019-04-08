@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/medicine_toolbar"
@@ -21,59 +20,66 @@
             android:layout_marginLeft="0dp"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_remedley" />
+
         <TextView
             android:id="@+id/symptom_toolbar_text"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medicine"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             android:textColor="#FFFFFF"
-            android:textSize="21sp"/>
+            android:textSize="21sp" />
+
+        <Button
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:background="@drawable/ic_account" />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/medicine_rv"
         android:layout_width="match_parent"
-        android:layout_below="@id/medicine_toolbar"
         android:layout_height="match_parent"
-        android:id="@+id/medicine_rv">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_below="@id/medicine_toolbar"></androidx.recyclerview.widget.RecyclerView>
 
 
     <!--<com.github.clans.fab.FloatingActionMenu-->
-        <!--android:id="@+id/material_design_android_floating_action_menu"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--fab:menu_animationDelayPerItem="55"-->
-        <!--fab:menu_backgroundColor="#FFFFFF"-->
-        <!--fab:menu_buttonSpacing="0dp"-->
-        <!--fab:menu_colorNormal="#98ff98"-->
-        <!--fab:menu_colorPressed="98ff98"-->
-        <!--fab:menu_colorRipple="#99d4d4d4"-->
-        <!--fab:menu_fab_size="normal"-->
-        <!--fab:menu_icon="@drawable/fab_add"-->
-        <!--fab:menu_labels_colorNormal="#FFF"-->
-        <!--fab:menu_labels_colorPressed="#FFF"-->
-        <!--fab:menu_labels_colorRipple="#66efecec"-->
-        <!--fab:menu_labels_cornerRadius="3dp"-->
-        <!--fab:menu_labels_ellipsize="none"-->
-        <!--fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"-->
-        <!--fab:menu_labels_margin="0dp"-->
-        <!--fab:menu_labels_maxLines="-1"-->
-        <!--fab:menu_labels_padding="8dp"-->
-        <!--fab:menu_labels_position="left"-->
-        <!--fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"-->
-        <!--fab:menu_labels_showShadow="true"-->
-        <!--fab:menu_labels_singleLine="false"-->
-        <!--fab:menu_labels_textColor="#000"-->
-        <!--fab:menu_labels_textSize="15sp"-->
-        <!--fab:menu_openDirection="up"-->
-        <!--fab:menu_shadowColor="#66aff198"-->
-        <!--fab:menu_shadowRadius="4dp"-->
-        <!--fab:menu_shadowXOffset="1dp"-->
-        <!--fab:menu_shadowYOffset="4dp"-->
-        <!--fab:menu_showShadow="true">-->
+    <!--android:id="@+id/material_design_android_floating_action_menu"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--fab:menu_animationDelayPerItem="55"-->
+    <!--fab:menu_backgroundColor="#FFFFFF"-->
+    <!--fab:menu_buttonSpacing="0dp"-->
+    <!--fab:menu_colorNormal="#98ff98"-->
+    <!--fab:menu_colorPressed="98ff98"-->
+    <!--fab:menu_colorRipple="#99d4d4d4"-->
+    <!--fab:menu_fab_size="normal"-->
+    <!--fab:menu_icon="@drawable/fab_add"-->
+    <!--fab:menu_labels_colorNormal="#FFF"-->
+    <!--fab:menu_labels_colorPressed="#FFF"-->
+    <!--fab:menu_labels_colorRipple="#66efecec"-->
+    <!--fab:menu_labels_cornerRadius="3dp"-->
+    <!--fab:menu_labels_ellipsize="none"-->
+    <!--fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"-->
+    <!--fab:menu_labels_margin="0dp"-->
+    <!--fab:menu_labels_maxLines="-1"-->
+    <!--fab:menu_labels_padding="8dp"-->
+    <!--fab:menu_labels_position="left"-->
+    <!--fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"-->
+    <!--fab:menu_labels_showShadow="true"-->
+    <!--fab:menu_labels_singleLine="false"-->
+    <!--fab:menu_labels_textColor="#000"-->
+    <!--fab:menu_labels_textSize="15sp"-->
+    <!--fab:menu_openDirection="up"-->
+    <!--fab:menu_shadowColor="#66aff198"-->
+    <!--fab:menu_shadowRadius="4dp"-->
+    <!--fab:menu_shadowXOffset="1dp"-->
+    <!--fab:menu_shadowYOffset="4dp"-->
+    <!--fab:menu_showShadow="true">-->
     <!--</com.github.clans.fab.FloatingActionMenu>-->
 
     <com.github.clans.fab.FloatingActionButton

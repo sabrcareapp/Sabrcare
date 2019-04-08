@@ -28,14 +28,14 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
     private Context ctx;
 
     public MedicineAdapter(ArrayList<MedicineModel> medicine, Context ctx) {
-        this.ctx=ctx;
-        this.medicine=medicine;
+        this.ctx = ctx;
+        this.medicine = medicine;
     }
 
     @NonNull
     @Override
     public MedicineAdapter.MedicineVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MedicineAdapter.MedicineVH(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_medicine,parent,false));
+        return new MedicineAdapter.MedicineVH(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_medicine, parent, false));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         holder.populateMedicine(medicine.get(position));
     }
 
-    public void addNewMedicine(MedicineModel medicineModel){
+    public void addNewMedicine(MedicineModel medicineModel) {
         medicine.add(medicineModel);
         notifyDataSetChanged();
     }
@@ -64,24 +64,25 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
 
         public MedicineVH(@NonNull View itemView) {
             super(itemView);
-            med_name=itemView.findViewById(R.id.medName);
-            day_phase=itemView.findViewById(R.id.dayPhase);
-            remState=itemView.findViewById(R.id.isReminderSet);
-            edit=itemView.findViewById(R.id.editMed);
-            pillIcon=itemView.findViewById(R.id.pill);
-            recViewItem=itemView.findViewById(R.id.cv2);
+            med_name = itemView.findViewById(R.id.medName);
+            day_phase = itemView.findViewById(R.id.dayPhase);
+            remState = itemView.findViewById(R.id.isReminderSet);
+            edit = itemView.findViewById(R.id.editMed);
+            pillIcon = itemView.findViewById(R.id.pill);
+            recViewItem = itemView.findViewById(R.id.cv2);
         }
 
         public boolean onLongClick(View v) {
             Log.d(TAG, "Item long-clicked at position " + getAdapterPosition());
             return true;
         }
-        void populateMedicine(final MedicineModel medicine){
-            System.out.println("IDs in the adapter>>>>>>>."+medicine.getMedID());
+
+        void populateMedicine(final MedicineModel medicine) {
+            System.out.println("IDs in the adapter>>>>>>>." + medicine.getMedID());
             med_name.setText(medicine.getMedName());
             day_phase.setText(medicine.getDayPhase());
 
-            if(medicine.isReminderOn()) {
+            if (medicine.isReminderOn()) {
                 remState.setText("Reminder On");
             } else {
                 remState.setText("Reminder Off");
@@ -90,9 +91,9 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent editMed = new Intent(ctx,NewMedActivity.class);
+                    Intent editMed = new Intent(ctx, NewMedActivity.class);
                     editMed.setAction("Edit");
-                    editMed.putExtra("MedID",medicine.getMedID());
+                    editMed.putExtra("MedID", medicine.getMedID());
                     ctx.startActivity(editMed);
                 }
             });
@@ -100,9 +101,9 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
             recViewItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent editMed = new Intent(ctx,NewMedActivity.class);
+                    Intent editMed = new Intent(ctx, NewMedActivity.class);
                     editMed.setAction("Edit");
-                    editMed.putExtra("MedID",medicine.getMedID());
+                    editMed.putExtra("MedID", medicine.getMedID());
                     ctx.startActivity(editMed);
                 }
             });

@@ -33,6 +33,7 @@ import com.android.volley.toolbox.Volley;
 import com.github.clans.fab.FloatingActionMenu;
 import com.sabrcare.app.HomeActivity;
 import com.sabrcare.app.R;
+import com.sabrcare.app.activities.ProfileActivity;
 import com.sabrcare.app.auth.SignInActivity;
 import com.sabrcare.app.auth.SignUpActivity;
 
@@ -70,6 +71,8 @@ public class RecordsFragment extends Fragment {
 
     String token=null;
 
+    Button profile;
+
 
     public RecordsFragment() {
         // Required empty public constructor
@@ -83,6 +86,19 @@ public class RecordsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.RecordsRV);
         materialDesignFAM = view.findViewById(R.id.material_design_android_floating_action_menu);
         fabNewFolder = view.findViewById(R.id.NewFolderFAB);
+        profile = view.findViewById(R.id.profile);
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent loadprofile = new Intent(getContext(),ProfileActivity.class);
+                getContext().startActivity(loadprofile);
+
+            }
+        });
+
 
 
         setting= getActivity().getSharedPreferences(FILE,MODE_PRIVATE);

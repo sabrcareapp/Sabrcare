@@ -26,28 +26,30 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
     private ArrayList<ModelTimeline> timeline;
     private RequestOptions options;
 
-    public TimelineAdapter(Context ctx,ArrayList<ModelTimeline> timeline) {
-        this.timeline=timeline;
-        this.ctx=ctx;
+    public TimelineAdapter(Context ctx, ArrayList<ModelTimeline> timeline) {
+        this.timeline = timeline;
+        this.ctx = ctx;
         options = new RequestOptions().centerCrop().placeholder(android.R.drawable.alert_dark_frame).error(android.R.drawable.alert_dark_frame);
-        Log.e("INSIDE ADAPTER","HELLO");
+        Log.e("INSIDE ADAPTER", "HELLO");
     }
 
     @NonNull
     @Override
     public TimelineVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new TimelineAdapter.TimelineVH(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_timeline,parent,false));
+        return new TimelineAdapter.TimelineVH(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_timeline, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull TimelineVH holder, int position) {
 
-        Log.e("INSIDE ONBIND",timeline.get(position).getTitle());
-      //  Log.e("timelineValues",timeline.get(position).getTitle());
+        Log.e("INSIDE ONBIND", timeline.get(position).getTitle());
+        //  Log.e("timelineValues",timeline.get(position).getTitle());
         holder.title.setText(timeline.get(position).getTitle());
         holder.subtitle.setText(timeline.get(position).getSubtitle());
+        holder.date.setText(timeline.get(position).getDate());
+        holder.time.setText(timeline.get(position).getTime());
 
-        if(timeline.get(position).getTimelineType().equals("Record")) {
+        if (timeline.get(position).getTimelineType().equals("Record")) {
             holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_records_image));
             holder.pic.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,8 +87,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
                     ctx.startActivity(intent);
                 }
             });
-        }
-        else if(timeline.get(position).getTimelineType().equals("Medicine")) {
+        } else if (timeline.get(position).getTimelineType().equals("Medicine")) {
             holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_pills_solid));
             holder.pic.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -124,8 +125,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
                     ctx.startActivity(intent);
                 }
             });
-        }
-        else if(timeline.get(position).getTimelineType().equals("Symptom")) {
+        } else if (timeline.get(position).getTimelineType().equals("Symptom")) {
             holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_stethoscope_solid));
             holder.pic.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -175,15 +175,19 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
 
         public TextView title;
         public TextView subtitle;
+        public TextView date;
+        public TextView time;
         public ImageView pic;
         public Button browseTimeline;//will be changed to using Fresco library later
 
         public TimelineVH(@NonNull View itemView) {
             super(itemView);
-            title=itemView.findViewById(R.id.title);
-            subtitle=itemView.findViewById(R.id.subtitle);
-            pic=itemView.findViewById(R.id.pic);
+            title = itemView.findViewById(R.id.title);
+            subtitle = itemView.findViewById(R.id.subtitle);
+            pic = itemView.findViewById(R.id.pic);
             browseTimeline = itemView.findViewById(R.id.browseTimeline);
+            time = itemView.findViewById(R.id.time);
+            date = itemView.findViewById(R.id.date);
         }
 
     }
