@@ -2,6 +2,7 @@ package com.sabrcare.app.timeline;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +89,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Timeli
                 }
             });
         } else if (timeline.get(position).getTimelineType().equals("Medicine")) {
-            holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.ic_pills_solid));
+            holder.pic.setImageDrawable(ctx.getResources().getDrawable(R.drawable.pill_icon));
+            holder.pic.setColorFilter(Color.parseColor("#00428c"));
             holder.pic.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
