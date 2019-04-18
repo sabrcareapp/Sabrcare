@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -71,7 +73,7 @@ public class RecordsFragment extends Fragment {
 
     String token=null;
 
-    Button profile;
+    ImageView profile;
 
 
     public RecordsFragment() {
@@ -87,7 +89,7 @@ public class RecordsFragment extends Fragment {
         materialDesignFAM = view.findViewById(R.id.material_design_android_floating_action_menu);
         fabNewFolder = view.findViewById(R.id.NewFolderFAB);
         profile = view.findViewById(R.id.profile);
-
+        profile.setColorFilter(Color.parseColor("#FFFFFF"));
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override

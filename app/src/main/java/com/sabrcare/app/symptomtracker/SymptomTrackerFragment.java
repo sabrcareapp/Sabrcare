@@ -11,6 +11,7 @@ import io.realm.Realm;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.ArrayMap;
@@ -19,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -28,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.sabrcare.app.LaunchActivity;
 import com.sabrcare.app.R;
 import com.sabrcare.app.activities.ProfileActivity;
 import com.sabrcare.app.auth.SignInActivity;
@@ -50,34 +53,24 @@ public class SymptomTrackerFragment extends Fragment {
     private Map<String, String> symptomHeaders = new ArrayMap<String, String>();
     SharedPreferences setting;
     String token = null;
-    Button profile;
+    ImageView profile;
+    Button sytBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //just change the fragment_dashboard
-        //with the fragment you want to inflate
-        //like if the class is HomeFragment it should have R.layout.home_fragment
-        //if it is DashboardFragment it should have R.layout.fragment_dashboard
-        return inflater.inflate(R.layout.fragment_symptom_tracker, null);
-    }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+        View view = inflater.inflate(R.layout.fragment_symptom_tracker, container, false);
         Toolbar symptom_tracker_toolbar = view.findViewById(R.id.symptom_toolbar);
         symptom_tracker_toolbar.setTitle("");
         ((AppCompatActivity) getActivity()).setSupportActionBar(symptom_tracker_toolbar);
 
-
-        //SHARED PREFERENCES HERE!!!!!!!!!!
 
         setting = getActivity().getSharedPreferences(FILE, MODE_PRIVATE);
         token = setting.getString("Token", "null");
 
 
         profile = view.findViewById(R.id.profile);
-
+        profile.setColorFilter(Color.parseColor("#FFFFFF"));
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +83,10 @@ public class SymptomTrackerFragment extends Fragment {
         });
 
         if (token.equals("null")) {
-            Intent launchHome = new Intent(getActivity(), SignInActivity.class);
+            Intent launchHome = new Intent(getActivity(), LaunchActivity.class);
             startActivity(launchHome);
             getActivity().finishAffinity();
-            return;
+            return view;
         }
 
         Realm.init(getActivity());
@@ -101,20 +94,16 @@ public class SymptomTrackerFragment extends Fragment {
 
 
         if (db.where(ModelSymptom.class).count() != 0) {
-            //Log.e("imp <<<<", db.where(ModelSymptom.class).count()+"");
-            //Log.e("imp <<<<", db.where(ModelSymptom.class).findAll()+"");
             symptoms.addAll(db.where(ModelSymptom.class).findAll());
         }
+
 
         RecyclerView sytRv = view.findViewById(R.id.syt_rv);
         sytRv.setLayoutManager(new LinearLayoutManager(getContext()));
         SymptomAdapter symptomAdapter = new SymptomAdapter();
         sytRv.setAdapter(symptomAdapter);
 
-        // TextView sytDate = view.findViewById(R.id.syt_date);
-        Button sytBtn = view.findViewById(R.id.syt_btn);
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new java.util.Date()); //HAS CURRENT TIME DATE
-        // sytDate.setText(currentDateTimeString);
+        sytBtn = view.findViewById(R.id.syt_btn);
 
         com.github.clans.fab.FloatingActionButton sytFab = view.findViewById(R.id.syt_fab);
         sytFab.setOnClickListener(new View.OnClickListener() {
@@ -129,20 +118,20 @@ public class SymptomTrackerFragment extends Fragment {
         sytBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 for (int i = 0; i < symptoms.size(); i++) {
-                    if (symptoms.get(i).isCheck == 1) {
+                    if (symptoms.get(i).getIsCheck() == 1) {
                         fl = 1;
                         break;
                     }
                 }
                 if (fl == 0) {
-                    return;
                 } else {
                     fl = 0;
                 }
                 for (int i = 0; i < 74; i++) {
-                    if (symptoms.get(i).isCheck == 1) {
-                        if (symptoms.get(i).severity.equals("null")) {
+                    if (symptoms.get(i).getIsCheck() == 1) {
+                        if (symptoms.get(i).getSeverity().equals("null")) {
                             Toast.makeText(getContext(),
                                     "Please select the severity of each Symptom",
                                     Toast.LENGTH_SHORT);
@@ -165,27 +154,30 @@ public class SymptomTrackerFragment extends Fragment {
 
                 JSONArray jsonArray = new JSONArray();
                 for (int i = 0; i < 74; i++) {
-                    if (symptoms.get(i).isCheck == 1) {
+                    if (symptoms.get(i).getIsCheck() == 1) {
+
                         JSONObject symptom = new JSONObject();
                         try {
-                            symptom.put("symptomName", symptoms.get(i).name);
-                            symptom.put("symptomSeverity", symptoms.get(i).severity);
+                            symptom.put("symptomName", symptoms.get(i).getName());
+                            symptom.put("symptomSeverity", symptoms.get(i).getSeverity());
 
-                            Toast.makeText(getContext(), symptoms.get(i).severity, Toast.LENGTH_LONG).show();
                             jsonArray.put(symptom);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 }
+                System.out.println(">>>>>>>>" + jsonArray);
                 postDataItem(jsonArray);
             }
         });
 
+
+        return view;
     }
 
     // TODO: Don't hardcode token
-    void postDataItem(JSONArray symptomArray) {
+    private void postDataItem(JSONArray symptomArray) {
         symptomQueue = Volley.newRequestQueue(getContext());
         String url = getResources().getString(R.string.apiUrl) + "symptom/add";
         symptomHeaders.put("token", token);

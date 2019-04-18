@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sabrcare.app.R;
@@ -40,6 +41,19 @@ public class SymptomAddActivity extends AppCompatActivity {
                 sytaTv9 = findViewById(R.id.syta_tv9),
                 sytaTv10 = findViewById(R.id.syta_tv10),
                 sytaTv11 = findViewById(R.id.syta_tv11);
+
+        ImageView img1 = findViewById(R.id.i1),
+                img2 = findViewById(R.id.i2),
+                img3 = findViewById(R.id.i3),
+                img4 = findViewById(R.id.i4),
+                img5 = findViewById(R.id.i5),
+                img6 = findViewById(R.id.i6),
+                img7 = findViewById(R.id.i7),
+                img8 = findViewById(R.id.i8),
+                img9 = findViewById(R.id.i9),
+                img10 = findViewById(R.id.i10),
+                img11 = findViewById(R.id.i11),
+                img12 = findViewById(R.id.i12);
 
         final RecyclerView sytaRv = findViewById(R.id.syta_rv),
                 sytaRv1 = findViewById(R.id.syta_rv1),
@@ -335,8 +349,33 @@ public class SymptomAddActivity extends AppCompatActivity {
                 }
             }
         });
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag == 1) {
+                    sytaRv.setVisibility(View.GONE);
+                    flag = 0;
+                } else {
+                    sytaRv.setVisibility(View.VISIBLE);
+                    flag = 1;
+                }
+            }
+        });
 
         sytaTv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag1 == 1) {
+                    sytaRv1.setVisibility(View.GONE);
+                    flag1 = 0;
+                } else {
+                    sytaRv1.setVisibility(View.VISIBLE);
+                    flag1 = 1;
+                }
+            }
+        });
+
+        img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (flag1 == 1) {
@@ -362,6 +401,19 @@ public class SymptomAddActivity extends AppCompatActivity {
             }
         });
 
+        img3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag2 == 1) {
+                    sytaRv2.setVisibility(View.GONE);
+                    flag2 = 0;
+                } else {
+                    sytaRv2.setVisibility(View.VISIBLE);
+                    flag2 = 1;
+                }
+            }
+        });
+
         sytaTv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -375,6 +427,18 @@ public class SymptomAddActivity extends AppCompatActivity {
             }
         });
 
+        img4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag3 == 1) {
+                    sytaRv3.setVisibility(View.GONE);
+                    flag3 = 0;
+                } else {
+                    sytaRv3.setVisibility(View.VISIBLE);
+                    flag3 = 1;
+                }
+            }
+        });
         sytaTv4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -387,7 +451,18 @@ public class SymptomAddActivity extends AppCompatActivity {
                 }
             }
         });
-
+        img5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag4 == 1) {
+                    sytaRv4.setVisibility(View.GONE);
+                    flag4 = 0;
+                } else {
+                    sytaRv4.setVisibility(View.VISIBLE);
+                    flag4 = 1;
+                }
+            }
+        });
         sytaTv5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -400,7 +475,18 @@ public class SymptomAddActivity extends AppCompatActivity {
                 }
             }
         });
-
+        img6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag5 == 1) {
+                    sytaRv5.setVisibility(View.GONE);
+                    flag5 = 0;
+                } else {
+                    sytaRv5.setVisibility(View.VISIBLE);
+                    flag5 = 1;
+                }
+            }
+        });
         sytaTv6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -413,7 +499,18 @@ public class SymptomAddActivity extends AppCompatActivity {
                 }
             }
         });
-
+        img7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag6 == 1) {
+                    sytaRv6.setVisibility(View.GONE);
+                    flag6 = 0;
+                } else {
+                    sytaRv6.setVisibility(View.VISIBLE);
+                    flag6 = 1;
+                }
+            }
+        });
         sytaTv7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -426,7 +523,18 @@ public class SymptomAddActivity extends AppCompatActivity {
                 }
             }
         });
-
+        img8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag7 == 1) {
+                    sytaRv7.setVisibility(View.GONE);
+                    flag7 = 0;
+                } else {
+                    sytaRv7.setVisibility(View.VISIBLE);
+                    flag7 = 1;
+                }
+            }
+        });
         sytaTv8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -439,7 +547,18 @@ public class SymptomAddActivity extends AppCompatActivity {
                 }
             }
         });
-
+        img9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag8 == 1) {
+                    sytaRv8.setVisibility(View.GONE);
+                    flag8 = 0;
+                } else {
+                    sytaRv8.setVisibility(View.VISIBLE);
+                    flag8 = 1;
+                }
+            }
+        });
         sytaTv9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -452,7 +571,18 @@ public class SymptomAddActivity extends AppCompatActivity {
                 }
             }
         });
-
+        img10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag9 == 1) {
+                    sytaRv9.setVisibility(View.GONE);
+                    flag9 = 0;
+                } else {
+                    sytaRv9.setVisibility(View.VISIBLE);
+                    flag9 = 1;
+                }
+            }
+        });
         sytaTv10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -465,7 +595,18 @@ public class SymptomAddActivity extends AppCompatActivity {
                 }
             }
         });
-
+        img11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag10 == 1) {
+                    sytaRv10.setVisibility(View.GONE);
+                    flag10 = 0;
+                } else {
+                    sytaRv10.setVisibility(View.VISIBLE);
+                    flag10 = 1;
+                }
+            }
+        });
         sytaTv11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -478,7 +619,18 @@ public class SymptomAddActivity extends AppCompatActivity {
                 }
             }
         });
-
+        img12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flag11 == 1) {
+                    sytaRv11.setVisibility(View.GONE);
+                    flag11 = 0;
+                } else {
+                    sytaRv11.setVisibility(View.VISIBLE);
+                    flag11 = 1;
+                }
+            }
+        });
 
         sytaBtn.setOnClickListener(new View.OnClickListener() {
             @Override

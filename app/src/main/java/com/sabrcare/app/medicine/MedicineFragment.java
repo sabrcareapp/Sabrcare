@@ -11,12 +11,14 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 import com.github.clans.fab.FloatingActionMenu;
@@ -35,7 +37,7 @@ public class MedicineFragment extends Fragment {
     private Realm realm;
     private MedicineAdapter medicineAdapter;
 
-    Button profile;
+    private ImageView profile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,8 +62,7 @@ public class MedicineFragment extends Fragment {
         recyclerView.setAdapter(medicineAdapter);
 
         profile = view.findViewById(R.id.profile);
-
-
+        profile.setColorFilter(Color.parseColor("#FFFFFF"));
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

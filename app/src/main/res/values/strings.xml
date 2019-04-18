@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Remedley</string>
     <string name="apiUrl">http://api.remedley.com/api/client/</string>
-
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
@@ -18,7 +18,7 @@
     <string name="how_severe_is_the_symptom">How severe is the symptom</string>
     <string name="title_add_new_medication">Add New Medication</string>
     <string name="title_here">Title here</string>
-    <string name="about_the_app">About The App</string>
+    <string name="about_the_app">About Us</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="username_agrim_agarwal">Username: Agrim Agarwal</string>
@@ -29,17 +29,17 @@
     <string name="Moderate">Moderate</string>
     <string name="Severe">Severe</string>
     <string name="save">SAVE</string>
-    <string name="most_common">MOST COMMON</string>
-    <string name="cardio_circulatory">CARDIO/CIRCULATORY</string>
-    <string name="gastrointestinal">GASTROINTESTINAL</string>
-    <string name="mood_attention_memory">MOOD/ATTENTION/MEMORY</string>
-    <string name="oral_mouth">ORAL/MOUTH</string>
-    <string name="pain">PAIN</string>
-    <string name="respiratory">RESPIRATORY</string>
-    <string name="sexual_gynecologic">SEXUAL/GYNECOLOGIC</string>
-    <string name="skin_nails">SKIN/NAILS</string>
-    <string name="urinary">URINARY</string>
-    <string name="visual_perception">VISUAL/PERCEPTION</string>
-    <string name="other">OTHER</string>
-    <string name="apply">APPLY</string>
+    <string name="most_common">Most Common</string>
+    <string name="cardio_circulatory">Cardio/Circulatory</string>
+    <string name="gastrointestinal">Gastrointestinal</string>
+    <string name="mood_attention_memory">Mood/Attention/Memory</string>
+    <string name="oral_mouth">Oral/Mouth</string>
+    <string name="pain">Pain</string>
+    <string name="respiratory">Respiratory</string>
+    <string name="sexual_gynecologic">Sexual/Gynecologic</string>
+    <string name="skin_nails">Skin/Nails</string>
+    <string name="urinary">Urinary</string>
+    <string name="visual_perception">Visual/Perception</string>
+    <string name="other">Other</string>
+    <string name="apply">Add Symptoms</string>
 </resources>

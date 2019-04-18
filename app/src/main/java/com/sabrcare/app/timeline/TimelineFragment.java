@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.ArrayMap;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -49,7 +51,7 @@ public class TimelineFragment extends Fragment {
     String token = null;
     public static Button browseTimeline;
 
-    Button profile;
+    ImageView profile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class TimelineFragment extends Fragment {
         timeline_rv = view.findViewById(R.id.timeline_rv);
 
         profile = view.findViewById(R.id.profile);
-
+        profile.setColorFilter(Color.parseColor("#FFFFFF"));
 
         setting = getActivity().getSharedPreferences(FILE, MODE_PRIVATE);
 

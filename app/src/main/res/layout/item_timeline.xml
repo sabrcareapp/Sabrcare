@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -8,56 +8,73 @@
     android:clickable="false"
     style="@style/Base.CardView"
     android:requiresFadingEdge="vertical"
-    android:orientation="horizontal"
-    >
-<androidx.cardview.widget.CardView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clickable="false"
-    card_view:cardCornerRadius="5dp"
-    card_view:cardElevation="10dp"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginBottom="2dp"
-    android:layout_marginTop="2dp"
-    style="@style/Base.CardView"
-    android:requiresFadingEdge="vertical"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/pic"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/remedley_logo"
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/pic"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/remedley_logo"
+        />
 
-         />
-</androidx.cardview.widget.CardView>
-
+    <View
+        android:layout_width="2dp"
+        android:layout_height="130dp"
+        android:background="@android:color/darker_gray"
+        android:layout_toEndOf="@id/pic"
+        android:layout_marginStart="8dp"
+        />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_toEndOf="@id/pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:clickable="false"
+        android:layout_marginBottom="10dp"
         card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="0dp"
-        style="@style/Base.CardView"
+        android:layout_marginTop="5dp"
+        card_view:cardElevation="5dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="10dp"
         android:requiresFadingEdge="vertical"
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_alignParentStart="true"
+                android:text="Date "
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:id="@+id/time"
+                android:paddingTop="10dp"
+                android:layout_toEndOf="@id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_below="@id/date"
                 android:textStyle="bold"
                 android:text="Title here"
                 android:textSize="20sp">
@@ -69,36 +86,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
+                android:paddingBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Subtitle here"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="154dp"
-                android:layout_marginLeft="78dp"
-                android:layout_marginTop="40dp"
-                android:layout_toRightOf="@+id/title"
-                android:text="Date "
-                android:textSize="15sp" />
-
-
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/date"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="152dp"
-                android:layout_marginLeft="85dp"
-                android:layout_marginTop="5dp"
-                android:layout_toRightOf="@+id/subtitle"
-                android:text="Time"
                 android:textSize="15sp" />
 
             <Button
@@ -117,4 +108,4 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+</RelativeLayout>
